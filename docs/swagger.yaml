@@ -1,0 +1,4959 @@
+definitions:
+  pvesphere_api_v1.ClusterDetail:
+    properties:
+      api_url:
+        type: string
+      cluster_name:
+        type: string
+      cluster_name_alias:
+        type: string
+      create_time:
+        description: 创建时间
+        type: string
+      creator:
+        description: 创建者
+        type: string
+      datacenter:
+        type: string
+      describes:
+        type: string
+      dns:
+        type: string
+      env:
+        type: string
+      id:
+        type: integer
+      is_enabled:
+        type: integer
+      is_schedulable:
+        type: integer
+      modifier:
+        description: 修改者
+        type: string
+      region:
+        type: string
+      update_time:
+        description: 更新时间
+        type: string
+      user_id:
+        type: string
+    type: object
+  pvesphere_api_v1.ClusterItem:
+    properties:
+      api_url:
+        type: string
+      cluster_name:
+        type: string
+      cluster_name_alias:
+        type: string
+      datacenter:
+        type: string
+      env:
+        type: string
+      id:
+        type: integer
+      is_enabled:
+        type: integer
+      is_schedulable:
+        type: integer
+      region:
+        type: string
+    type: object
+  pvesphere_api_v1.ClusterTaskItem:
+    properties:
+      endtime:
+        type: integer
+      extra:
+        additionalProperties: true
+        type: object
+      id:
+        type: string
+      node:
+        type: string
+      starttime:
+        type: integer
+      status:
+        type: string
+      type:
+        type: string
+      upid:
+        type: string
+      user:
+        type: string
+    type: object
+  pvesphere_api_v1.CreateBackupRequest:
+    properties:
+      bwlimit:
+        description: 带宽限制（MB/s）（可选）
+        example: 10
+        type: integer
+      compress:
+        description: 压缩格式：zstd, lzo, gzip（可选，支持 zst 作为 zstd 的别名）
+        example: zstd
+        type: string
+      dumpdir:
+        description: 备份目录（可选，覆盖存储配置）
+        example: /var/lib/vz/dump
+        type: string
+      exclude:
+        description: 排除的挂载点（可选，逗号分隔）
+        example: /mnt/data
+        type: string
+      ionice:
+        description: IO 优先级（可选）
+        example: 7
+        type: integer
+      mailnotification:
+        description: 邮件通知类型：always, failure（可选）
+        example: always
+        type: string
+      mailto:
+        description: 备份完成后发送邮件到（可选）
+        example: admin@example.com
+        type: string
+      maxfiles:
+        description: 保留的最大备份文件数（可选）
+        example: 5
+        type: integer
+      mode:
+        description: 备份模式：snapshot, suspend, stop（可选，默认 snapshot）
+        example: snapshot
+        type: string
+      notes_template:
+        description: 备份注释模板（可选）
+        example: Backup of {name}
+        type: string
+      quiesce:
+        description: 是否使用 quiesce：0=否, 1=是（可选，需要 qemu-guest-agent）
+        example: 0
+        type: integer
+      remove:
+        description: 是否删除旧备份：0=否, 1=是（可选）
+        example: 0
+        type: integer
+      stop:
+        description: 是否停止虚拟机：0=否, 1=是（可选）
+        example: 0
+        type: integer
+      stopwait:
+        description: 停止等待时间（秒）（可选）
+        example: 300
+        type: integer
+      storage:
+        description: 存储名称（可选，默认使用配置的存储）
+        example: local
+        type: string
+      vmid:
+        description: 虚拟机ID（必填）
+        example: 100
+        type: integer
+      zstd:
+        description: zstd 压缩级别 1-22（可选，仅当 compress=zst 时有效）
+        example: 1
+        type: integer
+    required:
+    - vmid
+    type: object
+  pvesphere_api_v1.CreateBackupResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.CreateBackupResponseData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.CreateBackupResponseData:
+    properties:
+      node_id:
+        description: 节点ID
+        type: integer
+      node_name:
+        description: 节点名称
+        type: string
+      upid:
+        description: 任务ID
+        type: string
+      vmid:
+        description: 虚拟机ID
+        type: integer
+    type: object
+  pvesphere_api_v1.CreateClusterRequest:
+    properties:
+      api_url:
+        example: https://10.7.64.206:8006
+        type: string
+      cluster_name:
+        example: my-cluster
+        type: string
+      cluster_name_alias:
+        example: 生产集群
+        type: string
+      datacenter:
+        example: dc1
+        type: string
+      describes:
+        example: 集群描述
+        type: string
+      dns:
+        example: 8.8.8.8
+        type: string
+      env:
+        example: prod
+        type: string
+      is_enabled:
+        example: 1
+        type: integer
+      is_schedulable:
+        example: 1
+        type: integer
+      region:
+        example: us-west-1
+        type: string
+      user_id:
+        example: api-user@pve
+        type: string
+      user_token:
+        example: your-token
+        type: string
+    required:
+    - api_url
+    - cluster_name
+    - user_id
+    - user_token
+    type: object
+  pvesphere_api_v1.CreateNodeNetworkRequest:
+    properties:
+      address:
+        description: IP 地址和子网掩码
+        example: 192.168.1.100/24
+        type: string
+      autostart:
+        description: 是否自动启动：0=否, 1=是
+        example: 1
+        type: integer
+      bond_mode:
+        description: Bond 模式（bond 类型）：0=balance-rr, 1=active-backup, 2=balance-xor,
+          3=broadcast, 4=802.3ad, 5=balance-tlb, 6=balance-alb
+        example: 0
+        type: integer
+      bond_slaves:
+        description: Bond 从接口（bond 类型）
+        example: eth0 eth1
+        type: string
+      bridge_ports:
+        description: 桥接端口（bridge 类型）
+        example: eth0
+        type: string
+      bridge_vlan_aware:
+        description: 桥接 VLAN 感知：0=否, 1=是
+        example: 0
+        type: integer
+      comments:
+        description: 注释
+        example: Main network bridge
+        type: string
+      gateway:
+        description: 网关地址
+        example: 192.168.1.1
+        type: string
+      iface:
+        description: 网络接口名称（如：eth0, vmbr0 等）
+        example: eth0
+        type: string
+      mtu:
+        description: 最大传输单元
+        example: 1500
+        type: integer
+      netmask:
+        description: 子网掩码（如果 address 未包含）
+        example: 255.255.255.0
+        type: string
+      node_id:
+        description: 节点ID（数据库ID）
+        example: 1
+        type: integer
+      type:
+        description: 网络类型：bridge, bond, eth, alias, vlan, ovs_bridge, ovs_bond, ovs_port,
+          ovs_int_port
+        example: bridge
+        type: string
+    required:
+    - node_id
+    type: object
+  pvesphere_api_v1.CreateNodeNetworkResponse:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.CreateNodeRequest:
+    properties:
+      annotations:
+        example: 节点备注
+        type: string
+      cluster_id:
+        example: 1
+        type: integer
+      env:
+        example: prod
+        type: string
+      ip_address:
+        example: 10.7.64.206
+        type: string
+      is_schedulable:
+        example: 1
+        type: integer
+      node_name:
+        example: pve-node-1
+        type: string
+      status:
+        example: online
+        type: string
+      vm_limit:
+        example: 100
+        type: integer
+    required:
+    - cluster_id
+    - node_name
+    type: object
+  pvesphere_api_v1.CreateStorageRequest:
+    properties:
+      active:
+        example: 1
+        type: integer
+      avail:
+        example: 10737418240
+        type: integer
+      cluster_id:
+        example: 1
+        type: integer
+      content:
+        example: images,iso
+        type: string
+      enabled:
+        example: 1
+        type: integer
+      node_name:
+        example: pve-node-1
+        type: string
+      shared:
+        example: 0
+        type: integer
+      storage_name:
+        example: local
+        type: string
+      total:
+        example: 16106127360
+        type: integer
+      type:
+        example: dir
+        type: string
+      used:
+        example: 5368709120
+        type: integer
+      used_fraction:
+        example: 0.333
+        type: number
+    required:
+    - cluster_id
+    - node_name
+    - storage_name
+    type: object
+  pvesphere_api_v1.CreateTemplateRequest:
+    properties:
+      cluster_id:
+        example: 1
+        type: integer
+      description:
+        example: 模板描述
+        type: string
+      template_name:
+        example: centos7.9-x86-64-temp
+        type: string
+    required:
+    - cluster_id
+    - template_name
+    type: object
+  pvesphere_api_v1.CreateVMRequest:
+    properties:
+      app_id:
+        description: 应用ID（可选）
+        example: app-001
+        type: string
+      bridge:
+        description: 网桥名称，默认 vmbr0
+        example: vmbr0
+        type: string
+      cluster_id:
+        description: 集群ID（推荐使用，优先级高于 cluster_name）
+        example: 1
+        type: integer
+      cluster_name:
+        description: 集群名称（可选，向后兼容，如果提供了 cluster_id 则忽略此字段）
+        example: my-cluster
+        type: string
+      cpu_num:
+        description: CPU核心数（可选，不设置则使用模板配置）
+        example: 2
+        type: integer
+      create_mode:
+        description: |-
+          CreateMode 创建模式：
+          - template：从模板克隆（默认，兼容旧前端不传 create_mode 的情况）
+          - iso：创建空虚拟机并挂载 ISO，从光驱启动安装
+          - empty：创建空虚拟机（不挂载 ISO），后续可通过 /api/v1/vms/config 再挂载 ISO
+        example: template
+        type: string
+      description:
+        description: 描述（可选）
+        example: 虚拟机描述
+        type: string
+      disk_format:
+        description: 磁盘格式（仅 dir 等文件存储需要，local-lvm 可忽略），默认 qcow2
+        example: qcow2
+        type: string
+      disk_size_gb:
+        description: 系统盘大小（GB），create_mode=iso/empty 时建议提供，不传则默认 32
+        example: 32
+        type: integer
+      full_clone:
+        description: 是否完整克隆（1=完整克隆，0=链接克隆，默认1）
+        example: 1
+        type: integer
+      ip_address_id:
+        description: IP地址ID（从vm_ipaddress表，可选）
+        example: 1
+        type: integer
+      iso_volume:
+        description: |-
+          ISO / 空机创建相关字段（create_mode=iso/empty）
+          ISO 卷标识（建议直接传 volume id：local-dir:iso/xxx.iso；也兼容以 / 开头：/local-dir:iso/xxx.iso）
+        example: local-dir:iso/ubuntu-22.04-server-amd64.iso
+        type: string
+      memory_size:
+        description: 内存大小MB（可选，不设置则使用模板配置）
+        example: 4096
+        type: integer
+      net_model:
+        description: 网卡模型，默认 virtio
+        example: virtio
+        type: string
+      node_id:
+        description: 节点ID（推荐使用，优先级高于 node_name）
+        example: 1
+        type: integer
+      node_name:
+        description: 目标节点名称（可选，向后兼容，如果提供了 node_id 则忽略此字段）
+        example: pve-node-1
+        type: string
+      os_type:
+        description: 操作系统类型（Proxmox ostype），默认 l26
+        example: l26
+        type: string
+      storage:
+        description: 存储名称（可选）
+        example: local
+        type: string
+      storage_cfg:
+        description: 存储配置（可选）
+        example: '{}'
+        type: string
+      template_id:
+        description: 模板ID（create_mode=template 时必填）
+        example: 1
+        type: integer
+      vm_name:
+        description: 新虚拟机名称
+        example: vm-001
+        type: string
+      vm_password:
+        description: 虚拟机密码（可选）
+        example: password
+        type: string
+      vm_user:
+        description: 虚拟机用户名（可选）
+        example: root
+        type: string
+      vmid:
+        description: 新虚拟机的 VM ID（可选，不传则自动生成8位数）
+        example: 100
+        type: integer
+    required:
+    - vm_name
+    type: object
+  pvesphere_api_v1.DashboardHotspotsData:
+    properties:
+      cluster_id:
+        description: 集群ID（当 scope 为 cluster 时）
+        type: integer
+      node_hotspots:
+        allOf:
+        - $ref: '#/definitions/pvesphere_api_v1.NodeHotspots'
+        description: 节点热点
+      recent_risks:
+        description: 最近风险（24h）
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.RecentRisk'
+        type: array
+      scope:
+        description: all 或 cluster
+        example: all
+        type: string
+      storage_hotspots:
+        description: 存储热点
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.StorageHotspot'
+        type: array
+      vm_hotspots:
+        allOf:
+        - $ref: '#/definitions/pvesphere_api_v1.VMHotspots'
+        description: 虚拟机热点
+    type: object
+  pvesphere_api_v1.DashboardHotspotsResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.DashboardHotspotsData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.DashboardOperationsData:
+    properties:
+      cluster_id:
+        description: 集群ID（当 scope 为 cluster 时）
+        type: integer
+      items:
+        description: 操作明细（可选）
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.OperationItem'
+        type: array
+      scope:
+        description: all 或 cluster
+        example: all
+        type: string
+      summary:
+        description: 操作摘要（按类型聚合）
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.OperationSummary'
+        type: array
+    type: object
+  pvesphere_api_v1.DashboardOperationsResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.DashboardOperationsData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.DashboardOverviewData:
+    properties:
+      cluster_id:
+        description: 集群ID（当 scope 为 cluster 时）
+        type: integer
+      health:
+        allOf:
+        - $ref: '#/definitions/pvesphere_api_v1.DashboardOverviewHealth'
+        description: 健康状态
+      scope:
+        description: all 或 cluster
+        example: all
+        type: string
+      summary:
+        allOf:
+        - $ref: '#/definitions/pvesphere_api_v1.DashboardOverviewSummary'
+        description: 概览统计
+    type: object
+  pvesphere_api_v1.DashboardOverviewHealth:
+    properties:
+      critical:
+        description: 严重数量
+        example: 0
+        type: integer
+      healthy:
+        description: 健康数量
+        example: 4
+        type: integer
+      warning:
+        description: 警告数量
+        example: 1
+        type: integer
+    type: object
+  pvesphere_api_v1.DashboardOverviewResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.DashboardOverviewData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.DashboardOverviewSummary:
+    properties:
+      cluster_count:
+        description: 集群数量
+        example: 5
+        type: integer
+      node_count:
+        description: 节点数量
+        example: 42
+        type: integer
+      storage_count:
+        description: 存储数量
+        example: 18
+        type: integer
+      vm_count:
+        description: 虚拟机数量
+        example: 1328
+        type: integer
+    type: object
+  pvesphere_api_v1.DashboardResourcesData:
+    properties:
+      cluster_id:
+        description: 集群ID（当 scope 为 cluster 时）
+        type: integer
+      cpu:
+        allOf:
+        - $ref: '#/definitions/pvesphere_api_v1.ResourceUsage'
+        description: CPU 使用率
+      memory:
+        allOf:
+        - $ref: '#/definitions/pvesphere_api_v1.ResourceUsage'
+        description: 内存使用率
+      scope:
+        description: all 或 cluster
+        example: all
+        type: string
+      storage:
+        allOf:
+        - $ref: '#/definitions/pvesphere_api_v1.ResourceUsage'
+        description: 存储使用率
+    type: object
+  pvesphere_api_v1.DashboardResourcesResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.DashboardResourcesData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.DashboardScopesData:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.ScopeItem'
+        type: array
+    type: object
+  pvesphere_api_v1.DashboardScopesResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.DashboardScopesData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.DeleteBackupRequest:
+    properties:
+      delay:
+        description: 延迟删除时间（秒），可选，默认立即删除
+        example: 5
+        type: integer
+      node_id:
+        description: 节点ID（必填）
+        example: 1
+        type: integer
+      storage_id:
+        description: 存储ID（必填）
+        example: 6
+        type: integer
+      volume:
+        description: 卷标识（volid），格式：storage:backup/filename（必填）
+        example: local:backup/vzdump-qemu-100-2024_01_01-00_00_00.vma.zst
+        type: string
+    required:
+    - node_id
+    - storage_id
+    - volume
+    type: object
+  pvesphere_api_v1.DeleteBackupResponse:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetAccessTicketRequest:
+    properties:
+      cluster_id:
+        description: 集群ID（从集群表获取 api_url）
+        example: 1
+        type: integer
+      password:
+        example: your-password
+        type: string
+      realm:
+        example: pam
+        type: string
+      username:
+        example: root
+        type: string
+    required:
+    - cluster_id
+    - password
+    - realm
+    - username
+    type: object
+  pvesphere_api_v1.GetAccessTicketResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        additionalProperties: true
+        type: object
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetClusterResourcesResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetClusterResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.ClusterDetail'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetClusterStatusResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetNodeConsoleRequest:
+    properties:
+      console_type:
+        description: 控制台类型：termproxy（终端）或 vncshell（VNC图形界面）
+        example: vncshell
+        type: string
+      csrf_token:
+        description: CSRF 防护令牌（从 /api/v1/pve/access/ticket 获取）
+        example: 6948C80E:...
+        type: string
+      generate_password:
+        description: 是否生成密码（仅 vncshell 有效）
+        example: false
+        type: boolean
+      node_id:
+        description: 节点ID（数据库ID）
+        example: 1
+        type: integer
+      ticket:
+        description: 高权限认证（可选）：如果提供了 ticket 和 csrf_token，将使用这些凭证而不是集群配置的 API Token
+        example: PVE:root@pam:...
+        type: string
+      websocket:
+        description: 是否启用 websocket（仅 vncshell 有效）
+        example: true
+        type: boolean
+    required:
+    - console_type
+    - node_id
+    type: object
+  pvesphere_api_v1.GetNodeConsoleResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        additionalProperties: true
+        type: object
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetNodeDisksDirectoryResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetNodeDisksLVMResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetNodeDisksLVMThinResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetNodeDisksListResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetNodeDisksZFSResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetNodeNetworksResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetNodeRRDDataResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetNodeResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.NodeDetail'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetNodeServicesResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetNodeStatusResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        additionalProperties: true
+        type: object
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetProfileResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.GetProfileResponseData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetProfileResponseData:
+    properties:
+      email:
+        example: pvesphere@gmail.com
+        type: string
+      nickname:
+        example: alan
+        type: string
+      userId:
+        type: string
+    type: object
+  pvesphere_api_v1.GetStorageContentResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetStorageRRDDataResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetStorageResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.StorageDetail'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetStorageStatusResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        additionalProperties: true
+        type: object
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetStorageVolumeResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        additionalProperties: true
+        type: object
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetSyncTaskResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.SyncTaskDetail'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetTaskLogResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.TaskLogItem'
+        type: array
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetTaskStatusResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.TaskStatusItem'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetTemplateDetailResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.TemplateDetailWithInstances'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetTemplateResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.TemplateDetail'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetVMCloudInitResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        additionalProperties: true
+        description: CloudInit 配置（包含当前和待处理值）
+        type: object
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetVMConsoleRequest:
+    properties:
+      generate_password:
+        example: false
+        type: boolean
+      vm_id:
+        description: 虚拟机ID（数据库ID）
+        example: 1
+        type: integer
+      websocket:
+        description: 是否启用 websocket（可选）
+        example: false
+        type: boolean
+    required:
+    - vm_id
+    type: object
+  pvesphere_api_v1.GetVMConsoleResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        additionalProperties: true
+        type: object
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetVMCurrentConfigResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        additionalProperties: true
+        type: object
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetVMPendingConfigResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetVMRRDDataResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetVMResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.VMDetail'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.GetVMStatusResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        additionalProperties: true
+        type: object
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.ImportTemplateRequest:
+    properties:
+      auto_sync:
+        description: local存储时是否自动同步到所有节点
+        example: false
+        type: boolean
+      backup_file:
+        description: 备份文件名
+        example: vzdump-qemu-100-2024_01_01-00_00_00.vma.zst
+        type: string
+      backup_storage_id:
+        description: 备份文件所在的存储ID（通常是local）
+        example: 6
+        type: integer
+      cluster_id:
+        example: 1
+        type: integer
+      description:
+        example: CentOS 7 模板
+        type: string
+      node_id:
+        description: 导入节点ID
+        example: 1
+        type: integer
+      sync_node_ids:
+        description: local存储时，指定要同步的节点ID列表
+        example:
+        - 2
+        - 3
+        items:
+          type: integer
+        type: array
+      target_storage_id:
+        description: VM磁盘要创建的目标存储ID（必须支持images，如local-lvm）
+        example: 7
+        type: integer
+      template_name:
+        example: centos7-template
+        type: string
+    required:
+    - backup_file
+    - backup_storage_id
+    - cluster_id
+    - node_id
+    - target_storage_id
+    - template_name
+    type: object
+  pvesphere_api_v1.ImportTemplateResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.ImportTemplateResponseData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.ImportTemplateResponseData:
+    properties:
+      import_id:
+        type: integer
+      import_node:
+        $ref: '#/definitions/pvesphere_api_v1.TemplateImportNode'
+      is_shared:
+        type: boolean
+      storage_type:
+        type: string
+      sync_tasks:
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.TemplateSyncTaskInfo'
+        type: array
+      template_id:
+        type: integer
+    type: object
+  pvesphere_api_v1.InitGPTDiskRequest:
+    properties:
+      disk:
+        description: 磁盘设备名
+        example: /dev/sdb
+        type: string
+      node_id:
+        description: 节点ID
+        example: 1
+        type: integer
+    required:
+    - disk
+    - node_id
+    type: object
+  pvesphere_api_v1.InitGPTDiskResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        description: 任务ID (UPID)
+        type: string
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.ListClusterResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.ListClusterResponseData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.ListClusterResponseData:
+    properties:
+      list:
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.ClusterItem'
+        type: array
+      total:
+        type: integer
+    type: object
+  pvesphere_api_v1.ListClusterTasksResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.ClusterTaskItem'
+        type: array
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.ListNodeResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.ListNodeResponseData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.ListNodeResponseData:
+    properties:
+      list:
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.NodeItem'
+        type: array
+      total:
+        type: integer
+    type: object
+  pvesphere_api_v1.ListNodeTasksResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.NodeTaskItem'
+        type: array
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.ListStorageResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.ListStorageResponseData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.ListStorageResponseData:
+    properties:
+      list:
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.StorageItem'
+        type: array
+      total:
+        type: integer
+    type: object
+  pvesphere_api_v1.ListSyncTasksResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.ListSyncTasksResponseData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.ListSyncTasksResponseData:
+    properties:
+      list:
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.SyncTaskDetail'
+        type: array
+      total:
+        type: integer
+    type: object
+  pvesphere_api_v1.ListTemplateInstancesResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.ListTemplateInstancesResponseData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.ListTemplateInstancesResponseData:
+    properties:
+      instances:
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.TemplateInstanceInfo'
+        type: array
+      template_id:
+        type: integer
+      template_name:
+        type: string
+      total:
+        type: integer
+    type: object
+  pvesphere_api_v1.ListTemplateResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.ListTemplateResponseData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.ListTemplateResponseData:
+    properties:
+      list:
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.TemplateItem'
+        type: array
+      total:
+        type: integer
+    type: object
+  pvesphere_api_v1.ListVMResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.ListVMResponseData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.ListVMResponseData:
+    properties:
+      list:
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.VMItem'
+        type: array
+      total:
+        type: integer
+    type: object
+  pvesphere_api_v1.LoginRequest:
+    properties:
+      email:
+        example: 1234@gmail.com
+        type: string
+      password:
+        example: "123456"
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  pvesphere_api_v1.LoginResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.LoginResponseData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.LoginResponseData:
+    properties:
+      accessToken:
+        type: string
+    type: object
+  pvesphere_api_v1.MigrateVMRequest:
+    properties:
+      bwlimit:
+        description: 带宽限制（KiB/s）
+        example: 1000
+        type: integer
+      map_storage:
+        description: 存储映射，格式：FROM:TO
+        example: local:shared
+        type: string
+      migration_network:
+        description: 迁移网络CIDR
+        example: 10.0.0.0/24
+        type: string
+      migration_type:
+        description: 迁移类型：secure（默认）或 insecure
+        example: secure
+        type: string
+      online:
+        description: 是否在线迁移
+        example: true
+        type: boolean
+      target_node_id:
+        description: 目标节点ID（数据库ID）
+        example: 2
+        type: integer
+      vm_id:
+        description: 虚拟机ID（数据库ID）
+        example: 1
+        type: integer
+      with_local_disks:
+        description: 是否迁移本地磁盘
+        example: true
+        type: boolean
+    required:
+    - target_node_id
+    - vm_id
+    type: object
+  pvesphere_api_v1.MigrateVMResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        description: UPID (任务ID)
+        type: string
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.NodeDetail:
+    properties:
+      annotations:
+        type: string
+      cluster_id:
+        type: integer
+      cluster_name:
+        description: 从关联表查询填充
+        type: string
+      create_time:
+        description: 创建时间
+        type: string
+      creator:
+        description: 创建者
+        type: string
+      env:
+        type: string
+      id:
+        type: integer
+      ip_address:
+        type: string
+      is_schedulable:
+        type: integer
+      modifier:
+        description: 修改者
+        type: string
+      node_name:
+        type: string
+      status:
+        type: string
+      update_time:
+        description: 更新时间
+        type: string
+      vm_limit:
+        type: integer
+    type: object
+  pvesphere_api_v1.NodeHotspots:
+    properties:
+      cpu:
+        description: CPU Top N
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.TopResourceConsumer'
+        type: array
+      memory:
+        description: Memory Top N
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.TopResourceConsumer'
+        type: array
+    type: object
+  pvesphere_api_v1.NodeInfo:
+    properties:
+      node_id:
+        type: integer
+      node_name:
+        type: string
+    type: object
+  pvesphere_api_v1.NodeItem:
+    properties:
+      cluster_id:
+        type: integer
+      cluster_name:
+        description: 从关联表查询填充
+        type: string
+      env:
+        type: string
+      id:
+        type: integer
+      ip_address:
+        type: string
+      is_schedulable:
+        type: integer
+      node_name:
+        type: string
+      status:
+        type: string
+      vm_limit:
+        type: integer
+    type: object
+  pvesphere_api_v1.NodeTaskItem:
+    properties:
+      endtime:
+        type: integer
+      extra:
+        additionalProperties: true
+        type: object
+      id:
+        type: string
+      starttime:
+        type: integer
+      status:
+        type: string
+      type:
+        type: string
+      upid:
+        type: string
+      user:
+        type: string
+    type: object
+  pvesphere_api_v1.OperationItem:
+    properties:
+      id:
+        description: 操作ID
+        example: op-1
+        type: string
+      name:
+        description: 操作名称
+        example: Migrate vm-101 to node-3
+        type: string
+      operation_type:
+        description: 操作类型
+        example: vm_migration
+        type: string
+      progress:
+        description: 进度百分比
+        example: 45
+        type: integer
+      started_at:
+        description: 开始时间
+        example: "2025-12-23T07:50:00Z"
+        type: string
+      status:
+        description: running / pending / failed / completed
+        example: running
+        type: string
+    type: object
+  pvesphere_api_v1.OperationSummary:
+    properties:
+      count:
+        description: 数量
+        example: 3
+        type: integer
+      display_name:
+        description: 显示名称
+        example: VM Migrations
+        type: string
+      operation_type:
+        description: vm_migration / node_maintenance / storage_rebalance
+        example: vm_migration
+        type: string
+    type: object
+  pvesphere_api_v1.RecentRisk:
+    properties:
+      id:
+        description: 风险ID
+        example: risk-1
+        type: string
+      level:
+        description: info / warning / critical
+        example: warning
+        type: string
+      message:
+        description: 风险信息
+        example: Node pve-07 unreachable
+        type: string
+      occurred_at:
+        description: 发生时间
+        example: "2025-12-23T08:01:00Z"
+        type: string
+      relative_time:
+        description: 相对时间
+        example: 5 min ago
+        type: string
+      target_id:
+        description: 目标ID
+        example: node-7
+        type: string
+      target_name:
+        description: 目标名称
+        example: pve-07
+        type: string
+      target_type:
+        description: vm / node / storage / cluster
+        example: node
+        type: string
+    type: object
+  pvesphere_api_v1.RegisterRequest:
+    properties:
+      email:
+        example: 1234@gmail.com
+        type: string
+      password:
+        example: "123456"
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  pvesphere_api_v1.ReloadNodeNetworkRequest:
+    properties:
+      node_id:
+        description: 节点ID（数据库ID）
+        example: 1
+        type: integer
+    required:
+    - node_id
+    type: object
+  pvesphere_api_v1.ReloadNodeNetworkResponse:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.RemoteMigrateVMRequest:
+    properties:
+      bwlimit:
+        description: 带宽限制（KiB/s）
+        example: 1000
+        type: integer
+      delete:
+        description: 迁移成功后是否删除源VM（默认false）
+        example: false
+        type: boolean
+      online:
+        description: 是否在线迁移
+        example: true
+        type: boolean
+      target_bridge:
+        description: 目标网桥（必填）
+        example: vmbr0
+        type: string
+      target_cluster_id:
+        description: 目标集群ID（数据库ID）
+        example: 2
+        type: integer
+      target_node_id:
+        description: 目标节点ID（数据库ID）
+        example: 3
+        type: integer
+      target_storage:
+        description: 目标存储（必填）
+        example: local-lvm
+        type: string
+      target_vmid:
+        description: 目标虚拟机ID（可选，不指定则使用源VMID）
+        example: 200
+        type: integer
+      vm_id:
+        description: 虚拟机ID（数据库ID）
+        example: 1
+        type: integer
+    required:
+    - target_bridge
+    - target_cluster_id
+    - target_node_id
+    - target_storage
+    - vm_id
+    type: object
+  pvesphere_api_v1.RemoteMigrateVMResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        description: UPID (任务ID)
+        type: string
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.ResourceUsage:
+    properties:
+      total_bytes:
+        description: 总字节数（内存/存储）
+        example: 260000000000
+        type: integer
+      total_cores:
+        description: CPU 总核心数（仅 CPU）
+        example: 250
+        type: number
+      usage_percent:
+        description: 使用率百分比
+        example: 72
+        type: number
+      used_bytes:
+        description: 已使用字节数（内存/存储）
+        example: 180000000000
+        type: integer
+      used_cores:
+        description: CPU 已使用核心数（仅 CPU）
+        example: 180
+        type: number
+    type: object
+  pvesphere_api_v1.Response:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.RestartNodeServiceRequest:
+    properties:
+      node_id:
+        description: 节点ID（数据库ID）
+        example: 1
+        type: integer
+      service_name:
+        description: 服务名称（如：pveproxy, pvedaemon, corosync 等）
+        example: pveproxy
+        type: string
+    required:
+    - node_id
+    - service_name
+    type: object
+  pvesphere_api_v1.RestartNodeServiceResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.RestartNodeServiceResponseData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.RestartNodeServiceResponseData:
+    properties:
+      upid:
+        description: 任务ID
+        type: string
+    type: object
+  pvesphere_api_v1.RetrySyncTaskResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.RetrySyncTaskResponseData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.RetrySyncTaskResponseData:
+    properties:
+      status:
+        type: string
+      task_id:
+        type: integer
+    type: object
+  pvesphere_api_v1.RevertNodeNetworkRequest:
+    properties:
+      node_id:
+        description: 节点ID（数据库ID）
+        example: 1
+        type: integer
+    required:
+    - node_id
+    type: object
+  pvesphere_api_v1.RevertNodeNetworkResponse:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.ScopeItem:
+    properties:
+      cluster_id:
+        example: 1
+        type: integer
+      cluster_name:
+        example: pve-prod-01
+        type: string
+      cluster_name_alias:
+        example: 生产集群一
+        type: string
+    type: object
+  pvesphere_api_v1.SetNodeStatusRequest:
+    properties:
+      command:
+        description: 操作命令：reboot（重启）或 shutdown（关闭）
+        example: reboot
+        type: string
+      node_id:
+        description: 节点ID（数据库ID）
+        example: 1
+        type: integer
+    required:
+    - command
+    - node_id
+    type: object
+  pvesphere_api_v1.SetNodeStatusResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        additionalProperties: true
+        type: object
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.StartNodeServiceRequest:
+    properties:
+      node_id:
+        description: 节点ID（数据库ID）
+        example: 1
+        type: integer
+      service_name:
+        description: 服务名称（如：pveproxy, pvedaemon, corosync 等）
+        example: pveproxy
+        type: string
+    required:
+    - node_id
+    - service_name
+    type: object
+  pvesphere_api_v1.StartNodeServiceResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.StartNodeServiceResponseData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.StartNodeServiceResponseData:
+    properties:
+      upid:
+        description: 任务ID
+        type: string
+    type: object
+  pvesphere_api_v1.StopNodeServiceRequest:
+    properties:
+      node_id:
+        description: 节点ID（数据库ID）
+        example: 1
+        type: integer
+      service_name:
+        description: 服务名称（如：pveproxy, pvedaemon, corosync 等）
+        example: pveproxy
+        type: string
+    required:
+    - node_id
+    - service_name
+    type: object
+  pvesphere_api_v1.StopNodeServiceResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.StopNodeServiceResponseData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.StopNodeServiceResponseData:
+    properties:
+      upid:
+        description: 任务ID
+        type: string
+    type: object
+  pvesphere_api_v1.StopTaskResponse:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.StorageDetail:
+    properties:
+      active:
+        type: integer
+      avail:
+        type: integer
+      cluster_id:
+        type: integer
+      content:
+        type: string
+      create_time:
+        description: 创建时间
+        type: string
+      creator:
+        description: 创建者
+        type: string
+      enabled:
+        type: integer
+      id:
+        type: integer
+      modifier:
+        description: 修改者
+        type: string
+      node_id:
+        description: 节点ID（关联字段）
+        type: integer
+      node_name:
+        type: string
+      shared:
+        type: integer
+      storage_name:
+        type: string
+      total:
+        type: integer
+      type:
+        type: string
+      update_time:
+        description: 更新时间
+        type: string
+      used:
+        type: integer
+      used_fraction:
+        type: number
+    type: object
+  pvesphere_api_v1.StorageHotspot:
+    properties:
+      id:
+        description: 存储ID
+        example: storage/pve01/local
+        type: string
+      name:
+        description: 存储名称
+        example: local (pve01)
+        type: string
+      total_bytes:
+        description: 总字节
+        example: 100663296000
+        type: integer
+      unit:
+        description: 单位
+        example: '%'
+        type: string
+      usage_percent:
+        description: 使用率百分比
+        example: 85.5
+        type: number
+      used_bytes:
+        description: 已使用字节
+        example: 85899345920
+        type: integer
+    type: object
+  pvesphere_api_v1.StorageItem:
+    properties:
+      active:
+        type: integer
+      avail:
+        type: integer
+      cluster_id:
+        type: integer
+      content:
+        type: string
+      enabled:
+        type: integer
+      id:
+        type: integer
+      node_id:
+        description: 节点ID（关联字段）
+        type: integer
+      node_name:
+        type: string
+      shared:
+        type: integer
+      storage_name:
+        type: string
+      total:
+        type: integer
+      type:
+        type: string
+      used:
+        type: integer
+      used_fraction:
+        type: number
+    type: object
+  pvesphere_api_v1.SyncTaskDetail:
+    properties:
+      error_message:
+        type: string
+      progress:
+        type: integer
+      source_node:
+        $ref: '#/definitions/pvesphere_api_v1.NodeInfo'
+      status:
+        type: string
+      storage_name:
+        type: string
+      sync_end_time:
+        type: string
+      sync_start_time:
+        type: string
+      target_node:
+        $ref: '#/definitions/pvesphere_api_v1.NodeInfo'
+      task_id:
+        type: integer
+      template_id:
+        type: integer
+      template_name:
+        type: string
+    type: object
+  pvesphere_api_v1.SyncTemplateRequest:
+    properties:
+      target_node_ids:
+        example:
+        - 3
+        - 4
+        items:
+          type: integer
+        type: array
+    required:
+    - target_node_ids
+    type: object
+  pvesphere_api_v1.SyncTemplateResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.SyncTemplateResponseData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.SyncTemplateResponseData:
+    properties:
+      sync_tasks:
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.TemplateSyncTaskInfo'
+        type: array
+    type: object
+  pvesphere_api_v1.TaskLogItem:
+    properties:
+      "n":
+        description: 行号
+        type: integer
+      t:
+        description: 日志内容
+        type: string
+    type: object
+  pvesphere_api_v1.TaskStatusItem:
+    properties:
+      endtime:
+        type: integer
+      exitstatus:
+        description: 可能是string或int
+      extra:
+        additionalProperties: true
+        type: object
+      id:
+        type: string
+      pid:
+        type: integer
+      pstart:
+        type: integer
+      starttime:
+        type: integer
+      status:
+        type: string
+      type:
+        type: string
+      upid:
+        type: string
+      user:
+        type: string
+    type: object
+  pvesphere_api_v1.TemplateDetail:
+    properties:
+      cluster_id:
+        type: integer
+      cluster_name:
+        description: 从关联表查询填充
+        type: string
+      create_time:
+        description: 创建时间
+        type: string
+      creator:
+        description: 创建者
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      modifier:
+        description: 修改者
+        type: string
+      template_name:
+        type: string
+      update_time:
+        description: 更新时间
+        type: string
+    type: object
+  pvesphere_api_v1.TemplateDetailWithInstances:
+    properties:
+      cluster_id:
+        type: integer
+      cluster_name:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      instances:
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.TemplateInstanceInfo'
+        type: array
+      template_name:
+        type: string
+      upload_info:
+        $ref: '#/definitions/pvesphere_api_v1.TemplateUploadInfo'
+    type: object
+  pvesphere_api_v1.TemplateImportNode:
+    properties:
+      node_id:
+        type: integer
+      node_name:
+        type: string
+    type: object
+  pvesphere_api_v1.TemplateInstanceInfo:
+    properties:
+      instance_id:
+        type: integer
+      is_primary:
+        type: boolean
+      node_id:
+        type: integer
+      node_name:
+        type: string
+      status:
+        type: string
+      storage_name:
+        type: string
+      sync_progress:
+        type: integer
+      vmid:
+        type: integer
+    type: object
+  pvesphere_api_v1.TemplateItem:
+    properties:
+      cluster_id:
+        type: integer
+      cluster_name:
+        description: 从关联表查询填充
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      template_name:
+        type: string
+    type: object
+  pvesphere_api_v1.TemplateSyncTaskInfo:
+    properties:
+      status:
+        type: string
+      target_node_id:
+        type: integer
+      target_node_name:
+        type: string
+      task_id:
+        type: integer
+    type: object
+  pvesphere_api_v1.TemplateUploadInfo:
+    properties:
+      file_name:
+        type: string
+      file_size:
+        type: integer
+      is_shared:
+        type: boolean
+      status:
+        type: string
+      storage_name:
+        type: string
+      upload_id:
+        type: integer
+    type: object
+  pvesphere_api_v1.TopResourceConsumer:
+    properties:
+      cluster_id:
+        description: 集群ID
+        example: 1
+        type: integer
+      cluster_name:
+        description: 集群名称
+        example: cluster1
+        type: string
+      id:
+        description: 资源ID
+        example: qemu/101
+        type: string
+      metric_value:
+        description: 指标值
+        example: 92
+        type: number
+      name:
+        description: 资源名称
+        example: web-prod-01
+        type: string
+      node_name:
+        description: 节点名称（VM 使用）
+        example: pve01
+        type: string
+      unit:
+        description: 单位
+        example: '%'
+        type: string
+    type: object
+  pvesphere_api_v1.UpdateClusterRequest:
+    properties:
+      api_url:
+        type: string
+      cluster_name_alias:
+        type: string
+      datacenter:
+        type: string
+      describes:
+        type: string
+      dns:
+        type: string
+      env:
+        type: string
+      is_enabled:
+        type: integer
+      is_schedulable:
+        type: integer
+      region:
+        type: string
+      user_id:
+        type: string
+      user_token:
+        type: string
+    type: object
+  pvesphere_api_v1.UpdateNodeRequest:
+    properties:
+      annotations:
+        type: string
+      env:
+        type: string
+      ip_address:
+        type: string
+      is_schedulable:
+        type: integer
+      status:
+        type: string
+      vm_limit:
+        type: integer
+    type: object
+  pvesphere_api_v1.UpdateProfileRequest:
+    properties:
+      newPassword:
+        example: newpassword
+        type: string
+      nickname:
+        example: alan
+        type: string
+      oldPassword:
+        example: oldpassword
+        type: string
+    type: object
+  pvesphere_api_v1.UpdateStorageRequest:
+    properties:
+      active:
+        type: integer
+      avail:
+        type: integer
+      content:
+        type: string
+      enabled:
+        type: integer
+      shared:
+        type: integer
+      total:
+        type: integer
+      type:
+        type: string
+      used:
+        type: integer
+      used_fraction:
+        type: number
+    type: object
+  pvesphere_api_v1.UpdateTemplateRequest:
+    properties:
+      description:
+        type: string
+      template_name:
+        type: string
+    type: object
+  pvesphere_api_v1.UpdateVMCloudInitRequest:
+    properties:
+      cipassword:
+        description: CloudInit 密码
+        example: password123
+        type: string
+      citype:
+        description: CloudInit 类型：nocloud, configdrive2, opennebula
+        example: nocloud
+        type: string
+      ciuser:
+        description: CloudInit 用户名
+        example: ubuntu
+        type: string
+      ipconfig0:
+        description: IP 配置（格式：ip=xxx,gw=xxx）
+        example: ip=192.168.1.100/24,gw=192.168.1.1
+        type: string
+      ipconfig1:
+        description: 第二个网络接口的 IP 配置
+        type: string
+      ipconfig2:
+        description: 第三个网络接口的 IP 配置
+        type: string
+      nameserver:
+        description: DNS 服务器
+        example: 8.8.8.8
+        type: string
+      node_id:
+        description: 节点ID（必填）
+        example: 1
+        type: integer
+      searchdomain:
+        description: 搜索域
+        example: example.com
+        type: string
+      sshkeys:
+        description: SSH 公钥（多行用 \n 分隔）
+        example: ssh-rsa AAAAB3...
+        type: string
+      vm_id:
+        description: 虚拟机ID（必填）
+        example: 100
+        type: integer
+    required:
+    - node_id
+    - vm_id
+    type: object
+  pvesphere_api_v1.UpdateVMCloudInitResponse:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.UpdateVMConfigRequest:
+    properties:
+      config:
+        additionalProperties: true
+        description: 配置项，key-value格式
+        type: object
+      vm_id:
+        description: 虚拟机ID（数据库ID）
+        example: 1
+        type: integer
+    required:
+    - config
+    - vm_id
+    type: object
+  pvesphere_api_v1.UpdateVMConfigResponse:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.UpdateVMRequest:
+    properties:
+      app_id:
+        type: string
+      cpu_num:
+        type: integer
+      description:
+        type: string
+      memory_size:
+        type: integer
+      node_ip:
+        type: string
+      status:
+        type: string
+      storage:
+        type: string
+      storage_cfg:
+        type: string
+      template_name:
+        type: string
+      vm_name:
+        type: string
+      vm_password:
+        type: string
+      vm_user:
+        type: string
+    type: object
+  pvesphere_api_v1.VMDetail:
+    properties:
+      app_id:
+        type: string
+      cluster_id:
+        description: 集群ID
+        type: integer
+      cluster_name:
+        description: 集群名称（冗余字段，用于显示）
+        type: string
+      cpu_num:
+        type: integer
+      create_time:
+        description: 创建时间
+        type: string
+      creator:
+        description: 创建者
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      is_template:
+        description: 是否为模板：0=否, 1=是
+        type: integer
+      memory_size:
+        type: integer
+      modifier:
+        description: 修改者
+        type: string
+      node_id:
+        description: 节点ID
+        type: integer
+      node_ip:
+        type: string
+      node_name:
+        description: 节点名称（冗余字段，用于显示）
+        type: string
+      status:
+        type: string
+      storage:
+        type: string
+      storage_cfg:
+        type: string
+      template_id:
+        description: 模板ID
+        type: integer
+      template_name:
+        description: 模板名称（冗余字段，用于显示）
+        type: string
+      update_time:
+        description: 更新时间
+        type: string
+      vm_name:
+        type: string
+      vm_user:
+        type: string
+      vmid:
+        type: integer
+    type: object
+  pvesphere_api_v1.VMHotspots:
+    properties:
+      cpu:
+        description: CPU Top N
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.TopResourceConsumer'
+        type: array
+      memory:
+        description: Memory Top N
+        items:
+          $ref: '#/definitions/pvesphere_api_v1.TopResourceConsumer'
+        type: array
+    type: object
+  pvesphere_api_v1.VMItem:
+    properties:
+      app_id:
+        type: string
+      cluster_id:
+        description: 集群ID
+        type: integer
+      cluster_name:
+        description: 集群名称（冗余字段，用于显示）
+        type: string
+      cpu_num:
+        type: integer
+      id:
+        type: integer
+      is_template:
+        description: 是否为模板：0=否, 1=是
+        type: integer
+      memory_size:
+        type: integer
+      node_id:
+        description: 节点ID
+        type: integer
+      node_ip:
+        type: string
+      node_name:
+        description: 节点名称（冗余字段，用于显示）
+        type: string
+      status:
+        type: string
+      template_id:
+        description: 模板ID
+        type: integer
+      template_name:
+        description: 模板名称（冗余字段，用于显示）
+        type: string
+      vm_name:
+        type: string
+      vmid:
+        type: integer
+    type: object
+  pvesphere_api_v1.VerifyClusterData:
+    properties:
+      connected:
+        description: 连接状态
+        example: true
+        type: boolean
+      message:
+        description: 附加信息
+        example: connection successful
+        type: string
+      release:
+        description: 发行版本
+        example: "8.3"
+        type: string
+      repoid:
+        description: 仓库ID
+        example: c1689ccb
+        type: string
+      version:
+        description: Proxmox VE 版本
+        example: 8.3.0
+        type: string
+    type: object
+  pvesphere_api_v1.VerifyClusterResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/pvesphere_api_v1.VerifyClusterData'
+      message:
+        type: string
+    type: object
+  pvesphere_api_v1.WipeDiskRequest:
+    properties:
+      disk:
+        description: 磁盘设备名
+        example: /dev/sdb
+        type: string
+      node_id:
+        description: 节点ID
+        example: 1
+        type: integer
+      partition:
+        description: 分区号（可选，如果为空则擦除整个磁盘）
+        example: 1
+        type: integer
+    required:
+    - disk
+    - node_id
+    type: object
+  pvesphere_api_v1.WipeDiskResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        description: 任务ID (UPID)
+        type: string
+      message:
+        type: string
+    type: object
+host: localhost:8000
+info:
+  contact:
+    email: support@pvesphere.io
+    name: PveSphere Support
+    url: https://github.com/pvesphere/pvesphere
+  description: PveSphere is a comprehensive web-based management platform for Proxmox
+    VE (PVE) clusters.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: http://swagger.io/terms/
+  title: PveSphere API
+  version: 1.0.0
+paths:
+  /api/v1/clusters:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: 页码
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: 每页数量
+        in: query
+        name: page_size
+        type: integer
+      - description: 环境
+        in: query
+        name: env
+        type: string
+      - description: 区域
+        in: query
+        name: region
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.ListClusterResponse'
+      security:
+      - Bearer: []
+      summary: 获取集群列表
+      tags:
+      - PVE集群模块
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.CreateClusterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 创建集群
+      tags:
+      - PVE集群模块
+  /api/v1/clusters/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: 集群ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 删除集群
+      tags:
+      - PVE集群模块
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 集群ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetClusterResponse'
+      security:
+      - Bearer: []
+      summary: 获取集群详情
+      tags:
+      - PVE集群模块
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: 集群ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.UpdateClusterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 更新集群
+      tags:
+      - PVE集群模块
+  /api/v1/clusters/resources:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 集群ID
+        in: query
+        name: cluster_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetClusterResourcesResponse'
+      security:
+      - Bearer: []
+      summary: 获取集群资源
+      tags:
+      - PVE集群模块
+  /api/v1/clusters/status:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 集群ID
+        in: query
+        name: cluster_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetClusterStatusResponse'
+      security:
+      - Bearer: []
+      summary: 获取集群状态
+      tags:
+      - PVE集群模块
+  /api/v1/clusters/verify:
+    get:
+      consumes:
+      - application/json
+      description: 通过调用 Proxmox /api2/json/version 接口验证集群连接和认证是否正常。支持两种验证方式：1. 通过
+        cluster_id 验证（从数据库获取集群信息）；2. 通过 api_url + user_id + user_token 直接验证（不依赖数据库）
+      parameters:
+      - description: 集群ID（与 api_url+user_id+user_token 二选一）
+        in: query
+        name: cluster_id
+        type: integer
+      - description: API地址（与 cluster_id 二选一）
+        in: query
+        name: api_url
+        type: string
+      - description: 用户ID（与 cluster_id 二选一）
+        in: query
+        name: user_id
+        type: string
+      - description: 用户Token（与 cluster_id 二选一）
+        in: query
+        name: user_token
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.VerifyClusterResponse'
+      security:
+      - Bearer: []
+      summary: 验证集群连接
+      tags:
+      - PVE集群模块
+  /api/v1/dashboard/hotspots:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - default: all
+        description: '范围: all 或 cluster'
+        in: query
+        name: scope
+        type: string
+      - description: 集群ID（当 scope 为 cluster 时使用）
+        in: query
+        name: cluster_id
+        type: integer
+      - default: 5
+        description: Top N 数量
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.DashboardHotspotsResponse'
+      security:
+      - Bearer: []
+      summary: 获取压力和风险焦点
+      tags:
+      - Dashboard模块
+  /api/v1/dashboard/operations:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - default: all
+        description: '范围: all 或 cluster'
+        in: query
+        name: scope
+        type: string
+      - description: 集群ID（当 scope 为 cluster 时使用）
+        in: query
+        name: cluster_id
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.DashboardOperationsResponse'
+      security:
+      - Bearer: []
+      summary: 获取运行中的操作
+      tags:
+      - Dashboard模块
+  /api/v1/dashboard/overview:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - default: all
+        description: '范围: all 或 cluster'
+        in: query
+        name: scope
+        type: string
+      - description: 集群ID（当 scope 为 cluster 时使用）
+        in: query
+        name: cluster_id
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.DashboardOverviewResponse'
+      security:
+      - Bearer: []
+      summary: 获取全局概览
+      tags:
+      - Dashboard模块
+  /api/v1/dashboard/resources:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - default: all
+        description: '范围: all 或 cluster'
+        in: query
+        name: scope
+        type: string
+      - description: 集群ID（当 scope 为 cluster 时使用）
+        in: query
+        name: cluster_id
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.DashboardResourcesResponse'
+      security:
+      - Bearer: []
+      summary: 获取资源使用率
+      tags:
+      - Dashboard模块
+  /api/v1/dashboard/scopes:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.DashboardScopesResponse'
+      security:
+      - Bearer: []
+      summary: 获取可选集群列表
+      tags:
+      - Dashboard模块
+  /api/v1/login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.LoginResponse'
+      summary: 账号登录
+      tags:
+      - 用户模块
+  /api/v1/nodes:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: 页码
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: 每页数量
+        in: query
+        name: page_size
+        type: integer
+      - description: 集群ID
+        in: query
+        name: cluster_id
+        type: integer
+      - description: 环境
+        in: query
+        name: env
+        type: string
+      - description: 状态
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.ListNodeResponse'
+      security:
+      - Bearer: []
+      summary: 获取节点列表
+      tags:
+      - PVE节点模块
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.CreateNodeRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 创建节点
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: 节点ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 删除节点
+      tags:
+      - PVE节点模块
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 节点ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetNodeResponse'
+      security:
+      - Bearer: []
+      summary: 获取节点详情
+      tags:
+      - PVE节点模块
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: 节点ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.UpdateNodeRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 更新节点
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/console:
+    post:
+      consumes:
+      - application/json
+      description: 获取节点控制台信息，支持 termproxy（终端）和 vncshell（VNC图形界面）两种模式
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.GetNodeConsoleRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetNodeConsoleResponse'
+      security:
+      - Bearer: []
+      summary: 获取节点控制台信息
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/console/ws:
+    get:
+      description: 同域 WS 代理到 Proxmox vncwebsocket，供 noVNC 直接连接（仅 vncshell 模式）
+      parameters:
+      - description: ws_token（由 /api/v1/nodes/console 返回）
+        in: query
+        name: token
+        required: true
+        type: string
+      responses: {}
+      security:
+      - Bearer: []
+      summary: 节点 Console WebSocket（VNC WebSocket 代理）
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/disks/directory:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 节点ID
+        in: query
+        name: node_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetNodeDisksDirectoryResponse'
+      security:
+      - Bearer: []
+      summary: 获取节点 Directory 存储
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/disks/initgpt:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.InitGPTDiskRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.InitGPTDiskResponse'
+      security:
+      - Bearer: []
+      summary: 初始化 GPT 磁盘
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/disks/list:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 节点ID
+        in: query
+        name: node_id
+        required: true
+        type: integer
+      - default: false
+        description: 是否包含分区信息
+        in: query
+        name: include_partitions
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetNodeDisksListResponse'
+      security:
+      - Bearer: []
+      summary: 获取节点磁盘列表
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/disks/lvm:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 节点ID
+        in: query
+        name: node_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetNodeDisksLVMResponse'
+      security:
+      - Bearer: []
+      summary: 获取节点 LVM 存储
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/disks/lvmthin:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 节点ID
+        in: query
+        name: node_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetNodeDisksLVMThinResponse'
+      security:
+      - Bearer: []
+      summary: 获取节点 LVM-Thin 存储
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/disks/wipedisk:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.WipeDiskRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.WipeDiskResponse'
+      security:
+      - Bearer: []
+      summary: 擦除磁盘或分区
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/disks/zfs:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 节点ID
+        in: query
+        name: node_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetNodeDisksZFSResponse'
+      security:
+      - Bearer: []
+      summary: 获取节点 ZFS 存储
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/network:
+    delete:
+      consumes:
+      - application/json
+      description: 恢复节点的网络配置更改
+      parameters:
+      - description: 恢复网络配置请求
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.RevertNodeNetworkRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.RevertNodeNetworkResponse'
+      security:
+      - Bearer: []
+      summary: 恢复网络配置更改
+      tags:
+      - PVE节点模块
+    get:
+      consumes:
+      - application/json
+      description: 列出节点的可用网络配置
+      parameters:
+      - description: 节点ID
+        in: query
+        name: node_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetNodeNetworksResponse'
+      security:
+      - Bearer: []
+      summary: 获取节点网络列表
+      tags:
+      - PVE节点模块
+    post:
+      consumes:
+      - application/json
+      description: 创建或更新节点的网络设备配置
+      parameters:
+      - description: 创建网络配置请求
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.CreateNodeNetworkRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.CreateNodeNetworkResponse'
+      security:
+      - Bearer: []
+      summary: 创建网络设备配置
+      tags:
+      - PVE节点模块
+    put:
+      consumes:
+      - application/json
+      description: 重新加载节点的网络配置
+      parameters:
+      - description: 重新加载网络配置请求
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.ReloadNodeNetworkRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.ReloadNodeNetworkResponse'
+      security:
+      - Bearer: []
+      summary: 重新加载网络配置
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/rrd:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 节点ID
+        in: query
+        name: node_id
+        required: true
+        type: integer
+      - description: 时间范围
+        enum:
+        - hour
+        - day
+        - week
+        - month
+        - year
+        in: query
+        name: timeframe
+        required: true
+        type: string
+      - description: 聚合函数
+        enum:
+        - AVERAGE
+        - MAX
+        in: query
+        name: cf
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetNodeRRDDataResponse'
+      security:
+      - Bearer: []
+      summary: 获取节点RRD监控数据
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/services:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 节点ID
+        in: query
+        name: node_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetNodeServicesResponse'
+      security:
+      - Bearer: []
+      summary: 获取节点服务列表
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/services/restart:
+    post:
+      consumes:
+      - application/json
+      description: 重启指定的节点服务
+      parameters:
+      - description: 重启服务请求
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.RestartNodeServiceRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.RestartNodeServiceResponse'
+      security:
+      - Bearer: []
+      summary: 重启节点服务
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/services/start:
+    post:
+      consumes:
+      - application/json
+      description: 启动指定的节点服务
+      parameters:
+      - description: 启动服务请求
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.StartNodeServiceRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.StartNodeServiceResponse'
+      security:
+      - Bearer: []
+      summary: 启动节点服务
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/services/stop:
+    post:
+      consumes:
+      - application/json
+      description: 停止指定的节点服务
+      parameters:
+      - description: 停止服务请求
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.StopNodeServiceRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.StopNodeServiceResponse'
+      security:
+      - Bearer: []
+      summary: 停止节点服务
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/status:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 节点ID
+        in: query
+        name: node_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetNodeStatusResponse'
+      security:
+      - Bearer: []
+      summary: 获取节点状态
+      tags:
+      - PVE节点模块
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.SetNodeStatusRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.SetNodeStatusResponse'
+      security:
+      - Bearer: []
+      summary: 设置节点状态（重启/关闭）
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/storage/content:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: 节点ID
+        in: query
+        name: node_id
+        required: true
+        type: integer
+      - description: 存储名称
+        in: query
+        name: storage
+        required: true
+        type: string
+      - description: 卷标识（volume ID，需要完整路径，例如：/local-dir:iso/baohe_pro_8_51_0_1619.iso）
+        in: query
+        name: volume
+        required: true
+        type: string
+      - description: 延迟删除时间（秒）
+        in: query
+        name: delay
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 删除存储内容（镜像 / ISO / OVA / VM 镜像等）
+      tags:
+      - PVE节点模块
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 节点ID
+        in: query
+        name: node_id
+        required: true
+        type: integer
+      - description: 存储名称
+        in: query
+        name: storage
+        required: true
+        type: string
+      - description: 内容类型过滤，如 images,iso,backup
+        in: query
+        name: content
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetStorageContentResponse'
+      security:
+      - Bearer: []
+      summary: 获取节点存储内容列表
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/storage/content/detail:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 节点ID
+        in: query
+        name: node_id
+        required: true
+        type: integer
+      - description: 存储名称
+        in: query
+        name: storage
+        required: true
+        type: string
+      - description: 卷标识（volume ID）
+        in: query
+        name: volume
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetStorageVolumeResponse'
+      security:
+      - Bearer: []
+      summary: 获取节点存储卷属性
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/storage/rrd:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 节点ID
+        in: query
+        name: node_id
+        required: true
+        type: integer
+      - description: 存储名称
+        in: query
+        name: storage
+        required: true
+        type: string
+      - description: 时间范围
+        enum:
+        - hour
+        - day
+        - week
+        - month
+        - year
+        in: query
+        name: timeframe
+        required: true
+        type: string
+      - description: 聚合函数
+        enum:
+        - AVERAGE
+        - MAX
+        in: query
+        name: cf
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetStorageRRDDataResponse'
+      security:
+      - Bearer: []
+      summary: 获取节点存储 RRD 监控数据
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/storage/status:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 节点ID
+        in: query
+        name: node_id
+        required: true
+        type: integer
+      - description: 存储名称
+        in: query
+        name: storage
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetStorageStatusResponse'
+      security:
+      - Bearer: []
+      summary: 获取节点存储状态
+      tags:
+      - PVE节点模块
+  /api/v1/nodes/storage/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: 节点ID
+        in: formData
+        name: node_id
+        required: true
+        type: integer
+      - description: 存储名称
+        in: formData
+        name: storage
+        required: true
+        type: string
+      - description: 内容类型
+        enum:
+        - iso
+        - vztmpl
+        - backup
+        - images
+        in: formData
+        name: content
+        type: string
+      - description: 上传文件
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 上传存储内容（模板 / ISO / OVA / VM 镜像）
+      tags:
+      - PVE节点模块
+  /api/v1/pve/access/ticket:
+    post:
+      consumes:
+      - application/json
+      description: 按照 Proxmox 原生 /api2/json/access/ticket 接口封装，使用用户名/密码获取 ticket 和
+        CSRFPreventionToken。api_url 从集群表中根据 cluster_id 获取。
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.GetAccessTicketRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetAccessTicketResponse'
+      security:
+      - Bearer: []
+      summary: 获取 Proxmox 高权限票据（/access/ticket）
+      tags:
+      - PVE认证模块
+  /api/v1/register:
+    post:
+      consumes:
+      - application/json
+      description: 目前只支持邮箱登录
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      summary: 用户注册
+      tags:
+      - 用户模块
+  /api/v1/storages:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: 页码
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: 每页数量
+        in: query
+        name: page_size
+        type: integer
+      - description: 集群ID
+        in: query
+        name: cluster_id
+        type: integer
+      - description: 节点名称
+        in: query
+        name: node_name
+        type: string
+      - description: 存储类型
+        in: query
+        name: type
+        type: string
+      - description: 存储名称
+        in: query
+        name: storage_name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.ListStorageResponse'
+      security:
+      - Bearer: []
+      summary: 获取存储列表
+      tags:
+      - PVE存储模块
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.CreateStorageRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 创建存储
+      tags:
+      - PVE存储模块
+  /api/v1/storages/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: 存储ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 删除存储
+      tags:
+      - PVE存储模块
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 存储ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetStorageResponse'
+      security:
+      - Bearer: []
+      summary: 获取存储详情
+      tags:
+      - PVE存储模块
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: 存储ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.UpdateStorageRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 更新存储
+      tags:
+      - PVE存储模块
+  /api/v1/tasks/cluster:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 集群ID
+        in: query
+        name: cluster_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.ListClusterTasksResponse'
+      security:
+      - Bearer: []
+      summary: 获取集群任务列表
+      tags:
+      - PVE任务模块
+  /api/v1/tasks/log:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 集群ID
+        in: query
+        name: cluster_id
+        required: true
+        type: integer
+      - description: 节点名称
+        in: query
+        name: node_name
+        required: true
+        type: string
+      - description: 任务UPID
+        in: query
+        name: upid
+        required: true
+        type: string
+      - default: 0
+        description: 起始行号
+        in: query
+        name: start
+        type: integer
+      - default: 50
+        description: 返回行数
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetTaskLogResponse'
+      security:
+      - Bearer: []
+      summary: 获取任务日志
+      tags:
+      - PVE任务模块
+  /api/v1/tasks/node:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 集群ID
+        in: query
+        name: cluster_id
+        required: true
+        type: integer
+      - description: 节点名称
+        in: query
+        name: node_name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.ListNodeTasksResponse'
+      security:
+      - Bearer: []
+      summary: 获取节点任务列表
+      tags:
+      - PVE任务模块
+  /api/v1/tasks/status:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 集群ID
+        in: query
+        name: cluster_id
+        required: true
+        type: integer
+      - description: 节点名称
+        in: query
+        name: node_name
+        required: true
+        type: string
+      - description: 任务UPID
+        in: query
+        name: upid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetTaskStatusResponse'
+      security:
+      - Bearer: []
+      summary: 获取任务状态
+      tags:
+      - PVE任务模块
+  /api/v1/tasks/stop:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: 集群ID
+        in: query
+        name: cluster_id
+        required: true
+        type: integer
+      - description: 节点名称
+        in: query
+        name: node_name
+        required: true
+        type: string
+      - description: 任务UPID
+        in: query
+        name: upid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.StopTaskResponse'
+      security:
+      - Bearer: []
+      summary: 终止任务
+      tags:
+      - PVE任务模块
+  /api/v1/templates:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: 页码
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: 每页数量
+        in: query
+        name: page_size
+        type: integer
+      - description: 集群ID
+        in: query
+        name: cluster_id
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.ListTemplateResponse'
+      security:
+      - Bearer: []
+      summary: 获取模板列表
+      tags:
+      - 模板管理
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.CreateTemplateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 创建模板
+      tags:
+      - 模板管理
+  /api/v1/templates/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: 模板ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 删除模板
+      tags:
+      - 模板管理
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 模板ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetTemplateResponse'
+      security:
+      - Bearer: []
+      summary: 获取模板详情
+      tags:
+      - 模板管理
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: 模板ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.UpdateTemplateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 更新模板
+      tags:
+      - 模板管理
+  /api/v1/templates/{id}/detail:
+    get:
+      consumes:
+      - application/json
+      description: 查询模板详细信息，包括上传信息和实例列表
+      parameters:
+      - description: 模板ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 是否包含实例信息
+        in: query
+        name: include_instances
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetTemplateDetailResponse'
+      summary: 查询模板详情
+      tags:
+      - 模板管理
+  /api/v1/templates/{id}/instances:
+    get:
+      consumes:
+      - application/json
+      description: 列出指定模板的所有实例
+      parameters:
+      - description: 模板ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.ListTemplateInstancesResponse'
+      summary: 列出模板实例
+      tags:
+      - 模板管理
+  /api/v1/templates/{id}/sync:
+    post:
+      consumes:
+      - application/json
+      description: 将本地存储的模板同步到其他节点（仅支持local存储）
+      parameters:
+      - description: 模板ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 同步请求
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.SyncTemplateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.SyncTemplateResponse'
+      summary: 同步模板到其他节点
+      tags:
+      - 模板管理
+  /api/v1/templates/import:
+    post:
+      consumes:
+      - application/json
+      description: 基于已有的虚拟机备份文件创建模板，支持共享存储和本地存储
+      parameters:
+      - description: 导入模板请求
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.ImportTemplateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.ImportTemplateResponse'
+      summary: 从备份文件导入模板
+      tags:
+      - 模板管理
+  /api/v1/templates/sync-tasks:
+    get:
+      consumes:
+      - application/json
+      description: 列出同步任务列表，支持分页和过滤
+      parameters:
+      - description: 页码
+        in: query
+        name: page
+        type: integer
+      - description: 每页数量
+        in: query
+        name: page_size
+        type: integer
+      - description: 模板ID
+        in: query
+        name: template_id
+        type: integer
+      - description: 任务状态
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.ListSyncTasksResponse'
+      summary: 列出同步任务
+      tags:
+      - 模板管理
+  /api/v1/templates/sync-tasks/{task_id}:
+    get:
+      consumes:
+      - application/json
+      description: 查询指定同步任务的详细信息
+      parameters:
+      - description: 任务ID
+        in: path
+        name: task_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetSyncTaskResponse'
+      summary: 查询同步任务
+      tags:
+      - 模板管理
+  /api/v1/templates/sync-tasks/{task_id}/retry:
+    post:
+      consumes:
+      - application/json
+      description: 重试失败的同步任务
+      parameters:
+      - description: 任务ID
+        in: path
+        name: task_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.RetrySyncTaskResponse'
+      summary: 重试同步任务
+      tags:
+      - 模板管理
+  /api/v1/user:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetProfileResponse'
+      security:
+      - Bearer: []
+      summary: 获取用户信息
+      tags:
+      - 用户模块
+    put:
+      consumes:
+      - application/json
+      description: 支持修改昵称和密码，不允许修改邮箱。修改密码需要提供旧密码和新密码。
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.UpdateProfileRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 修改用户信息
+      tags:
+      - 用户模块
+  /api/v1/vms:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: 页码
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: 每页数量
+        in: query
+        name: page_size
+        type: integer
+      - description: 集群名称
+        in: query
+        name: cluster_name
+        type: string
+      - description: 节点名称
+        in: query
+        name: node_name
+        type: string
+      - description: 状态
+        in: query
+        name: status
+        type: string
+      - description: 应用ID
+        in: query
+        name: app_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.ListVMResponse'
+      security:
+      - Bearer: []
+      summary: 获取虚拟机列表
+      tags:
+      - PVE虚拟机模块
+    post:
+      consumes:
+      - application/json
+      description: 仅创建数据库记录，用于手动同步或导入场景，不调用 Proxmox API
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.CreateVMRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 创建虚拟机（仅数据库记录）
+      tags:
+      - PVE虚拟机模块
+  /api/v1/vms/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: 虚拟机ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 删除虚拟机
+      tags:
+      - PVE虚拟机模块
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 虚拟机ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetVMResponse'
+      security:
+      - Bearer: []
+      summary: 获取虚拟机详情
+      tags:
+      - PVE虚拟机模块
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: 虚拟机ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.UpdateVMRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 更新虚拟机
+      tags:
+      - PVE虚拟机模块
+  /api/v1/vms/{id}/start:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 虚拟机ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 启动虚拟机
+      tags:
+      - PVE虚拟机模块
+  /api/v1/vms/{id}/stop:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 虚拟机ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 停止虚拟机
+      tags:
+      - PVE虚拟机模块
+  /api/v1/vms/backup:
+    delete:
+      consumes:
+      - application/json
+      description: 删除指定存储中的备份文件
+      parameters:
+      - description: 删除备份请求
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.DeleteBackupRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.DeleteBackupResponse'
+      security:
+      - Bearer: []
+      summary: 删除虚拟机备份
+      tags:
+      - PVE虚拟机模块
+    post:
+      consumes:
+      - application/json
+      description: 使用 Proxmox vzdump API 创建虚拟机备份
+      parameters:
+      - description: 创建备份请求
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.CreateBackupRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.CreateBackupResponse'
+      security:
+      - Bearer: []
+      summary: 创建虚拟机备份
+      tags:
+      - PVE虚拟机模块
+  /api/v1/vms/cloudinit:
+    get:
+      consumes:
+      - application/json
+      description: 获取虚拟机的 CloudInit 配置，包含当前和待处理的值
+      parameters:
+      - description: 虚拟机ID
+        in: query
+        name: vm_id
+        required: true
+        type: integer
+      - description: 节点ID
+        in: query
+        name: node_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetVMCloudInitResponse'
+      security:
+      - Bearer: []
+      summary: 获取虚拟机 CloudInit 配置
+      tags:
+      - PVE虚拟机模块
+    put:
+      consumes:
+      - application/json
+      description: 重新生成和更改 cloudinit 配置驱动器
+      parameters:
+      - description: 更新 CloudInit 配置请求
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.UpdateVMCloudInitRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.UpdateVMCloudInitResponse'
+      security:
+      - Bearer: []
+      summary: 更新虚拟机 CloudInit 配置
+      tags:
+      - PVE虚拟机模块
+  /api/v1/vms/config:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 虚拟机ID
+        in: query
+        name: vm_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetVMCurrentConfigResponse'
+      security:
+      - Bearer: []
+      summary: 获取虚拟机当前配置
+      tags:
+      - PVE虚拟机模块
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.UpdateVMConfigRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.UpdateVMConfigResponse'
+      security:
+      - Bearer: []
+      summary: 更新虚拟机配置
+      tags:
+      - PVE虚拟机模块
+  /api/v1/vms/config/pending:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 虚拟机ID
+        in: query
+        name: vm_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetVMPendingConfigResponse'
+      security:
+      - Bearer: []
+      summary: 获取虚拟机pending配置
+      tags:
+      - PVE虚拟机模块
+  /api/v1/vms/console:
+    post:
+      consumes:
+      - application/json
+      description: 调用 Proxmox vncproxy 获取 port/ticket 等信息，用于 noVNC 连接
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.GetVMConsoleRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetVMConsoleResponse'
+      security:
+      - Bearer: []
+      summary: 获取虚拟机 Console（VNCProxy）
+      tags:
+      - PVE虚拟机模块
+  /api/v1/vms/console/ws:
+    get:
+      description: 同域 WS 代理到 Proxmox vncwebsocket，供 noVNC 直接连接
+      parameters:
+      - description: ws_token（由 /api/v1/vms/console 返回）
+        in: query
+        name: token
+        required: true
+        type: string
+      responses: {}
+      security:
+      - Bearer: []
+      summary: 虚拟机 Console WebSocket（VNC WebSocket 代理）
+      tags:
+      - PVE虚拟机模块
+  /api/v1/vms/create:
+    post:
+      consumes:
+      - application/json
+      description: 调用 Proxmox API 创建虚拟机并自动创建数据库记录，这是最常用的场景
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.CreateVMRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 创建虚拟机（完整流程）
+      tags:
+      - PVE虚拟机模块
+  /api/v1/vms/migrate:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 迁移请求
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.MigrateVMRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.MigrateVMResponse'
+      security:
+      - Bearer: []
+      summary: 迁移虚拟机（同集群）
+      tags:
+      - PVE虚拟机模块
+  /api/v1/vms/remote-migrate:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 远程迁移请求
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pvesphere_api_v1.RemoteMigrateVMRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.RemoteMigrateVMResponse'
+      security:
+      - Bearer: []
+      summary: 远程迁移虚拟机（跨集群）
+      tags:
+      - PVE虚拟机模块
+  /api/v1/vms/rrd:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 虚拟机ID
+        in: query
+        name: vm_id
+        required: true
+        type: integer
+      - description: 时间范围
+        enum:
+        - hour
+        - day
+        - week
+        - month
+        - year
+        in: query
+        name: timeframe
+        required: true
+        type: string
+      - description: 聚合函数
+        enum:
+        - AVERAGE
+        - MAX
+        in: query
+        name: cf
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetVMRRDDataResponse'
+      security:
+      - Bearer: []
+      summary: 获取虚拟机RRD监控数据
+      tags:
+      - PVE虚拟机模块
+  /api/v1/vms/status:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 虚拟机ID
+        in: query
+        name: vm_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pvesphere_api_v1.GetVMStatusResponse'
+      security:
+      - Bearer: []
+      summary: 获取虚拟机状态
+      tags:
+      - PVE虚拟机模块
+securityDefinitions:
+  Bearer:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

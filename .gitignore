@@ -1,0 +1,10 @@
+storage/logs
+.cursor
+.vscode
+controller
+migration
+storage/pvesphere-test.db
+.idea
+*.log
+deploy/docker-compose/conf
+deploy/docker-compose/data
