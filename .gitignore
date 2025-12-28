@@ -4,6 +4,7 @@ storage/logs
 controller
 migration
 storage/pvesphere-test.db
+cmd/server/__debug_bin*
 .idea
 *.log
 deploy/docker-compose/conf
