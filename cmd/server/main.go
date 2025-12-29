@@ -19,8 +19,8 @@ import (
 // @contact.name   PveSphere Support
 // @contact.url    https://github.com/pvesphere/pvesphere
 // @contact.email  support@pvesphere.io
-// @license.name  MIT
-// @license.url   https://opensource.org/licenses/MIT
+// @license.name  Apache 2.0
+// @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
 // @host      localhost:8000
 // @securityDefinitions.apiKey Bearer
 // @in header

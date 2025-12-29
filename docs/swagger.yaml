@@ -2595,8 +2595,8 @@ info:
   description: PveSphere is a comprehensive web-based management platform for Proxmox
     VE (PVE) clusters.
   license:
-    name: MIT
-    url: https://opensource.org/licenses/MIT
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: http://swagger.io/terms/
   title: PveSphere API
   version: 1.0.0

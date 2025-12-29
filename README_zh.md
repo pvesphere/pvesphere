@@ -415,7 +415,7 @@ http://localhost:8000/swagger/index.html
 
 ## 许可证
 
-[MIT License](LICENSE)
+[Apache License 2.0](LICENSE)
 
 版权所有 © 2025-present PveSphere Contributors
 
