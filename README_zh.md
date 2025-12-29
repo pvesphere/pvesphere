@@ -7,7 +7,7 @@
 ## 项目简介
 
 PVESphere 是一个基于 Web 的 Proxmox VE (PVE) 集群综合管理平台。它提供了一个现代化、直观的界面，用于从统一的仪表板管理多个 PVE 集群、节点、虚拟机、存储和模板。
-<img src="./docs/pvesphere-review-rc01.gif" width="100%" />
+<!-- <img src="./docs/pvesphere-review-rc01.gif" width="100%" /> -->
 
 ## 功能特性
 
