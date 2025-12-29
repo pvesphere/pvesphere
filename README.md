@@ -10,7 +10,7 @@
 
 PveSphere is a comprehensive web-based management platform for Proxmox VE (PVE) clusters. It provides a modern, intuitive interface for managing multiple PVE clusters, nodes, virtual machines, storage, and templates from a single unified dashboard.
 
-![PveSphere Preview](./docs/pvesphere-review-rc01.gif)
+<img src="./docs/pvesphere-review-rc01.gif" width="100%" />
 
 ### What is PveSphere?
 
