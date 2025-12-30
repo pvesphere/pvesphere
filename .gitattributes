@@ -1,14 +1,29 @@
+# 默认：文本文件自动判断
 * text=auto
 
-# Force the following filetypes to have unix eols, so Windows does not break them
-*.* text eol=lf
+# 强制 LF（仅限源码 / 文本）
+*.go text eol=lf
+*.js text eol=lf
+*.ts text eol=lf
+*.vue text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.sh text eol=lf
 
-# Windows forced line-endings
+# Windows 特殊目录
 /.idea/* text eol=crlf
 
-#
-## These files are binary and should be left untouched
-#
+# 二进制文件（绝不允许 Git 处理）
+*.png  binary
+*.gif  binary
+*.jpg  binary
+*.jpeg binary
+*.svg  binary
+*.ico  binary
+*.webp binary
+*.mp4  binary
+*.webm binary
+*.pdf  binary
 
-# (binary is a macro for -text -diff)
-*.png binary
