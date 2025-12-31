@@ -8,203 +8,101 @@
 
 ## Introduction
 
-PveSphere is a comprehensive web-based management platform for Proxmox VE (PVE) clusters. It provides a modern, intuitive interface for managing multiple PVE clusters, nodes, virtual machines, storage, and templates from a single unified dashboard.
+PveSphere is a web-based multi-cluster management platform for Proxmox VE (PVE). It provides a unified interface to manage multiple PVE clusters, nodes, virtual machines, storage, and templates from a single dashboard.
 
 <img src="./docs/pvesphere-review03.gif" width="100%" />
 
-### What is PveSphere?
+## Why PveSphere?
 
-PveSphere is a multi-cluster management solution that enables centralized control and monitoring of Proxmox VE infrastructure. It simplifies the complexity of managing distributed PVE environments by providing a single pane of glass for all your virtualization resources.
+Proxmox VE is a powerful open-source virtualization platform, but managing multiple clusters can be challenging:
 
----
+- **Multiple Cluster Management**: Need to switch between different PVE web interfaces when managing multiple clusters
+- **Unified Monitoring**: Difficult to get a global view of resources across all clusters
+- **Template Synchronization**: Manually syncing VM templates across nodes is time-consuming and error-prone
+- **Operational Complexity**: Managing VMs, storage, and backups across clusters requires frequent context switching
+
+PveSphere solves these problems by providing a **centralized management platform** that simplifies multi-cluster operations and improves operational efficiency.
+
+## What Problems Does It Solve?
+
+### 🎯 Core Pain Points
+
+1. **Multi-Cluster Management**: Unified interface for managing multiple PVE clusters without switching between different web UIs
+2. **Resource Visibility**: Real-time monitoring of all clusters, nodes, VMs, and storage from a single dashboard
+3. **Template Management**: Automated template synchronization across nodes, supporting both shared and local storage
+4. **Simplified Operations**: Streamlined workflows for VM lifecycle management, migrations, backups, and monitoring
+5. **Better UX**: Modern, responsive web interface that's easier to use than the native PVE interface for many operations
+
+### 🔍 Specific Use Cases
+
+- Managing multiple PVE clusters across different locations or environments
+- Centralized monitoring and alerting for PVE infrastructure
+- Automated template distribution across nodes
+- Simplified VM provisioning and management workflows
+- Better resource visibility for capacity planning
+
+## Who Is PveSphere For?
+
+### ✅ Suitable For
+
+- **Multi-cluster operators**: Teams managing multiple PVE clusters who need centralized management
+- **Small to medium teams**: Small DevOps teams that want to simplify PVE operations
+- **Template-heavy environments**: Users who frequently deploy VMs from templates and need automated synchronization
+- **Resource monitoring focused**: Teams that need better visibility into resource usage across clusters
+- **Open-source enthusiasts**: Users who prefer open-source solutions and want to avoid vendor lock-in
+
+### ❌ Not Suitable For
+
+- **Single cluster users**: If you only manage one PVE cluster, the native PVE web interface may be sufficient
+- **Large-scale requirements**: Teams that already operate large-scale OpenStack environments
+- **Complex HA/DR scenarios**: Advanced high-availability and disaster recovery requirements may need specialized tools
+- **API-only users**: If you primarily interact with PVE via API/CLI, you may not need a web management interface
+
+## Real-World Scenarios
+
+### Scenario 1: Multi-Environment Management
+You run development, staging, and production PVE clusters. Instead of logging into three different PVE web interfaces, you can manage all three from PveSphere's unified dashboard.
+
+### Scenario 2: Template Distribution
+You have VM templates stored on local storage and need to make them available on multiple nodes. PveSphere automates the synchronization process, saving hours of manual work.
+
+### Scenario 3: Resource Monitoring
+You need to monitor resource utilization across multiple clusters to identify hotspots and plan capacity. PveSphere provides a centralized view of CPU, memory, and storage usage.
+
+### Scenario 4: Simplified VM Operations
+Your team frequently creates, migrates, and manages VMs across clusters. PveSphere provides a streamlined interface that reduces the number of clicks and context switches needed.
 
 ## Features
 
-### 🎯 Core Functionality
+### Core Functionality
 
-- **Dashboard Overview**: Real-time monitoring of cluster resources, health status, and utilization metrics
-- **Cluster Management**: Manage multiple PVE clusters with centralized authentication and configuration
-- **Node Management**: Monitor and manage physical nodes across clusters, including console access
-- **Virtual Machine Management**: Full lifecycle management of VMs including create, start, stop, migrate, backup, and restore
-- **Storage Management**: Monitor storage usage, manage storage pools, and view storage content
-- **Template Management**: Import, sync, and manage VM templates for rapid deployment
+- **Multi-Cluster Dashboard**: Real-time overview of all clusters, nodes, VMs, and storage resources
+- **Cluster Management**: Add and manage multiple PVE clusters with centralized configuration
+- **VM Lifecycle Management**: Create, start, stop, migrate, backup, and restore VMs
+- **Template Management**: Import, synchronize, and manage VM templates across nodes
+- **Storage Management**: Monitor storage usage and manage storage pools
+- **Node Management**: Monitor nodes and access node consoles via terminal proxy
+- **VM Console Access**: VNC/NoVNC console access for VMs
+- **Resource Monitoring**: Real-time metrics and utilization tracking
 
-### 🚀 Key Capabilities
+For detailed documentation, please visit: [https://docs.pvesphere.com](https://docs.pvesphere.com)
 
-- Multi-cluster support with unified management interface
-- Real-time resource monitoring and metrics visualization
-- VM console access via VNC/NoVNC
-- Node console access via terminal proxy
-- Cloud-Init configuration support
-- Automated template synchronization
-- Backup and restore functionality
-- Task monitoring and management
-- Network configuration management
-- Service management (start, stop, restart)
-- Responsive design with mobile support
-- Internationalization (i18n) support
-
----
-
-## Technology Stack
-
-### Frontend (`pvesphere-ui`)
-
-- **Framework**: Vue 3 (Composition API)
-- **Build Tool**: Vite 7
-- **UI Library**: Element Plus 2
-- **Language**: TypeScript 5
-- **State Management**: Pinia 3
-- **Routing**: Vue Router 4
-- **Internationalization**: Vue I18n
-- **Charts**: ECharts 6
-- **Terminal**: xterm.js 5, noVNC
-- **Styling**: Tailwind CSS 4, SCSS
-- **Base Template**: [vue-pure-admin](https://github.com/pure-admin/vue-pure-admin)
-
-### Backend (`pvesphere`)
-
-- **Language**: Go 1.23
-- **Web Framework**: Gin 1.10
-- **ORM**: GORM 1.30
-- **Database**: MySQL / PostgreSQL / SQLite
-- **Authentication**: JWT (golang-jwt/jwt)
-- **Cache**: Redis 9
-- **WebSocket**: Gorilla WebSocket
-- **Task Scheduling**: gocron
-- **Logging**: Zap
-- **API Documentation**: Swagger
-- **Architecture**: Based on [Nunu](https://github.com/go-nunu/nunu) framework
-
----
-
-## Project Structure
-
-### Frontend Structure
-
-```
-pvesphere-ui/
-├── src/
-│   ├── api/              # API interfaces
-│   ├── assets/          # Static resources
-│   ├── components/      # Reusable components
-│   ├── config/          # Configuration files
-│   ├── directives/      # Vue directives
-│   ├── layout/          # Layout components
-│   ├── plugins/         # Plugin configurations
-│   ├── router/          # Route configuration
-│   ├── store/           # Pinia stores
-│   ├── style/           # Global styles
-│   ├── utils/           # Utility functions
-│   └── views/           # Page components
-│       └── pve/         # PVE management pages
-│           ├── cluster/     # Cluster management
-│           ├── dashboard/   # Dashboard
-│           ├── node/        # Node management
-│           ├── storage/     # Storage management
-│           ├── template/    # Template management
-│           └── vm/          # VM management
-├── locales/             # i18n translation files
-└── package.json
-```
-
-### Backend Structure
-
-```
-pvesphere/
-├── api/v1/              # API route handlers
-├── cmd/                 # Application entry points
-│   ├── server/          # HTTP server
-│   ├── controller/      # Kubernetes controller
-│   ├── migration/       # Database migration
-│   └── task/            # Background tasks
-├── internal/
-│   ├── handler/         # Request handlers
-│   ├── service/         # Business logic
-│   ├── repository/      # Data access layer
-│   ├── model/           # Data models
-│   ├── middleware/      # HTTP middleware
-│   └── router/          # Route definitions
-├── pkg/                 # Shared packages
-│   ├── proxmox/         # Proxmox API client
-│   ├── jwt/             # JWT utilities
-│   └── log/             # Logging utilities
-└── config/              # Configuration files
-```
-
----
-
-## Getting Started
+## Quick Start
 
 ### Prerequisites
 
-- **Frontend**:
-  - Node.js >= 20.19.0 or >= 22.13.0
-  - pnpm >= 9
+- Docker >= 20.10
+- Docker Compose >= 2.0
 
-- **Backend**:
-  - Go >= 1.23
-  - MySQL / PostgreSQL / SQLite
-  - Redis (optional, for caching)
-
-- **Docker** (optional):
-  - Docker >= 20.10
-  - Docker Compose >= 2.0
-
-### Frontend Setup
+### Quick Start with Docker
 
 ```bash
-# Navigate to frontend directory
-cd pvesphere-ui
-
-# Install dependencies
-pnpm install
-
-# Start development server
-pnpm dev
-
-# Build for production
-pnpm build
-```
-
-### Backend Setup
-
-```bash
-# Navigate to backend directory
+# Clone the repository
+git clone https://github.com/pvesphere/pvesphere.git
 cd pvesphere
 
-# Install dependencies
-go mod download
-
-# Run database migration (will automatically create default user)
-go run cmd/migration/main.go
-
-# Start server
-go run cmd/server/main.go
-```
-
-### Default User Information
-
-After running the database migration for the first time, the system will automatically create a default administrator account. You can log in using the following credentials:
-
-- **Email**: `pvesphere@gmail.com`
-- **Password**: `Ab123456`
-- **Nickname**: `PveSphere Admin`
-
-> Note: If the default user already exists, the migration process will not create it again. It is recommended to change the password after the first login.
-
-## Docker Deployment
-
-### Quick Start (Recommended)
-
-Use Makefile commands to quickly build and start all services:
-
-```bash
-# Build and start all services (including database migration)
+# Build and start all services
 make docker-compose-build
-
-# Check service status
-make docker-compose-ps
 
 # View service logs
 make docker-compose-logs
@@ -213,272 +111,53 @@ make docker-compose-logs
 make docker-compose-down
 ```
 
-### Docker Image Building
+### Default Login
 
-#### Build Individual Service Images
+After first startup, use these credentials:
+- **Email**: `pvesphere@gmail.com`
+- **Password**: `Ab123456`
 
-```bash
-# Build API service image
-make docker-build-api
+> ⚠️ Remember to change the default password after first login.
 
-# Build controller service image
-make docker-build-controller
-
-# Build all service images
-make docker-build
-```
-
-#### Manual Image Building
-
-```bash
-# Build API service
-docker build -f deploy/build/Dockerfile \
-  --build-arg APP_RELATIVE_PATH=./cmd/server \
-  --build-arg APP_NAME=server \
-  --build-arg APP_ENV=prod \
-  -t pvesphere-api:latest .
-
-# Build controller service
-docker build -f deploy/build/Dockerfile \
-  --build-arg APP_RELATIVE_PATH=./cmd/controller \
-  --build-arg APP_NAME=controller \
-  --build-arg APP_ENV=prod \
-  -t pvesphere-controller:latest .
-```
-
-### Docker Compose Usage
-
-The project uses Docker Compose to manage services, with SQLite as the default database.
-
-#### Common Commands
-
-```bash
-# Start all services
-make docker-compose-up
-
-# Build and start (first run)
-make docker-compose-build
-
-# Check service status
-make docker-compose-ps
-
-# View all service logs
-make docker-compose-logs
-
-# View API service logs
-make docker-compose-logs-api
-
-# View controller service logs
-make docker-compose-logs-controller
-
-# Restart all services
-make docker-compose-restart
-
-# Stop services (keep containers)
-make docker-compose-stop
-
-# Start stopped services
-make docker-compose-start
-
-# Stop and remove all services
-make docker-compose-down
-```
-
-#### Service Overview
-
-- **api-server**: API service (port 8000)
-- **controller**: Controller service
-- **migration**: Database migration service (runs automatically)
-
-#### Access Services
+### Access Services
 
 - **API Service**: http://localhost:8000
 - **API Documentation**: http://localhost:8000/swagger/index.html
 
-#### Default User Information
+For detailed installation and configuration instructions, please visit: [https://docs.pvesphere.com](https://docs.pvesphere.com)
 
-After running the database migration for the first time, the system will automatically create a default administrator account. You can log in using the following credentials:
+## Roadmap
 
-- **Email**: `pvesphere@gmail.com`
-- **Password**: `Ab123456`
-- **Nickname**: `PveSphere Admin`
+PveSphere focuses on **stability and correctness over speed of features**. The following high-level roadmap outlines planned improvements:
 
-> Note: If the default user already exists, the migration process will not create it again. It is recommended to change the password after the first login.
+### Core Improvements
 
-#### Data Persistence
+- **Improved Template Lifecycle Tracking**: Enhanced visibility and management of template states throughout their lifecycle
+- **Safer Multi-Cluster Orchestration**: More robust and reliable operations when managing resources across multiple clusters
+- **Enhanced Automation Workflows**: Streamlined automation capabilities for common operational tasks
+- **Better Observability and Auditability**: Comprehensive monitoring, logging, and audit trails for all operations
 
-All data (database, logs) is stored in Docker volume `pvesphere-storage`, ensuring data persistence across container restarts.
+### Planned Features
 
-### Local Development (Using Makefile)
+- **Advanced Storage Management**: More comprehensive storage operations and management capabilities
+- **Cluster-Level VM Scheduling**: Intelligent VM placement and scheduling mechanisms at the cluster level
+- **DRS (Distributed Resource Scheduler)**: Secondary scheduling capabilities for dynamic resource rebalancing
+- **Role-Based Access Control (RBAC)**: Fine-grained access control and permission management
+- **Extended Monitoring & Logging**: Enhanced monitoring capabilities and comprehensive logging management
 
-The project provides convenient Makefile commands for local development:
+> **Note**: Roadmap items prioritize stability and correctness. Features will be released when they are thoroughly tested and production-ready, not based on arbitrary timelines.
 
-```bash
-# Initialize development environment (install tools)
-make init
+## Documentation
 
-# Local startup (requires local Go environment)
-# 1. Start dependency services (MySQL, Redis)
-# 2. Run database migration
-# 3. Start API service
-make bootstrap
+For comprehensive documentation, including installation guides, API reference, and usage examples, please visit:
 
-# Build local binaries
-make build              # Build all services
-make build-server       # Build API service only
-make build-controller   # Build controller service only
+**📚 [https://docs.pvesphere.com](https://docs.pvesphere.com)**
 
-# Run tests
-make test
+## Contributing
 
-# Generate Swagger documentation
-make swag
-```
+Contributions are welcome! Whether it's bug fixes, feature enhancements, or documentation improvements, we appreciate your help in making PveSphere better.
 
-### Database Migration
-
-#### Docker Environment
-
-Database migration runs automatically when services start. To run manually:
-
-```bash
-# Run migration using docker compose
-cd deploy/docker-compose
-docker compose run --rm migration
-
-# Or run in container
-docker exec -it pvesphere-api ./migration -conf /data/app/config/docker.yml
-```
-
-#### Local Environment
-
-```bash
-# Using go run
-go run ./cmd/migration -conf config/local.yml
-
-# Or using nunu
-nunu run ./cmd/migration -conf config/local.yml
-```
-
-### Push Images to Registry
-
-```bash
-# Push API service image
-make docker-push-api REGISTRY=your-registry.com/pvesphere
-
-# Push controller service image
-make docker-push-controller REGISTRY=your-registry.com/pvesphere
-
-# Push all service images
-make docker-push REGISTRY=your-registry.com/pvesphere
-```
-
-For more Docker usage instructions, see [deploy/docker-compose/README.md](deploy/docker-compose/README.md)
-
----
-
-## Main Features Overview
-
-### 1. Dashboard
-
-- Global overview of all clusters, nodes, VMs, and storage
-- Resource utilization metrics (CPU, Memory, Storage)
-- Hotspots and risk alerts
-- Multi-cluster scope switching
-
-### 2. Cluster Management
-
-- Add and configure multiple PVE clusters
-- API connection verification
-- Cluster health monitoring
-- Enable/disable cluster scheduling
-
-### 3. Node Management
-
-- View node status and resources
-- Node console access (terminal proxy)
-- Network configuration
-- Service management (start, stop, restart)
-- Disk and storage monitoring
-
-### 4. Virtual Machine Management
-
-- Create, start, stop, and delete VMs
-- VM migration between nodes
-- VM console access (VNC)
-- Backup and restore
-- Cloud-Init configuration
-- Hardware configuration
-- Network configuration
-
-### 5. Storage Management
-
-- View storage pools and usage
-- Monitor storage capacity
-- Browse storage content (ISO, backup, templates)
-
-### 6. Template Management
-
-- Import templates from backups
-- Template synchronization across nodes
-- Template instance management
-- Support for shared and local storage
-
----
-
-## API Documentation
-
-Backend API documentation is available via Swagger UI when the server is running:
-
-```
-http://localhost:8000/swagger/index.html
-```
-
----
-
-## Development
-
-### Frontend Development
-
-```bash
-# Development mode
-pnpm dev
-
-# Type checking
-pnpm typecheck
-
-# Linting
-pnpm lint
-
-# Build
-pnpm build
-```
-
-### Backend Development
-
-```bash
-# Run server
-go run cmd/server/main.go
-
-# Run tests
-go test ./...
-
-# Generate Swagger docs
-swag init
-```
-
----
-
-## Internationalization
-
-The frontend supports multiple languages. Translation files are located in `locales/`:
-
-- `zh-CN.yaml` - Simplified Chinese
-- `en.yaml` - English
-
-To add a new language, create a new YAML file in the `locales/` directory and update the i18n configuration.
-
----
+Please feel free to submit issues and pull requests.
 
 ## License
 
@@ -486,11 +165,11 @@ To add a new language, create a new YAML file in the `locales/` directory and up
 
 Copyright © 2025-present PveSphere Contributors
 
----
+## Contact
 
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+- **Email**: pvesphere@gmail.com
+- **Twitter**: [@PveSphere](https://x.com/PveSphere)
+- **GitHub**: [https://github.com/pvesphere/pvesphere](https://github.com/pvesphere/pvesphere)
 
 ---
 
