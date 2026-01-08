@@ -1,72 +1,10 @@
-version: '3.8'
-
 services:
-  # # MySQL 数据库服务
-  # user-db:
-  #   image: mysql:8.0.31-debian
-  #   hostname: user-db
-  #   container_name: pvesphere-db
-  #   ports:
-  #     - "3380:3306"
-  #   environment:
-  #     - MYSQL_ROOT_PASSWORD=123456
-  #     - MYSQL_ROOT_HOST=%
-  #     - MYSQL_DATABASE=user
-  #   volumes:
-  #     - pvesphere-db-data:/var/lib/mysql
-  #   healthcheck:
-  #     test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p123456"]
-  #     interval: 10s
-  #     timeout: 5s
-  #     retries: 5
-  #   networks:
-  #     - pvesphere-network
-
-  # # Redis 缓存服务
-  # cache-redis:
-  #   image: redis:6-alpine
-  #   hostname: cache-redis
-  #   container_name: pvesphere-redis
-  #   ports:
-  #     - "6350:6379"
-  #   command: redis-server --appendonly yes
-  #   volumes:
-  #     - pvesphere-redis-data:/data
-  #   healthcheck:
-  #     test: ["CMD", "redis-cli", "ping"]
-  #     interval: 10s
-  #     timeout: 5s
-  #     retries: 5
-  #   networks:
-  #     - pvesphere-network
-
-  # 数据库迁移服务（在 API 和 Controller 启动前运行）
-  # migration 服务使用与 api-server 相同的构建参数，确保包含 migration 二进制文件
-  migration:
-    build:
-      context: ../..
-      dockerfile: deploy/build/Dockerfile
-      args:
-        APP_RELATIVE_PATH: ./cmd/server
-        APP_NAME: server
-        APP_ENV: docker
-    image: pvesphere-api:latest
-    container_name: pvesphere-migration
-    volumes:
-      - ../../config:/data/app/config:ro
-      - pvesphere-storage:/data/app/storage
-    environment:
-      - APP_ENV=docker
-    command: ["./migration", "-conf", "/data/app/config/docker.yml"]
-    networks:
-      - pvesphere-network
-    restart: "no"
-
   # API 服务
-  api-server:
+  api:
     build:
       context: ../..
       dockerfile: deploy/build/Dockerfile
+      target: backend
       args:
         APP_RELATIVE_PATH: ./cmd/server
         APP_NAME: server
@@ -80,18 +18,24 @@ services:
       - pvesphere-storage:/data/app/storage
     environment:
       - APP_ENV=docker
-    command: ["./server", "-conf", "/data/app/config/docker.yml"]
-    depends_on:
-      - migration
+    command: >
+      sh -c "./migration -conf /data/app/config/docker.yml && ./server -conf /data/app/config/docker.yml"
     networks:
       - pvesphere-network
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
   # 控制器服务
   controller:
     build:
       context: ../..
       dockerfile: deploy/build/Dockerfile
+      target: backend
       args:
         APP_RELATIVE_PATH: ./cmd/controller
         APP_NAME: controller
@@ -105,13 +49,37 @@ services:
       - APP_ENV=docker
     command: ["./controller", "-conf", "/data/app/config/docker.yml"]
     depends_on:
-      - migration
+      api:
+        condition: service_healthy
     networks:
       - pvesphere-network
     restart: unless-stopped
 
+  # 前端服务（仅支持本地代码构建）
+  frontend:
+    build:
+      context: ../..
+      dockerfile: deploy/build/Dockerfile
+      target: frontend
+    image: pvesphere-frontend:latest
+    container_name: pvesphere-frontend
+    ports:
+      - "8080:8080"
+    depends_on:
+      api:
+        condition: service_healthy
+    networks:
+      - pvesphere-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
 volumes:
-  # SQLite 数据库和日志存储（两个服务共享）
+  # SQLite 数据库和日志存储（多个服务共享）
   pvesphere-storage:
 
 networks:

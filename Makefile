@@ -39,6 +39,7 @@ build-controller:
 docker-build-api:
 	@echo "构建 API 服务 Docker 镜像..."
 	docker build -f deploy/build/Dockerfile \
+		--target backend \
 		--build-arg APP_RELATIVE_PATH=./cmd/server \
 		--build-arg APP_NAME=server \
 		--build-arg APP_ENV=prod \
@@ -50,6 +51,7 @@ docker-build-api:
 docker-build-controller:
 	@echo "构建控制器服务 Docker 镜像..."
 	docker build -f deploy/build/Dockerfile \
+		--target backend \
 		--build-arg APP_RELATIVE_PATH=./cmd/controller \
 		--build-arg APP_NAME=controller \
 		--build-arg APP_ENV=prod \
@@ -57,8 +59,17 @@ docker-build-controller:
 		-t pvesphere-controller:$$(git describe --tags --always 2>/dev/null || echo "latest") \
 		.
 
+.PHONY: docker-build-frontend
+docker-build-frontend:
+	@echo "构建前端服务 Docker 镜像..."
+	docker build -f deploy/build/Dockerfile \
+		--target frontend \
+		-t pvesphere-frontend:latest \
+		-t pvesphere-frontend:$$(git describe --tags --always 2>/dev/null || echo "latest") \
+		.
+
 .PHONY: docker-build
-docker-build: docker-build-api docker-build-controller
+docker-build: docker-build-api docker-build-controller docker-build-frontend
 	@echo "所有服务 Docker 镜像构建完成"
 
 # 镜像仓库地址，可通过环境变量 REGISTRY 指定，默认为空（本地构建）
@@ -104,7 +115,7 @@ docker-run-controller:
 # Docker Compose 相关命令
 .PHONY: docker-compose-up
 docker-compose-up:
-	@echo "启动所有服务（包括数据库、Redis、API 服务和控制器服务）..."
+	@echo "启动所有服务（包括 API、Controller 和 Frontend）..."
 	cd deploy/docker-compose && docker compose up -d
 
 .PHONY: docker-compose-down
@@ -132,6 +143,11 @@ docker-compose-logs-controller:
 	@echo "查看控制器服务日志..."
 	cd deploy/docker-compose && docker compose logs -f controller
 
+.PHONY: docker-compose-logs-frontend
+docker-compose-logs-frontend:
+	@echo "查看前端服务日志..."
+	cd deploy/docker-compose && docker compose logs -f frontend
+
 .PHONY: docker-compose-ps
 docker-compose-ps:
 	@echo "查看服务状态..."
@@ -141,6 +157,21 @@ docker-compose-ps:
 docker-compose-restart:
 	@echo "重启所有服务..."
 	cd deploy/docker-compose && docker compose restart
+
+.PHONY: docker-compose-restart-api
+docker-compose-restart-api:
+	@echo "重启 API 服务..."
+	cd deploy/docker-compose && docker compose restart api-server
+
+.PHONY: docker-compose-restart-controller
+docker-compose-restart-controller:
+	@echo "重启控制器服务..."
+	cd deploy/docker-compose && docker compose restart controller
+
+.PHONY: docker-compose-restart-frontend
+docker-compose-restart-frontend:
+	@echo "重启前端服务..."
+	cd deploy/docker-compose && docker compose restart frontend
 
 .PHONY: docker-compose-stop
 docker-compose-stop:
@@ -152,6 +183,41 @@ docker-compose-start:
 	@echo "启动已停止的服务..."
 	cd deploy/docker-compose && docker compose start
 
+# Docker Compose 健康检查
+.PHONY: docker-compose-health
+docker-compose-health:
+	@echo "检查所有服务健康状态..."
+	@cd deploy/docker-compose && docker compose ps
+	@echo "\n前端健康检查:"
+	@curl -s http://localhost:8080/health || echo "前端服务未就绪"
+	@echo "\nAPI 健康检查:"
+	@curl -s http://localhost:8000/api/health || echo "API 服务未就绪"
+
+# 快速启动（推荐）
+.PHONY: up
+up: docker-compose-build
+	@echo "\n==================================="
+	@echo "所有服务已启动！"
+	@echo "前端地址: http://localhost:8080"
+	@echo "API 地址: http://localhost:8000"
+	@echo "==================================="
+	@echo "\n使用 'make logs' 查看日志"
+	@echo "使用 'make ps' 查看服务状态"
+	@echo "使用 'make down' 停止所有服务"
+
+# 快速停止
+.PHONY: down
+down: docker-compose-down
+
+# 快速查看日志
+.PHONY: logs
+logs: docker-compose-logs
+
+# 快速查看状态
+.PHONY: ps
+ps: docker-compose-ps
+
+# Swagger 文档生成
 .PHONY: swag
 swag:
 	swag init  -g cmd/server/main.go -o ./docs

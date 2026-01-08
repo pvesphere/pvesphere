@@ -1,2 +1,49 @@
+# 版本控制
 .git
+.gitignore
+.gitattributes
+
+# IDE
 .idea
+.vscode
+*.swp
+*.swo
+*~
+
+# 构建产物
+bin/
+dist/
+build/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# 测试
+test/
+*.test
+coverage.txt
+coverage.html
+
+# 文档
+*.md
+!README.md
+
+# 日志和数据库
+storage/
+*.log
+*.db
+
+# 临时文件
+tmp/
+temp/
+.DS_Store
+Thumbs.db
+
+# 前端（如有 node_modules）
+node_modules/
+.npm
+.cache
+
+# 部署相关
+deploy/docker-compose/
