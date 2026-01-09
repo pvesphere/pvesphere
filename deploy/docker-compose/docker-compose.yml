@@ -6,7 +6,6 @@ services:
       dockerfile: deploy/build/Dockerfile
       target: backend
       args:
-        APP_RELATIVE_PATH: ./cmd/server
         APP_NAME: server
         APP_ENV: docker
     image: pvesphere-api:latest
@@ -18,8 +17,13 @@ services:
       - pvesphere-storage:/data/app/storage
     environment:
       - APP_ENV=docker
+      - APP_NAME=server
+    # 先运行数据库迁移，然后启动 API 服务
     command: >
-      sh -c "./migration -conf /data/app/config/docker.yml && ./server -conf /data/app/config/docker.yml"
+      sh -c "echo 'Running migrations...' && 
+             ./migration -conf /data/app/config/docker.yml && 
+             echo 'Starting server...' && 
+             ./server -conf /data/app/config/docker.yml"
     networks:
       - pvesphere-network
     restart: unless-stopped
@@ -37,7 +41,6 @@ services:
       dockerfile: deploy/build/Dockerfile
       target: backend
       args:
-        APP_RELATIVE_PATH: ./cmd/controller
         APP_NAME: controller
         APP_ENV: docker
     image: pvesphere-controller:latest
@@ -47,13 +50,21 @@ services:
       - pvesphere-storage:/data/app/storage
     environment:
       - APP_ENV=docker
-    command: ["./controller", "-conf", "/data/app/config/docker.yml"]
+      - APP_NAME=controller
+    # 显式指定运行 controller 二进制文件
+    command: ["sh", "-c", "echo 'Starting controller...' && ./controller -conf /data/app/config/docker.yml"]
     depends_on:
       api:
         condition: service_healthy
     networks:
       - pvesphere-network
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "pgrep", "-f", "controller"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
 
   # 前端服务（仅支持本地代码构建）
   frontend:

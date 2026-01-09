@@ -9,9 +9,6 @@ RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk
 # 安装必要的构建工具
 RUN apk add --no-cache git make
 
-ARG APP_RELATIVE_PATH
-ARG APP_NAME=server
-
 # 复制项目文件
 COPY . /data/app
 WORKDIR /data/app
@@ -19,12 +16,21 @@ WORKDIR /data/app
 # 清理旧的构建产物
 RUN rm -rf /data/app/bin/
 
-# 下载依赖并构建
+# 下载依赖并构建所有服务
+# 一次性构建所有二进制文件，避免多次构建时的缓存问题
 RUN export GOPROXY=https://goproxy.cn,direct && \
     go mod download && \
     go mod tidy && \
-    go build -ldflags="-s -w" -o ./bin/${APP_NAME} ${APP_RELATIVE_PATH} && \
-    go build -ldflags="-s -w" -o ./bin/migration ./cmd/migration
+    echo "=== Building all services ===" && \
+    echo "Building server..." && \
+    go build -ldflags="-s -w" -o ./bin/server ./cmd/server && \
+    echo "Building controller..." && \
+    go build -ldflags="-s -w" -o ./bin/controller ./cmd/controller && \
+    echo "Building migration..." && \
+    go build -ldflags="-s -w" -o ./bin/migration ./cmd/migration && \
+    echo "=== Build complete ===" && \
+    echo "Checking binaries:" && \
+    ls -lh ./bin/
 
 # 复制配置文件
 RUN cp -r config /data/app/bin/ || true
@@ -140,18 +146,34 @@ ENV APP_ENV=${APP_ENV}
 
 WORKDIR /data/app
 
-# 从构建阶段复制二进制文件和配置
+# 从构建阶段复制所有二进制文件和配置
+# 注意：所有服务（server、controller、migration）都包含在这个镜像中
 COPY --from=go-builder /data/app/bin /data/app
 
 # 默认暴露 8000 端口（API 服务）
 EXPOSE 8000
 
-# 使用环境变量指定可执行文件名
+# 使用构建参数指定要运行的服务
 ARG APP_NAME=server
 ENV APP_NAME=${APP_NAME}
 
+# 检查所有必需的二进制文件是否存在
+RUN echo "=== 检查构建的二进制文件 ===" && \
+    ls -lh /data/app/ && \
+    for binary in server controller migration; do \
+        if [ ! -f "/data/app/$binary" ]; then \
+            echo "ERROR: Binary /data/app/$binary not found!"; \
+            ls -la /data/app/; \
+            exit 1; \
+        fi; \
+    done && \
+    echo "SUCCESS: All binaries found" && \
+    echo "Default APP_NAME=${APP_NAME}" && \
+    chmod +x /data/app/*
+
 # 默认命令（可在 docker-compose 中覆盖）
-CMD ["./server"]
+# 使用 sh -c 来支持环境变量展开
+CMD sh -c "echo 'Starting ${APP_NAME}...' && ./${APP_NAME}"
 
 # ============================================
 # 阶段4: 前端运行时镜像（Nginx）
