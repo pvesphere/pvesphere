@@ -1,8 +1,8 @@
 storage/logs
 .cursor
 .vscode
-controller
-migration
+/controller
+/migration
 storage/pvesphere-test.db
 cmd/server/__debug_bin*
 .idea
