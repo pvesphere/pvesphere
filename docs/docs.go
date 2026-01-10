@@ -73,7 +73,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.ListClusterResponse"
+                            "$ref": "#/definitions/v1.ListClusterResponse"
                         }
                     }
                 }
@@ -101,7 +101,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.CreateClusterRequest"
+                            "$ref": "#/definitions/v1.CreateClusterRequest"
                         }
                     }
                 ],
@@ -109,7 +109,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -145,7 +145,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetClusterResourcesResponse"
+                            "$ref": "#/definitions/v1.GetClusterResourcesResponse"
                         }
                     }
                 }
@@ -181,7 +181,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetClusterStatusResponse"
+                            "$ref": "#/definitions/v1.GetClusterStatusResponse"
                         }
                     }
                 }
@@ -235,7 +235,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.VerifyClusterResponse"
+                            "$ref": "#/definitions/v1.VerifyClusterResponse"
                         }
                     }
                 }
@@ -271,7 +271,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetClusterResponse"
+                            "$ref": "#/definitions/v1.GetClusterResponse"
                         }
                     }
                 }
@@ -306,7 +306,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.UpdateClusterRequest"
+                            "$ref": "#/definitions/v1.UpdateClusterRequest"
                         }
                     }
                 ],
@@ -314,7 +314,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -348,7 +348,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -397,7 +397,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.DashboardHotspotsResponse"
+                            "$ref": "#/definitions/v1.DashboardHotspotsResponse"
                         }
                     }
                 }
@@ -439,7 +439,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.DashboardOperationsResponse"
+                            "$ref": "#/definitions/v1.DashboardOperationsResponse"
                         }
                     }
                 }
@@ -481,7 +481,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.DashboardOverviewResponse"
+                            "$ref": "#/definitions/v1.DashboardOverviewResponse"
                         }
                     }
                 }
@@ -523,7 +523,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.DashboardResourcesResponse"
+                            "$ref": "#/definitions/v1.DashboardResourcesResponse"
                         }
                     }
                 }
@@ -550,7 +550,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.DashboardScopesResponse"
+                            "$ref": "#/definitions/v1.DashboardScopesResponse"
                         }
                     }
                 }
@@ -575,7 +575,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.LoginRequest"
+                            "$ref": "#/definitions/v1.LoginRequest"
                         }
                     }
                 ],
@@ -583,7 +583,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.LoginResponse"
+                            "$ref": "#/definitions/v1.LoginResponse"
                         }
                     }
                 }
@@ -644,7 +644,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.ListNodeResponse"
+                            "$ref": "#/definitions/v1.ListNodeResponse"
                         }
                     }
                 }
@@ -672,7 +672,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.CreateNodeRequest"
+                            "$ref": "#/definitions/v1.CreateNodeRequest"
                         }
                     }
                 ],
@@ -680,7 +680,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -711,7 +711,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetNodeConsoleRequest"
+                            "$ref": "#/definitions/v1.GetNodeConsoleRequest"
                         }
                     }
                 ],
@@ -719,7 +719,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetNodeConsoleResponse"
+                            "$ref": "#/definitions/v1.GetNodeConsoleResponse"
                         }
                     }
                 }
@@ -779,7 +779,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetNodeDisksDirectoryResponse"
+                            "$ref": "#/definitions/v1.GetNodeDisksDirectoryResponse"
                         }
                     }
                 }
@@ -809,7 +809,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.InitGPTDiskRequest"
+                            "$ref": "#/definitions/v1.InitGPTDiskRequest"
                         }
                     }
                 ],
@@ -817,7 +817,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.InitGPTDiskResponse"
+                            "$ref": "#/definitions/v1.InitGPTDiskResponse"
                         }
                     }
                 }
@@ -860,7 +860,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetNodeDisksListResponse"
+                            "$ref": "#/definitions/v1.GetNodeDisksListResponse"
                         }
                     }
                 }
@@ -896,7 +896,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetNodeDisksLVMResponse"
+                            "$ref": "#/definitions/v1.GetNodeDisksLVMResponse"
                         }
                     }
                 }
@@ -932,7 +932,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetNodeDisksLVMThinResponse"
+                            "$ref": "#/definitions/v1.GetNodeDisksLVMThinResponse"
                         }
                     }
                 }
@@ -962,7 +962,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.WipeDiskRequest"
+                            "$ref": "#/definitions/v1.WipeDiskRequest"
                         }
                     }
                 ],
@@ -970,7 +970,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.WipeDiskResponse"
+                            "$ref": "#/definitions/v1.WipeDiskResponse"
                         }
                     }
                 }
@@ -1006,7 +1006,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetNodeDisksZFSResponse"
+                            "$ref": "#/definitions/v1.GetNodeDisksZFSResponse"
                         }
                     }
                 }
@@ -1043,7 +1043,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetNodeNetworksResponse"
+                            "$ref": "#/definitions/v1.GetNodeNetworksResponse"
                         }
                     }
                 }
@@ -1072,7 +1072,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.ReloadNodeNetworkRequest"
+                            "$ref": "#/definitions/v1.ReloadNodeNetworkRequest"
                         }
                     }
                 ],
@@ -1080,7 +1080,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.ReloadNodeNetworkResponse"
+                            "$ref": "#/definitions/v1.ReloadNodeNetworkResponse"
                         }
                     }
                 }
@@ -1109,7 +1109,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.CreateNodeNetworkRequest"
+                            "$ref": "#/definitions/v1.CreateNodeNetworkRequest"
                         }
                     }
                 ],
@@ -1117,7 +1117,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.CreateNodeNetworkResponse"
+                            "$ref": "#/definitions/v1.CreateNodeNetworkResponse"
                         }
                     }
                 }
@@ -1146,7 +1146,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.RevertNodeNetworkRequest"
+                            "$ref": "#/definitions/v1.RevertNodeNetworkRequest"
                         }
                     }
                 ],
@@ -1154,7 +1154,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.RevertNodeNetworkResponse"
+                            "$ref": "#/definitions/v1.RevertNodeNetworkResponse"
                         }
                     }
                 }
@@ -1215,7 +1215,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetNodeRRDDataResponse"
+                            "$ref": "#/definitions/v1.GetNodeRRDDataResponse"
                         }
                     }
                 }
@@ -1251,7 +1251,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetNodeServicesResponse"
+                            "$ref": "#/definitions/v1.GetNodeServicesResponse"
                         }
                     }
                 }
@@ -1282,7 +1282,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.RestartNodeServiceRequest"
+                            "$ref": "#/definitions/v1.RestartNodeServiceRequest"
                         }
                     }
                 ],
@@ -1290,7 +1290,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.RestartNodeServiceResponse"
+                            "$ref": "#/definitions/v1.RestartNodeServiceResponse"
                         }
                     }
                 }
@@ -1321,7 +1321,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.StartNodeServiceRequest"
+                            "$ref": "#/definitions/v1.StartNodeServiceRequest"
                         }
                     }
                 ],
@@ -1329,7 +1329,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.StartNodeServiceResponse"
+                            "$ref": "#/definitions/v1.StartNodeServiceResponse"
                         }
                     }
                 }
@@ -1360,7 +1360,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.StopNodeServiceRequest"
+                            "$ref": "#/definitions/v1.StopNodeServiceRequest"
                         }
                     }
                 ],
@@ -1368,7 +1368,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.StopNodeServiceResponse"
+                            "$ref": "#/definitions/v1.StopNodeServiceResponse"
                         }
                     }
                 }
@@ -1404,7 +1404,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetNodeStatusResponse"
+                            "$ref": "#/definitions/v1.GetNodeStatusResponse"
                         }
                     }
                 }
@@ -1432,7 +1432,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.SetNodeStatusRequest"
+                            "$ref": "#/definitions/v1.SetNodeStatusRequest"
                         }
                     }
                 ],
@@ -1440,7 +1440,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.SetNodeStatusResponse"
+                            "$ref": "#/definitions/v1.SetNodeStatusResponse"
                         }
                     }
                 }
@@ -1489,7 +1489,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetStorageContentResponse"
+                            "$ref": "#/definitions/v1.GetStorageContentResponse"
                         }
                     }
                 }
@@ -1543,7 +1543,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -1593,7 +1593,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetStorageVolumeResponse"
+                            "$ref": "#/definitions/v1.GetStorageVolumeResponse"
                         }
                     }
                 }
@@ -1661,7 +1661,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetStorageRRDDataResponse"
+                            "$ref": "#/definitions/v1.GetStorageRRDDataResponse"
                         }
                     }
                 }
@@ -1704,7 +1704,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetStorageStatusResponse"
+                            "$ref": "#/definitions/v1.GetStorageStatusResponse"
                         }
                     }
                 }
@@ -1766,7 +1766,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -1802,7 +1802,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetNodeResponse"
+                            "$ref": "#/definitions/v1.GetNodeResponse"
                         }
                     }
                 }
@@ -1837,7 +1837,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.UpdateNodeRequest"
+                            "$ref": "#/definitions/v1.UpdateNodeRequest"
                         }
                     }
                 ],
@@ -1845,7 +1845,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -1879,7 +1879,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -1910,7 +1910,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetAccessTicketRequest"
+                            "$ref": "#/definitions/v1.GetAccessTicketRequest"
                         }
                     }
                 ],
@@ -1918,7 +1918,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetAccessTicketResponse"
+                            "$ref": "#/definitions/v1.GetAccessTicketResponse"
                         }
                     }
                 }
@@ -1944,7 +1944,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.RegisterRequest"
+                            "$ref": "#/definitions/v1.RegisterRequest"
                         }
                     }
                 ],
@@ -1952,7 +1952,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -2019,7 +2019,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.ListStorageResponse"
+                            "$ref": "#/definitions/v1.ListStorageResponse"
                         }
                     }
                 }
@@ -2047,7 +2047,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.CreateStorageRequest"
+                            "$ref": "#/definitions/v1.CreateStorageRequest"
                         }
                     }
                 ],
@@ -2055,7 +2055,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -2091,7 +2091,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetStorageResponse"
+                            "$ref": "#/definitions/v1.GetStorageResponse"
                         }
                     }
                 }
@@ -2126,7 +2126,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.UpdateStorageRequest"
+                            "$ref": "#/definitions/v1.UpdateStorageRequest"
                         }
                     }
                 ],
@@ -2134,7 +2134,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -2168,7 +2168,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -2204,7 +2204,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.ListClusterTasksResponse"
+                            "$ref": "#/definitions/v1.ListClusterTasksResponse"
                         }
                     }
                 }
@@ -2268,7 +2268,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetTaskLogResponse"
+                            "$ref": "#/definitions/v1.GetTaskLogResponse"
                         }
                     }
                 }
@@ -2311,7 +2311,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.ListNodeTasksResponse"
+                            "$ref": "#/definitions/v1.ListNodeTasksResponse"
                         }
                     }
                 }
@@ -2361,7 +2361,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetTaskStatusResponse"
+                            "$ref": "#/definitions/v1.GetTaskStatusResponse"
                         }
                     }
                 }
@@ -2411,7 +2411,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.StopTaskResponse"
+                            "$ref": "#/definitions/v1.StopTaskResponse"
                         }
                     }
                 }
@@ -2460,7 +2460,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.ListTemplateResponse"
+                            "$ref": "#/definitions/v1.ListTemplateResponse"
                         }
                     }
                 }
@@ -2488,7 +2488,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.CreateTemplateRequest"
+                            "$ref": "#/definitions/v1.CreateTemplateRequest"
                         }
                     }
                 ],
@@ -2496,7 +2496,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -2522,7 +2522,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.ImportTemplateRequest"
+                            "$ref": "#/definitions/v1.ImportTemplateRequest"
                         }
                     }
                 ],
@@ -2530,7 +2530,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.ImportTemplateResponse"
+                            "$ref": "#/definitions/v1.ImportTemplateResponse"
                         }
                     }
                 }
@@ -2579,7 +2579,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.ListSyncTasksResponse"
+                            "$ref": "#/definitions/v1.ListSyncTasksResponse"
                         }
                     }
                 }
@@ -2611,7 +2611,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetSyncTaskResponse"
+                            "$ref": "#/definitions/v1.GetSyncTaskResponse"
                         }
                     }
                 }
@@ -2643,7 +2643,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.RetrySyncTaskResponse"
+                            "$ref": "#/definitions/v1.RetrySyncTaskResponse"
                         }
                     }
                 }
@@ -2679,7 +2679,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetTemplateResponse"
+                            "$ref": "#/definitions/v1.GetTemplateResponse"
                         }
                     }
                 }
@@ -2714,7 +2714,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.UpdateTemplateRequest"
+                            "$ref": "#/definitions/v1.UpdateTemplateRequest"
                         }
                     }
                 ],
@@ -2722,7 +2722,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -2756,7 +2756,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -2794,7 +2794,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetTemplateDetailResponse"
+                            "$ref": "#/definitions/v1.GetTemplateDetailResponse"
                         }
                     }
                 }
@@ -2826,7 +2826,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.ListTemplateInstancesResponse"
+                            "$ref": "#/definitions/v1.ListTemplateInstancesResponse"
                         }
                     }
                 }
@@ -2859,7 +2859,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.SyncTemplateRequest"
+                            "$ref": "#/definitions/v1.SyncTemplateRequest"
                         }
                     }
                 ],
@@ -2867,7 +2867,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.SyncTemplateResponse"
+                            "$ref": "#/definitions/v1.SyncTemplateResponse"
                         }
                     }
                 }
@@ -2894,7 +2894,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetProfileResponse"
+                            "$ref": "#/definitions/v1.GetProfileResponse"
                         }
                     }
                 }
@@ -2923,7 +2923,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.UpdateProfileRequest"
+                            "$ref": "#/definitions/v1.UpdateProfileRequest"
                         }
                     }
                 ],
@@ -2931,7 +2931,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -2998,7 +2998,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.ListVMResponse"
+                            "$ref": "#/definitions/v1.ListVMResponse"
                         }
                     }
                 }
@@ -3027,7 +3027,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.CreateVMRequest"
+                            "$ref": "#/definitions/v1.CreateVMRequest"
                         }
                     }
                 ],
@@ -3035,7 +3035,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -3066,7 +3066,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.CreateBackupRequest"
+                            "$ref": "#/definitions/v1.CreateBackupRequest"
                         }
                     }
                 ],
@@ -3074,7 +3074,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.CreateBackupResponse"
+                            "$ref": "#/definitions/v1.CreateBackupResponse"
                         }
                     }
                 }
@@ -3103,7 +3103,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.DeleteBackupRequest"
+                            "$ref": "#/definitions/v1.DeleteBackupRequest"
                         }
                     }
                 ],
@@ -3111,7 +3111,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.DeleteBackupResponse"
+                            "$ref": "#/definitions/v1.DeleteBackupResponse"
                         }
                     }
                 }
@@ -3155,7 +3155,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetVMCloudInitResponse"
+                            "$ref": "#/definitions/v1.GetVMCloudInitResponse"
                         }
                     }
                 }
@@ -3184,7 +3184,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.UpdateVMCloudInitRequest"
+                            "$ref": "#/definitions/v1.UpdateVMCloudInitRequest"
                         }
                     }
                 ],
@@ -3192,7 +3192,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.UpdateVMCloudInitResponse"
+                            "$ref": "#/definitions/v1.UpdateVMCloudInitResponse"
                         }
                     }
                 }
@@ -3228,7 +3228,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetVMCurrentConfigResponse"
+                            "$ref": "#/definitions/v1.GetVMCurrentConfigResponse"
                         }
                     }
                 }
@@ -3256,7 +3256,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.UpdateVMConfigRequest"
+                            "$ref": "#/definitions/v1.UpdateVMConfigRequest"
                         }
                     }
                 ],
@@ -3264,7 +3264,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.UpdateVMConfigResponse"
+                            "$ref": "#/definitions/v1.UpdateVMConfigResponse"
                         }
                     }
                 }
@@ -3300,7 +3300,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetVMPendingConfigResponse"
+                            "$ref": "#/definitions/v1.GetVMPendingConfigResponse"
                         }
                     }
                 }
@@ -3331,7 +3331,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetVMConsoleRequest"
+                            "$ref": "#/definitions/v1.GetVMConsoleRequest"
                         }
                     }
                 ],
@@ -3339,7 +3339,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetVMConsoleResponse"
+                            "$ref": "#/definitions/v1.GetVMConsoleResponse"
                         }
                     }
                 }
@@ -3394,7 +3394,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.CreateVMRequest"
+                            "$ref": "#/definitions/v1.CreateVMRequest"
                         }
                     }
                 ],
@@ -3402,7 +3402,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -3432,7 +3432,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.MigrateVMRequest"
+                            "$ref": "#/definitions/v1.MigrateVMRequest"
                         }
                     }
                 ],
@@ -3440,7 +3440,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.MigrateVMResponse"
+                            "$ref": "#/definitions/v1.MigrateVMResponse"
                         }
                     }
                 }
@@ -3470,7 +3470,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.RemoteMigrateVMRequest"
+                            "$ref": "#/definitions/v1.RemoteMigrateVMRequest"
                         }
                     }
                 ],
@@ -3478,7 +3478,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.RemoteMigrateVMResponse"
+                            "$ref": "#/definitions/v1.RemoteMigrateVMResponse"
                         }
                     }
                 }
@@ -3539,7 +3539,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetVMRRDDataResponse"
+                            "$ref": "#/definitions/v1.GetVMRRDDataResponse"
                         }
                     }
                 }
@@ -3575,7 +3575,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetVMStatusResponse"
+                            "$ref": "#/definitions/v1.GetVMStatusResponse"
                         }
                     }
                 }
@@ -3611,7 +3611,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.GetVMResponse"
+                            "$ref": "#/definitions/v1.GetVMResponse"
                         }
                     }
                 }
@@ -3646,7 +3646,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.UpdateVMRequest"
+                            "$ref": "#/definitions/v1.UpdateVMRequest"
                         }
                     }
                 ],
@@ -3654,7 +3654,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -3688,7 +3688,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -3724,7 +3724,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -3760,7 +3760,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pvesphere_api_v1.Response"
+                            "$ref": "#/definitions/v1.Response"
                         }
                     }
                 }
@@ -3768,7 +3768,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "pvesphere_api_v1.ClusterDetail": {
+        "v1.ClusterDetail": {
             "type": "object",
             "properties": {
                 "api_url": {
@@ -3825,7 +3825,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.ClusterItem": {
+        "v1.ClusterItem": {
             "type": "object",
             "properties": {
                 "api_url": {
@@ -3857,7 +3857,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.ClusterTaskItem": {
+        "v1.ClusterTaskItem": {
             "type": "object",
             "properties": {
                 "endtime": {
@@ -3890,7 +3890,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.CreateBackupRequest": {
+        "v1.CreateBackupRequest": {
             "type": "object",
             "required": [
                 "vmid"
@@ -3983,21 +3983,21 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.CreateBackupResponse": {
+        "v1.CreateBackupResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.CreateBackupResponseData"
+                    "$ref": "#/definitions/v1.CreateBackupResponseData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.CreateBackupResponseData": {
+        "v1.CreateBackupResponseData": {
             "type": "object",
             "properties": {
                 "node_id": {
@@ -4018,7 +4018,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.CreateClusterRequest": {
+        "v1.CreateClusterRequest": {
             "type": "object",
             "required": [
                 "api_url",
@@ -4077,7 +4077,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.CreateNodeNetworkRequest": {
+        "v1.CreateNodeNetworkRequest": {
             "type": "object",
             "required": [
                 "node_id"
@@ -4150,7 +4150,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.CreateNodeNetworkResponse": {
+        "v1.CreateNodeNetworkResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -4162,7 +4162,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.CreateNodeRequest": {
+        "v1.CreateNodeRequest": {
             "type": "object",
             "required": [
                 "cluster_id",
@@ -4203,7 +4203,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.CreateStorageRequest": {
+        "v1.CreateStorageRequest": {
             "type": "object",
             "required": [
                 "cluster_id",
@@ -4261,7 +4261,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.CreateTemplateRequest": {
+        "v1.CreateTemplateRequest": {
             "type": "object",
             "required": [
                 "cluster_id",
@@ -4282,7 +4282,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.CreateVMRequest": {
+        "v1.CreateVMRequest": {
             "type": "object",
             "required": [
                 "vm_name"
@@ -4410,7 +4410,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.DashboardHotspotsData": {
+        "v1.DashboardHotspotsData": {
             "type": "object",
             "properties": {
                 "cluster_id": {
@@ -4421,7 +4421,7 @@ const docTemplate = `{
                     "description": "节点热点",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/pvesphere_api_v1.NodeHotspots"
+                            "$ref": "#/definitions/v1.NodeHotspots"
                         }
                     ]
                 },
@@ -4429,7 +4429,7 @@ const docTemplate = `{
                     "description": "最近风险（24h）",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.RecentRisk"
+                        "$ref": "#/definitions/v1.RecentRisk"
                     }
                 },
                 "scope": {
@@ -4441,34 +4441,34 @@ const docTemplate = `{
                     "description": "存储热点",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.StorageHotspot"
+                        "$ref": "#/definitions/v1.StorageHotspot"
                     }
                 },
                 "vm_hotspots": {
                     "description": "虚拟机热点",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/pvesphere_api_v1.VMHotspots"
+                            "$ref": "#/definitions/v1.VMHotspots"
                         }
                     ]
                 }
             }
         },
-        "pvesphere_api_v1.DashboardHotspotsResponse": {
+        "v1.DashboardHotspotsResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.DashboardHotspotsData"
+                    "$ref": "#/definitions/v1.DashboardHotspotsData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.DashboardOperationsData": {
+        "v1.DashboardOperationsData": {
             "type": "object",
             "properties": {
                 "cluster_id": {
@@ -4479,7 +4479,7 @@ const docTemplate = `{
                     "description": "操作明细（可选）",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.OperationItem"
+                        "$ref": "#/definitions/v1.OperationItem"
                     }
                 },
                 "scope": {
@@ -4491,26 +4491,26 @@ const docTemplate = `{
                     "description": "操作摘要（按类型聚合）",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.OperationSummary"
+                        "$ref": "#/definitions/v1.OperationSummary"
                     }
                 }
             }
         },
-        "pvesphere_api_v1.DashboardOperationsResponse": {
+        "v1.DashboardOperationsResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.DashboardOperationsData"
+                    "$ref": "#/definitions/v1.DashboardOperationsData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.DashboardOverviewData": {
+        "v1.DashboardOverviewData": {
             "type": "object",
             "properties": {
                 "cluster_id": {
@@ -4521,7 +4521,7 @@ const docTemplate = `{
                     "description": "健康状态",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/pvesphere_api_v1.DashboardOverviewHealth"
+                            "$ref": "#/definitions/v1.DashboardOverviewHealth"
                         }
                     ]
                 },
@@ -4534,13 +4534,13 @@ const docTemplate = `{
                     "description": "概览统计",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/pvesphere_api_v1.DashboardOverviewSummary"
+                            "$ref": "#/definitions/v1.DashboardOverviewSummary"
                         }
                     ]
                 }
             }
         },
-        "pvesphere_api_v1.DashboardOverviewHealth": {
+        "v1.DashboardOverviewHealth": {
             "type": "object",
             "properties": {
                 "critical": {
@@ -4560,21 +4560,21 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.DashboardOverviewResponse": {
+        "v1.DashboardOverviewResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.DashboardOverviewData"
+                    "$ref": "#/definitions/v1.DashboardOverviewData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.DashboardOverviewSummary": {
+        "v1.DashboardOverviewSummary": {
             "type": "object",
             "properties": {
                 "cluster_count": {
@@ -4599,7 +4599,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.DashboardResourcesData": {
+        "v1.DashboardResourcesData": {
             "type": "object",
             "properties": {
                 "cluster_id": {
@@ -4610,7 +4610,7 @@ const docTemplate = `{
                     "description": "CPU 使用率",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/pvesphere_api_v1.ResourceUsage"
+                            "$ref": "#/definitions/v1.ResourceUsage"
                         }
                     ]
                 },
@@ -4618,7 +4618,7 @@ const docTemplate = `{
                     "description": "内存使用率",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/pvesphere_api_v1.ResourceUsage"
+                            "$ref": "#/definitions/v1.ResourceUsage"
                         }
                     ]
                 },
@@ -4631,52 +4631,52 @@ const docTemplate = `{
                     "description": "存储使用率",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/pvesphere_api_v1.ResourceUsage"
+                            "$ref": "#/definitions/v1.ResourceUsage"
                         }
                     ]
                 }
             }
         },
-        "pvesphere_api_v1.DashboardResourcesResponse": {
+        "v1.DashboardResourcesResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.DashboardResourcesData"
+                    "$ref": "#/definitions/v1.DashboardResourcesData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.DashboardScopesData": {
+        "v1.DashboardScopesData": {
             "type": "object",
             "properties": {
                 "items": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.ScopeItem"
+                        "$ref": "#/definitions/v1.ScopeItem"
                     }
                 }
             }
         },
-        "pvesphere_api_v1.DashboardScopesResponse": {
+        "v1.DashboardScopesResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.DashboardScopesData"
+                    "$ref": "#/definitions/v1.DashboardScopesData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.DeleteBackupRequest": {
+        "v1.DeleteBackupRequest": {
             "type": "object",
             "required": [
                 "node_id",
@@ -4706,7 +4706,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.DeleteBackupResponse": {
+        "v1.DeleteBackupResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -4718,7 +4718,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetAccessTicketRequest": {
+        "v1.GetAccessTicketRequest": {
             "type": "object",
             "required": [
                 "cluster_id",
@@ -4746,7 +4746,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetAccessTicketResponse": {
+        "v1.GetAccessTicketResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -4761,7 +4761,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetClusterResourcesResponse": {
+        "v1.GetClusterResourcesResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -4779,21 +4779,21 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetClusterResponse": {
+        "v1.GetClusterResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.ClusterDetail"
+                    "$ref": "#/definitions/v1.ClusterDetail"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.GetClusterStatusResponse": {
+        "v1.GetClusterStatusResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -4811,7 +4811,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetNodeConsoleRequest": {
+        "v1.GetNodeConsoleRequest": {
             "type": "object",
             "required": [
                 "console_type",
@@ -4850,7 +4850,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetNodeConsoleResponse": {
+        "v1.GetNodeConsoleResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -4865,7 +4865,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetNodeDisksDirectoryResponse": {
+        "v1.GetNodeDisksDirectoryResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -4883,7 +4883,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetNodeDisksLVMResponse": {
+        "v1.GetNodeDisksLVMResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -4901,7 +4901,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetNodeDisksLVMThinResponse": {
+        "v1.GetNodeDisksLVMThinResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -4919,7 +4919,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetNodeDisksListResponse": {
+        "v1.GetNodeDisksListResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -4937,7 +4937,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetNodeDisksZFSResponse": {
+        "v1.GetNodeDisksZFSResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -4955,7 +4955,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetNodeNetworksResponse": {
+        "v1.GetNodeNetworksResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -4973,7 +4973,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetNodeRRDDataResponse": {
+        "v1.GetNodeRRDDataResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -4991,21 +4991,21 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetNodeResponse": {
+        "v1.GetNodeResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.NodeDetail"
+                    "$ref": "#/definitions/v1.NodeDetail"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.GetNodeServicesResponse": {
+        "v1.GetNodeServicesResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5023,7 +5023,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetNodeStatusResponse": {
+        "v1.GetNodeStatusResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5038,21 +5038,21 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetProfileResponse": {
+        "v1.GetProfileResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.GetProfileResponseData"
+                    "$ref": "#/definitions/v1.GetProfileResponseData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.GetProfileResponseData": {
+        "v1.GetProfileResponseData": {
             "type": "object",
             "properties": {
                 "email": {
@@ -5068,7 +5068,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetStorageContentResponse": {
+        "v1.GetStorageContentResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5086,7 +5086,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetStorageRRDDataResponse": {
+        "v1.GetStorageRRDDataResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5104,36 +5104,21 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetStorageResponse": {
+        "v1.GetStorageResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.StorageDetail"
+                    "$ref": "#/definitions/v1.StorageDetail"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.GetStorageStatusResponse": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "integer"
-                },
-                "data": {
-                    "type": "object",
-                    "additionalProperties": true
-                },
-                "message": {
-                    "type": "string"
-                }
-            }
-        },
-        "pvesphere_api_v1.GetStorageVolumeResponse": {
+        "v1.GetStorageStatusResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5148,21 +5133,36 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetSyncTaskResponse": {
+        "v1.GetStorageVolumeResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.SyncTaskDetail"
+                    "type": "object",
+                    "additionalProperties": true
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.GetTaskLogResponse": {
+        "v1.GetSyncTaskResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/v1.SyncTaskDetail"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "v1.GetTaskLogResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5171,7 +5171,7 @@ const docTemplate = `{
                 "data": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.TaskLogItem"
+                        "$ref": "#/definitions/v1.TaskLogItem"
                     }
                 },
                 "message": {
@@ -5179,49 +5179,49 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetTaskStatusResponse": {
+        "v1.GetTaskStatusResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.TaskStatusItem"
+                    "$ref": "#/definitions/v1.TaskStatusItem"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.GetTemplateDetailResponse": {
+        "v1.GetTemplateDetailResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.TemplateDetailWithInstances"
+                    "$ref": "#/definitions/v1.TemplateDetailWithInstances"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.GetTemplateResponse": {
+        "v1.GetTemplateResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.TemplateDetail"
+                    "$ref": "#/definitions/v1.TemplateDetail"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.GetVMCloudInitResponse": {
+        "v1.GetVMCloudInitResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5237,7 +5237,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetVMConsoleRequest": {
+        "v1.GetVMConsoleRequest": {
             "type": "object",
             "required": [
                 "vm_id"
@@ -5259,7 +5259,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetVMConsoleResponse": {
+        "v1.GetVMConsoleResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5274,7 +5274,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetVMCurrentConfigResponse": {
+        "v1.GetVMCurrentConfigResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5289,7 +5289,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetVMPendingConfigResponse": {
+        "v1.GetVMPendingConfigResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5307,7 +5307,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetVMRRDDataResponse": {
+        "v1.GetVMRRDDataResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5325,21 +5325,21 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.GetVMResponse": {
+        "v1.GetVMResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.VMDetail"
+                    "$ref": "#/definitions/v1.VMDetail"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.GetVMStatusResponse": {
+        "v1.GetVMStatusResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5354,7 +5354,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.ImportTemplateRequest": {
+        "v1.ImportTemplateRequest": {
             "type": "object",
             "required": [
                 "backup_file",
@@ -5415,28 +5415,28 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.ImportTemplateResponse": {
+        "v1.ImportTemplateResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.ImportTemplateResponseData"
+                    "$ref": "#/definitions/v1.ImportTemplateResponseData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.ImportTemplateResponseData": {
+        "v1.ImportTemplateResponseData": {
             "type": "object",
             "properties": {
                 "import_id": {
                     "type": "integer"
                 },
                 "import_node": {
-                    "$ref": "#/definitions/pvesphere_api_v1.TemplateImportNode"
+                    "$ref": "#/definitions/v1.TemplateImportNode"
                 },
                 "is_shared": {
                     "type": "boolean"
@@ -5447,7 +5447,7 @@ const docTemplate = `{
                 "sync_tasks": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.TemplateSyncTaskInfo"
+                        "$ref": "#/definitions/v1.TemplateSyncTaskInfo"
                     }
                 },
                 "template_id": {
@@ -5455,7 +5455,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.InitGPTDiskRequest": {
+        "v1.InitGPTDiskRequest": {
             "type": "object",
             "required": [
                 "disk",
@@ -5474,7 +5474,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.InitGPTDiskResponse": {
+        "v1.InitGPTDiskResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5489,27 +5489,27 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.ListClusterResponse": {
+        "v1.ListClusterResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.ListClusterResponseData"
+                    "$ref": "#/definitions/v1.ListClusterResponseData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.ListClusterResponseData": {
+        "v1.ListClusterResponseData": {
             "type": "object",
             "properties": {
                 "list": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.ClusterItem"
+                        "$ref": "#/definitions/v1.ClusterItem"
                     }
                 },
                 "total": {
@@ -5517,7 +5517,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.ListClusterTasksResponse": {
+        "v1.ListClusterTasksResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5526,7 +5526,7 @@ const docTemplate = `{
                 "data": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.ClusterTaskItem"
+                        "$ref": "#/definitions/v1.ClusterTaskItem"
                     }
                 },
                 "message": {
@@ -5534,27 +5534,27 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.ListNodeResponse": {
+        "v1.ListNodeResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.ListNodeResponseData"
+                    "$ref": "#/definitions/v1.ListNodeResponseData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.ListNodeResponseData": {
+        "v1.ListNodeResponseData": {
             "type": "object",
             "properties": {
                 "list": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.NodeItem"
+                        "$ref": "#/definitions/v1.NodeItem"
                     }
                 },
                 "total": {
@@ -5562,7 +5562,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.ListNodeTasksResponse": {
+        "v1.ListNodeTasksResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5571,7 +5571,7 @@ const docTemplate = `{
                 "data": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.NodeTaskItem"
+                        "$ref": "#/definitions/v1.NodeTaskItem"
                     }
                 },
                 "message": {
@@ -5579,27 +5579,27 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.ListStorageResponse": {
+        "v1.ListStorageResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.ListStorageResponseData"
+                    "$ref": "#/definitions/v1.ListStorageResponseData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.ListStorageResponseData": {
+        "v1.ListStorageResponseData": {
             "type": "object",
             "properties": {
                 "list": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.StorageItem"
+                        "$ref": "#/definitions/v1.StorageItem"
                     }
                 },
                 "total": {
@@ -5607,27 +5607,27 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.ListSyncTasksResponse": {
+        "v1.ListSyncTasksResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.ListSyncTasksResponseData"
+                    "$ref": "#/definitions/v1.ListSyncTasksResponseData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.ListSyncTasksResponseData": {
+        "v1.ListSyncTasksResponseData": {
             "type": "object",
             "properties": {
                 "list": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.SyncTaskDetail"
+                        "$ref": "#/definitions/v1.SyncTaskDetail"
                     }
                 },
                 "total": {
@@ -5635,27 +5635,27 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.ListTemplateInstancesResponse": {
+        "v1.ListTemplateInstancesResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.ListTemplateInstancesResponseData"
+                    "$ref": "#/definitions/v1.ListTemplateInstancesResponseData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.ListTemplateInstancesResponseData": {
+        "v1.ListTemplateInstancesResponseData": {
             "type": "object",
             "properties": {
                 "instances": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.TemplateInstanceInfo"
+                        "$ref": "#/definitions/v1.TemplateInstanceInfo"
                     }
                 },
                 "template_id": {
@@ -5669,27 +5669,27 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.ListTemplateResponse": {
+        "v1.ListTemplateResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.ListTemplateResponseData"
+                    "$ref": "#/definitions/v1.ListTemplateResponseData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.ListTemplateResponseData": {
+        "v1.ListTemplateResponseData": {
             "type": "object",
             "properties": {
                 "list": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.TemplateItem"
+                        "$ref": "#/definitions/v1.TemplateItem"
                     }
                 },
                 "total": {
@@ -5697,27 +5697,27 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.ListVMResponse": {
+        "v1.ListVMResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.ListVMResponseData"
+                    "$ref": "#/definitions/v1.ListVMResponseData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.ListVMResponseData": {
+        "v1.ListVMResponseData": {
             "type": "object",
             "properties": {
                 "list": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.VMItem"
+                        "$ref": "#/definitions/v1.VMItem"
                     }
                 },
                 "total": {
@@ -5725,7 +5725,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.LoginRequest": {
+        "v1.LoginRequest": {
             "type": "object",
             "required": [
                 "email",
@@ -5742,21 +5742,21 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.LoginResponse": {
+        "v1.LoginResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.LoginResponseData"
+                    "$ref": "#/definitions/v1.LoginResponseData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.LoginResponseData": {
+        "v1.LoginResponseData": {
             "type": "object",
             "properties": {
                 "accessToken": {
@@ -5764,7 +5764,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.MigrateVMRequest": {
+        "v1.MigrateVMRequest": {
             "type": "object",
             "required": [
                 "target_node_id",
@@ -5813,7 +5813,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.MigrateVMResponse": {
+        "v1.MigrateVMResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5828,7 +5828,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.NodeDetail": {
+        "v1.NodeDetail": {
             "type": "object",
             "properties": {
                 "annotations": {
@@ -5880,26 +5880,26 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.NodeHotspots": {
+        "v1.NodeHotspots": {
             "type": "object",
             "properties": {
                 "cpu": {
                     "description": "CPU Top N",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.TopResourceConsumer"
+                        "$ref": "#/definitions/v1.TopResourceConsumer"
                     }
                 },
                 "memory": {
                     "description": "Memory Top N",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.TopResourceConsumer"
+                        "$ref": "#/definitions/v1.TopResourceConsumer"
                     }
                 }
             }
         },
-        "pvesphere_api_v1.NodeInfo": {
+        "v1.NodeInfo": {
             "type": "object",
             "properties": {
                 "node_id": {
@@ -5910,7 +5910,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.NodeItem": {
+        "v1.NodeItem": {
             "type": "object",
             "properties": {
                 "cluster_id": {
@@ -5943,7 +5943,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.NodeTaskItem": {
+        "v1.NodeTaskItem": {
             "type": "object",
             "properties": {
                 "endtime": {
@@ -5973,7 +5973,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.OperationItem": {
+        "v1.OperationItem": {
             "type": "object",
             "properties": {
                 "id": {
@@ -6008,7 +6008,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.OperationSummary": {
+        "v1.OperationSummary": {
             "type": "object",
             "properties": {
                 "count": {
@@ -6028,7 +6028,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.RecentRisk": {
+        "v1.RecentRisk": {
             "type": "object",
             "properties": {
                 "id": {
@@ -6073,7 +6073,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.RegisterRequest": {
+        "v1.RegisterRequest": {
             "type": "object",
             "required": [
                 "email",
@@ -6090,7 +6090,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.ReloadNodeNetworkRequest": {
+        "v1.ReloadNodeNetworkRequest": {
             "type": "object",
             "required": [
                 "node_id"
@@ -6103,7 +6103,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.ReloadNodeNetworkResponse": {
+        "v1.ReloadNodeNetworkResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -6115,7 +6115,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.RemoteMigrateVMRequest": {
+        "v1.RemoteMigrateVMRequest": {
             "type": "object",
             "required": [
                 "target_bridge",
@@ -6172,7 +6172,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.RemoteMigrateVMResponse": {
+        "v1.RemoteMigrateVMResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -6187,7 +6187,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.ResourceUsage": {
+        "v1.ResourceUsage": {
             "type": "object",
             "properties": {
                 "total_bytes": {
@@ -6217,7 +6217,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.Response": {
+        "v1.Response": {
             "type": "object",
             "properties": {
                 "code": {
@@ -6229,7 +6229,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.RestartNodeServiceRequest": {
+        "v1.RestartNodeServiceRequest": {
             "type": "object",
             "required": [
                 "node_id",
@@ -6248,21 +6248,21 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.RestartNodeServiceResponse": {
+        "v1.RestartNodeServiceResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.RestartNodeServiceResponseData"
+                    "$ref": "#/definitions/v1.RestartNodeServiceResponseData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.RestartNodeServiceResponseData": {
+        "v1.RestartNodeServiceResponseData": {
             "type": "object",
             "properties": {
                 "upid": {
@@ -6271,21 +6271,21 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.RetrySyncTaskResponse": {
+        "v1.RetrySyncTaskResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.RetrySyncTaskResponseData"
+                    "$ref": "#/definitions/v1.RetrySyncTaskResponseData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.RetrySyncTaskResponseData": {
+        "v1.RetrySyncTaskResponseData": {
             "type": "object",
             "properties": {
                 "status": {
@@ -6296,7 +6296,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.RevertNodeNetworkRequest": {
+        "v1.RevertNodeNetworkRequest": {
             "type": "object",
             "required": [
                 "node_id"
@@ -6309,7 +6309,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.RevertNodeNetworkResponse": {
+        "v1.RevertNodeNetworkResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -6321,7 +6321,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.ScopeItem": {
+        "v1.ScopeItem": {
             "type": "object",
             "properties": {
                 "cluster_id": {
@@ -6338,7 +6338,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.SetNodeStatusRequest": {
+        "v1.SetNodeStatusRequest": {
             "type": "object",
             "required": [
                 "command",
@@ -6357,7 +6357,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.SetNodeStatusResponse": {
+        "v1.SetNodeStatusResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -6372,7 +6372,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.StartNodeServiceRequest": {
+        "v1.StartNodeServiceRequest": {
             "type": "object",
             "required": [
                 "node_id",
@@ -6391,21 +6391,21 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.StartNodeServiceResponse": {
+        "v1.StartNodeServiceResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.StartNodeServiceResponseData"
+                    "$ref": "#/definitions/v1.StartNodeServiceResponseData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.StartNodeServiceResponseData": {
+        "v1.StartNodeServiceResponseData": {
             "type": "object",
             "properties": {
                 "upid": {
@@ -6414,7 +6414,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.StopNodeServiceRequest": {
+        "v1.StopNodeServiceRequest": {
             "type": "object",
             "required": [
                 "node_id",
@@ -6433,21 +6433,21 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.StopNodeServiceResponse": {
+        "v1.StopNodeServiceResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.StopNodeServiceResponseData"
+                    "$ref": "#/definitions/v1.StopNodeServiceResponseData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.StopNodeServiceResponseData": {
+        "v1.StopNodeServiceResponseData": {
             "type": "object",
             "properties": {
                 "upid": {
@@ -6456,7 +6456,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.StopTaskResponse": {
+        "v1.StopTaskResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -6468,7 +6468,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.StorageDetail": {
+        "v1.StorageDetail": {
             "type": "object",
             "properties": {
                 "active": {
@@ -6532,7 +6532,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.StorageHotspot": {
+        "v1.StorageHotspot": {
             "type": "object",
             "properties": {
                 "id": {
@@ -6567,7 +6567,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.StorageItem": {
+        "v1.StorageItem": {
             "type": "object",
             "properties": {
                 "active": {
@@ -6615,7 +6615,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.SyncTaskDetail": {
+        "v1.SyncTaskDetail": {
             "type": "object",
             "properties": {
                 "error_message": {
@@ -6625,7 +6625,7 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "source_node": {
-                    "$ref": "#/definitions/pvesphere_api_v1.NodeInfo"
+                    "$ref": "#/definitions/v1.NodeInfo"
                 },
                 "status": {
                     "type": "string"
@@ -6640,7 +6640,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "target_node": {
-                    "$ref": "#/definitions/pvesphere_api_v1.NodeInfo"
+                    "$ref": "#/definitions/v1.NodeInfo"
                 },
                 "task_id": {
                     "type": "integer"
@@ -6653,7 +6653,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.SyncTemplateRequest": {
+        "v1.SyncTemplateRequest": {
             "type": "object",
             "required": [
                 "target_node_ids"
@@ -6671,32 +6671,32 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.SyncTemplateResponse": {
+        "v1.SyncTemplateResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.SyncTemplateResponseData"
+                    "$ref": "#/definitions/v1.SyncTemplateResponseData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.SyncTemplateResponseData": {
+        "v1.SyncTemplateResponseData": {
             "type": "object",
             "properties": {
                 "sync_tasks": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.TemplateSyncTaskInfo"
+                        "$ref": "#/definitions/v1.TemplateSyncTaskInfo"
                     }
                 }
             }
         },
-        "pvesphere_api_v1.TaskLogItem": {
+        "v1.TaskLogItem": {
             "type": "object",
             "properties": {
                 "n": {
@@ -6709,7 +6709,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.TaskStatusItem": {
+        "v1.TaskStatusItem": {
             "type": "object",
             "properties": {
                 "endtime": {
@@ -6748,7 +6748,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.TemplateDetail": {
+        "v1.TemplateDetail": {
             "type": "object",
             "properties": {
                 "cluster_id": {
@@ -6785,7 +6785,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.TemplateDetailWithInstances": {
+        "v1.TemplateDetailWithInstances": {
             "type": "object",
             "properties": {
                 "cluster_id": {
@@ -6803,18 +6803,18 @@ const docTemplate = `{
                 "instances": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.TemplateInstanceInfo"
+                        "$ref": "#/definitions/v1.TemplateInstanceInfo"
                     }
                 },
                 "template_name": {
                     "type": "string"
                 },
                 "upload_info": {
-                    "$ref": "#/definitions/pvesphere_api_v1.TemplateUploadInfo"
+                    "$ref": "#/definitions/v1.TemplateUploadInfo"
                 }
             }
         },
-        "pvesphere_api_v1.TemplateImportNode": {
+        "v1.TemplateImportNode": {
             "type": "object",
             "properties": {
                 "node_id": {
@@ -6825,7 +6825,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.TemplateInstanceInfo": {
+        "v1.TemplateInstanceInfo": {
             "type": "object",
             "properties": {
                 "instance_id": {
@@ -6854,7 +6854,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.TemplateItem": {
+        "v1.TemplateItem": {
             "type": "object",
             "properties": {
                 "cluster_id": {
@@ -6875,7 +6875,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.TemplateSyncTaskInfo": {
+        "v1.TemplateSyncTaskInfo": {
             "type": "object",
             "properties": {
                 "status": {
@@ -6892,7 +6892,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.TemplateUploadInfo": {
+        "v1.TemplateUploadInfo": {
             "type": "object",
             "properties": {
                 "file_name": {
@@ -6915,7 +6915,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.TopResourceConsumer": {
+        "v1.TopResourceConsumer": {
             "type": "object",
             "properties": {
                 "cluster_id": {
@@ -6955,7 +6955,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.UpdateClusterRequest": {
+        "v1.UpdateClusterRequest": {
             "type": "object",
             "properties": {
                 "api_url": {
@@ -6993,7 +6993,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.UpdateNodeRequest": {
+        "v1.UpdateNodeRequest": {
             "type": "object",
             "properties": {
                 "annotations": {
@@ -7016,7 +7016,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.UpdateProfileRequest": {
+        "v1.UpdateProfileRequest": {
             "type": "object",
             "properties": {
                 "newPassword": {
@@ -7033,7 +7033,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.UpdateStorageRequest": {
+        "v1.UpdateStorageRequest": {
             "type": "object",
             "properties": {
                 "active": {
@@ -7065,7 +7065,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.UpdateTemplateRequest": {
+        "v1.UpdateTemplateRequest": {
             "type": "object",
             "properties": {
                 "description": {
@@ -7076,7 +7076,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.UpdateVMCloudInitRequest": {
+        "v1.UpdateVMCloudInitRequest": {
             "type": "object",
             "required": [
                 "node_id",
@@ -7138,7 +7138,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.UpdateVMCloudInitResponse": {
+        "v1.UpdateVMCloudInitResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7150,7 +7150,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.UpdateVMConfigRequest": {
+        "v1.UpdateVMConfigRequest": {
             "type": "object",
             "required": [
                 "config",
@@ -7169,7 +7169,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.UpdateVMConfigResponse": {
+        "v1.UpdateVMConfigResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7181,7 +7181,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.UpdateVMRequest": {
+        "v1.UpdateVMRequest": {
             "type": "object",
             "properties": {
                 "app_id": {
@@ -7222,7 +7222,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.VMDetail": {
+        "v1.VMDetail": {
             "type": "object",
             "properties": {
                 "app_id": {
@@ -7307,26 +7307,26 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.VMHotspots": {
+        "v1.VMHotspots": {
             "type": "object",
             "properties": {
                 "cpu": {
                     "description": "CPU Top N",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.TopResourceConsumer"
+                        "$ref": "#/definitions/v1.TopResourceConsumer"
                     }
                 },
                 "memory": {
                     "description": "Memory Top N",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pvesphere_api_v1.TopResourceConsumer"
+                        "$ref": "#/definitions/v1.TopResourceConsumer"
                     }
                 }
             }
         },
-        "pvesphere_api_v1.VMItem": {
+        "v1.VMItem": {
             "type": "object",
             "properties": {
                 "app_id": {
@@ -7383,7 +7383,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.VerifyClusterData": {
+        "v1.VerifyClusterData": {
             "type": "object",
             "properties": {
                 "connected": {
@@ -7413,21 +7413,21 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.VerifyClusterResponse": {
+        "v1.VerifyClusterResponse": {
             "type": "object",
             "properties": {
                 "code": {
                     "type": "integer"
                 },
                 "data": {
-                    "$ref": "#/definitions/pvesphere_api_v1.VerifyClusterData"
+                    "$ref": "#/definitions/v1.VerifyClusterData"
                 },
                 "message": {
                     "type": "string"
                 }
             }
         },
-        "pvesphere_api_v1.WipeDiskRequest": {
+        "v1.WipeDiskRequest": {
             "type": "object",
             "required": [
                 "disk",
@@ -7451,7 +7451,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pvesphere_api_v1.WipeDiskResponse": {
+        "v1.WipeDiskResponse": {
             "type": "object",
             "properties": {
                 "code": {

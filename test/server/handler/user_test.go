@@ -100,7 +100,6 @@ func TestUserHandler_UpdateProfile(t *testing.T) {
 
 	params := v1.UpdateProfileRequest{
 		Nickname: "alan",
-		Email:    "alan@gmail.com",
 	}
 
 	mockUserService := mock_service.NewMockUserService(ctrl)

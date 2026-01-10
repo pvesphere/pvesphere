@@ -1,5 +1,5 @@
 definitions:
-  pvesphere_api_v1.ClusterDetail:
+  v1.ClusterDetail:
     properties:
       api_url:
         type: string
@@ -38,7 +38,7 @@ definitions:
       user_id:
         type: string
     type: object
-  pvesphere_api_v1.ClusterItem:
+  v1.ClusterItem:
     properties:
       api_url:
         type: string
@@ -59,7 +59,7 @@ definitions:
       region:
         type: string
     type: object
-  pvesphere_api_v1.ClusterTaskItem:
+  v1.ClusterTaskItem:
     properties:
       endtime:
         type: integer
@@ -81,7 +81,7 @@ definitions:
       user:
         type: string
     type: object
-  pvesphere_api_v1.CreateBackupRequest:
+  v1.CreateBackupRequest:
     properties:
       bwlimit:
         description: 带宽限制（MB/s）（可选）
@@ -154,16 +154,16 @@ definitions:
     required:
     - vmid
     type: object
-  pvesphere_api_v1.CreateBackupResponse:
+  v1.CreateBackupResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.CreateBackupResponseData'
+        $ref: '#/definitions/v1.CreateBackupResponseData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.CreateBackupResponseData:
+  v1.CreateBackupResponseData:
     properties:
       node_id:
         description: 节点ID
@@ -178,7 +178,7 @@ definitions:
         description: 虚拟机ID
         type: integer
     type: object
-  pvesphere_api_v1.CreateClusterRequest:
+  v1.CreateClusterRequest:
     properties:
       api_url:
         example: https://10.7.64.206:8006
@@ -222,7 +222,7 @@ definitions:
     - user_id
     - user_token
     type: object
-  pvesphere_api_v1.CreateNodeNetworkRequest:
+  v1.CreateNodeNetworkRequest:
     properties:
       address:
         description: IP 地址和子网掩码
@@ -281,7 +281,7 @@ definitions:
     required:
     - node_id
     type: object
-  pvesphere_api_v1.CreateNodeNetworkResponse:
+  v1.CreateNodeNetworkResponse:
     properties:
       code:
         type: integer
@@ -289,7 +289,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.CreateNodeRequest:
+  v1.CreateNodeRequest:
     properties:
       annotations:
         example: 节点备注
@@ -319,7 +319,7 @@ definitions:
     - cluster_id
     - node_name
     type: object
-  pvesphere_api_v1.CreateStorageRequest:
+  v1.CreateStorageRequest:
     properties:
       active:
         example: 1
@@ -362,7 +362,7 @@ definitions:
     - node_name
     - storage_name
     type: object
-  pvesphere_api_v1.CreateTemplateRequest:
+  v1.CreateTemplateRequest:
     properties:
       cluster_id:
         example: 1
@@ -377,7 +377,7 @@ definitions:
     - cluster_id
     - template_name
     type: object
-  pvesphere_api_v1.CreateVMRequest:
+  v1.CreateVMRequest:
     properties:
       app_id:
         description: 应用ID（可选）
@@ -484,19 +484,19 @@ definitions:
     required:
     - vm_name
     type: object
-  pvesphere_api_v1.DashboardHotspotsData:
+  v1.DashboardHotspotsData:
     properties:
       cluster_id:
         description: 集群ID（当 scope 为 cluster 时）
         type: integer
       node_hotspots:
         allOf:
-        - $ref: '#/definitions/pvesphere_api_v1.NodeHotspots'
+        - $ref: '#/definitions/v1.NodeHotspots'
         description: 节点热点
       recent_risks:
         description: 最近风险（24h）
         items:
-          $ref: '#/definitions/pvesphere_api_v1.RecentRisk'
+          $ref: '#/definitions/v1.RecentRisk'
         type: array
       scope:
         description: all 或 cluster
@@ -505,23 +505,23 @@ definitions:
       storage_hotspots:
         description: 存储热点
         items:
-          $ref: '#/definitions/pvesphere_api_v1.StorageHotspot'
+          $ref: '#/definitions/v1.StorageHotspot'
         type: array
       vm_hotspots:
         allOf:
-        - $ref: '#/definitions/pvesphere_api_v1.VMHotspots'
+        - $ref: '#/definitions/v1.VMHotspots'
         description: 虚拟机热点
     type: object
-  pvesphere_api_v1.DashboardHotspotsResponse:
+  v1.DashboardHotspotsResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.DashboardHotspotsData'
+        $ref: '#/definitions/v1.DashboardHotspotsData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.DashboardOperationsData:
+  v1.DashboardOperationsData:
     properties:
       cluster_id:
         description: 集群ID（当 scope 为 cluster 时）
@@ -529,7 +529,7 @@ definitions:
       items:
         description: 操作明细（可选）
         items:
-          $ref: '#/definitions/pvesphere_api_v1.OperationItem'
+          $ref: '#/definitions/v1.OperationItem'
         type: array
       scope:
         description: all 或 cluster
@@ -538,26 +538,26 @@ definitions:
       summary:
         description: 操作摘要（按类型聚合）
         items:
-          $ref: '#/definitions/pvesphere_api_v1.OperationSummary'
+          $ref: '#/definitions/v1.OperationSummary'
         type: array
     type: object
-  pvesphere_api_v1.DashboardOperationsResponse:
+  v1.DashboardOperationsResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.DashboardOperationsData'
+        $ref: '#/definitions/v1.DashboardOperationsData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.DashboardOverviewData:
+  v1.DashboardOverviewData:
     properties:
       cluster_id:
         description: 集群ID（当 scope 为 cluster 时）
         type: integer
       health:
         allOf:
-        - $ref: '#/definitions/pvesphere_api_v1.DashboardOverviewHealth'
+        - $ref: '#/definitions/v1.DashboardOverviewHealth'
         description: 健康状态
       scope:
         description: all 或 cluster
@@ -565,10 +565,10 @@ definitions:
         type: string
       summary:
         allOf:
-        - $ref: '#/definitions/pvesphere_api_v1.DashboardOverviewSummary'
+        - $ref: '#/definitions/v1.DashboardOverviewSummary'
         description: 概览统计
     type: object
-  pvesphere_api_v1.DashboardOverviewHealth:
+  v1.DashboardOverviewHealth:
     properties:
       critical:
         description: 严重数量
@@ -583,16 +583,16 @@ definitions:
         example: 1
         type: integer
     type: object
-  pvesphere_api_v1.DashboardOverviewResponse:
+  v1.DashboardOverviewResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.DashboardOverviewData'
+        $ref: '#/definitions/v1.DashboardOverviewData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.DashboardOverviewSummary:
+  v1.DashboardOverviewSummary:
     properties:
       cluster_count:
         description: 集群数量
@@ -611,18 +611,18 @@ definitions:
         example: 1328
         type: integer
     type: object
-  pvesphere_api_v1.DashboardResourcesData:
+  v1.DashboardResourcesData:
     properties:
       cluster_id:
         description: 集群ID（当 scope 为 cluster 时）
         type: integer
       cpu:
         allOf:
-        - $ref: '#/definitions/pvesphere_api_v1.ResourceUsage'
+        - $ref: '#/definitions/v1.ResourceUsage'
         description: CPU 使用率
       memory:
         allOf:
-        - $ref: '#/definitions/pvesphere_api_v1.ResourceUsage'
+        - $ref: '#/definitions/v1.ResourceUsage'
         description: 内存使用率
       scope:
         description: all 或 cluster
@@ -630,35 +630,35 @@ definitions:
         type: string
       storage:
         allOf:
-        - $ref: '#/definitions/pvesphere_api_v1.ResourceUsage'
+        - $ref: '#/definitions/v1.ResourceUsage'
         description: 存储使用率
     type: object
-  pvesphere_api_v1.DashboardResourcesResponse:
+  v1.DashboardResourcesResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.DashboardResourcesData'
+        $ref: '#/definitions/v1.DashboardResourcesData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.DashboardScopesData:
+  v1.DashboardScopesData:
     properties:
       items:
         items:
-          $ref: '#/definitions/pvesphere_api_v1.ScopeItem'
+          $ref: '#/definitions/v1.ScopeItem'
         type: array
     type: object
-  pvesphere_api_v1.DashboardScopesResponse:
+  v1.DashboardScopesResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.DashboardScopesData'
+        $ref: '#/definitions/v1.DashboardScopesData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.DeleteBackupRequest:
+  v1.DeleteBackupRequest:
     properties:
       delay:
         description: 延迟删除时间（秒），可选，默认立即删除
@@ -681,7 +681,7 @@ definitions:
     - storage_id
     - volume
     type: object
-  pvesphere_api_v1.DeleteBackupResponse:
+  v1.DeleteBackupResponse:
     properties:
       code:
         type: integer
@@ -689,7 +689,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetAccessTicketRequest:
+  v1.GetAccessTicketRequest:
     properties:
       cluster_id:
         description: 集群ID（从集群表获取 api_url）
@@ -710,7 +710,7 @@ definitions:
     - realm
     - username
     type: object
-  pvesphere_api_v1.GetAccessTicketResponse:
+  v1.GetAccessTicketResponse:
     properties:
       code:
         type: integer
@@ -720,7 +720,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetClusterResourcesResponse:
+  v1.GetClusterResourcesResponse:
     properties:
       code:
         type: integer
@@ -732,16 +732,16 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetClusterResponse:
+  v1.GetClusterResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.ClusterDetail'
+        $ref: '#/definitions/v1.ClusterDetail'
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetClusterStatusResponse:
+  v1.GetClusterStatusResponse:
     properties:
       code:
         type: integer
@@ -753,7 +753,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetNodeConsoleRequest:
+  v1.GetNodeConsoleRequest:
     properties:
       console_type:
         description: 控制台类型：termproxy（终端）或 vncshell（VNC图形界面）
@@ -783,7 +783,7 @@ definitions:
     - console_type
     - node_id
     type: object
-  pvesphere_api_v1.GetNodeConsoleResponse:
+  v1.GetNodeConsoleResponse:
     properties:
       code:
         type: integer
@@ -793,7 +793,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetNodeDisksDirectoryResponse:
+  v1.GetNodeDisksDirectoryResponse:
     properties:
       code:
         type: integer
@@ -805,7 +805,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetNodeDisksLVMResponse:
+  v1.GetNodeDisksLVMResponse:
     properties:
       code:
         type: integer
@@ -817,7 +817,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetNodeDisksLVMThinResponse:
+  v1.GetNodeDisksLVMThinResponse:
     properties:
       code:
         type: integer
@@ -829,7 +829,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetNodeDisksListResponse:
+  v1.GetNodeDisksListResponse:
     properties:
       code:
         type: integer
@@ -841,7 +841,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetNodeDisksZFSResponse:
+  v1.GetNodeDisksZFSResponse:
     properties:
       code:
         type: integer
@@ -853,7 +853,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetNodeNetworksResponse:
+  v1.GetNodeNetworksResponse:
     properties:
       code:
         type: integer
@@ -865,7 +865,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetNodeRRDDataResponse:
+  v1.GetNodeRRDDataResponse:
     properties:
       code:
         type: integer
@@ -877,16 +877,16 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetNodeResponse:
+  v1.GetNodeResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.NodeDetail'
+        $ref: '#/definitions/v1.NodeDetail'
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetNodeServicesResponse:
+  v1.GetNodeServicesResponse:
     properties:
       code:
         type: integer
@@ -898,7 +898,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetNodeStatusResponse:
+  v1.GetNodeStatusResponse:
     properties:
       code:
         type: integer
@@ -908,16 +908,16 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetProfileResponse:
+  v1.GetProfileResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.GetProfileResponseData'
+        $ref: '#/definitions/v1.GetProfileResponseData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetProfileResponseData:
+  v1.GetProfileResponseData:
     properties:
       email:
         example: pvesphere@gmail.com
@@ -928,7 +928,7 @@ definitions:
       userId:
         type: string
     type: object
-  pvesphere_api_v1.GetStorageContentResponse:
+  v1.GetStorageContentResponse:
     properties:
       code:
         type: integer
@@ -940,7 +940,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetStorageRRDDataResponse:
+  v1.GetStorageRRDDataResponse:
     properties:
       code:
         type: integer
@@ -952,26 +952,16 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetStorageResponse:
+  v1.GetStorageResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.StorageDetail'
+        $ref: '#/definitions/v1.StorageDetail'
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetStorageStatusResponse:
-    properties:
-      code:
-        type: integer
-      data:
-        additionalProperties: true
-        type: object
-      message:
-        type: string
-    type: object
-  pvesphere_api_v1.GetStorageVolumeResponse:
+  v1.GetStorageStatusResponse:
     properties:
       code:
         type: integer
@@ -981,54 +971,64 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetSyncTaskResponse:
+  v1.GetStorageVolumeResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.SyncTaskDetail'
+        additionalProperties: true
+        type: object
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetTaskLogResponse:
+  v1.GetSyncTaskResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/v1.SyncTaskDetail'
+      message:
+        type: string
+    type: object
+  v1.GetTaskLogResponse:
     properties:
       code:
         type: integer
       data:
         items:
-          $ref: '#/definitions/pvesphere_api_v1.TaskLogItem'
+          $ref: '#/definitions/v1.TaskLogItem'
         type: array
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetTaskStatusResponse:
+  v1.GetTaskStatusResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.TaskStatusItem'
+        $ref: '#/definitions/v1.TaskStatusItem'
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetTemplateDetailResponse:
+  v1.GetTemplateDetailResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.TemplateDetailWithInstances'
+        $ref: '#/definitions/v1.TemplateDetailWithInstances'
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetTemplateResponse:
+  v1.GetTemplateResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.TemplateDetail'
+        $ref: '#/definitions/v1.TemplateDetail'
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetVMCloudInitResponse:
+  v1.GetVMCloudInitResponse:
     properties:
       code:
         type: integer
@@ -1039,7 +1039,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetVMConsoleRequest:
+  v1.GetVMConsoleRequest:
     properties:
       generate_password:
         example: false
@@ -1055,7 +1055,7 @@ definitions:
     required:
     - vm_id
     type: object
-  pvesphere_api_v1.GetVMConsoleResponse:
+  v1.GetVMConsoleResponse:
     properties:
       code:
         type: integer
@@ -1065,7 +1065,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetVMCurrentConfigResponse:
+  v1.GetVMCurrentConfigResponse:
     properties:
       code:
         type: integer
@@ -1075,7 +1075,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetVMPendingConfigResponse:
+  v1.GetVMPendingConfigResponse:
     properties:
       code:
         type: integer
@@ -1087,7 +1087,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetVMRRDDataResponse:
+  v1.GetVMRRDDataResponse:
     properties:
       code:
         type: integer
@@ -1099,16 +1099,16 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetVMResponse:
+  v1.GetVMResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.VMDetail'
+        $ref: '#/definitions/v1.VMDetail'
       message:
         type: string
     type: object
-  pvesphere_api_v1.GetVMStatusResponse:
+  v1.GetVMStatusResponse:
     properties:
       code:
         type: integer
@@ -1118,7 +1118,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.ImportTemplateRequest:
+  v1.ImportTemplateRequest:
     properties:
       auto_sync:
         description: local存储时是否自动同步到所有节点
@@ -1165,33 +1165,33 @@ definitions:
     - target_storage_id
     - template_name
     type: object
-  pvesphere_api_v1.ImportTemplateResponse:
+  v1.ImportTemplateResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.ImportTemplateResponseData'
+        $ref: '#/definitions/v1.ImportTemplateResponseData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.ImportTemplateResponseData:
+  v1.ImportTemplateResponseData:
     properties:
       import_id:
         type: integer
       import_node:
-        $ref: '#/definitions/pvesphere_api_v1.TemplateImportNode'
+        $ref: '#/definitions/v1.TemplateImportNode'
       is_shared:
         type: boolean
       storage_type:
         type: string
       sync_tasks:
         items:
-          $ref: '#/definitions/pvesphere_api_v1.TemplateSyncTaskInfo'
+          $ref: '#/definitions/v1.TemplateSyncTaskInfo'
         type: array
       template_id:
         type: integer
     type: object
-  pvesphere_api_v1.InitGPTDiskRequest:
+  v1.InitGPTDiskRequest:
     properties:
       disk:
         description: 磁盘设备名
@@ -1205,7 +1205,7 @@ definitions:
     - disk
     - node_id
     type: object
-  pvesphere_api_v1.InitGPTDiskResponse:
+  v1.InitGPTDiskResponse:
     properties:
       code:
         type: integer
@@ -1215,114 +1215,114 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.ListClusterResponse:
+  v1.ListClusterResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.ListClusterResponseData'
+        $ref: '#/definitions/v1.ListClusterResponseData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.ListClusterResponseData:
+  v1.ListClusterResponseData:
     properties:
       list:
         items:
-          $ref: '#/definitions/pvesphere_api_v1.ClusterItem'
+          $ref: '#/definitions/v1.ClusterItem'
         type: array
       total:
         type: integer
     type: object
-  pvesphere_api_v1.ListClusterTasksResponse:
+  v1.ListClusterTasksResponse:
     properties:
       code:
         type: integer
       data:
         items:
-          $ref: '#/definitions/pvesphere_api_v1.ClusterTaskItem'
+          $ref: '#/definitions/v1.ClusterTaskItem'
         type: array
       message:
         type: string
     type: object
-  pvesphere_api_v1.ListNodeResponse:
+  v1.ListNodeResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.ListNodeResponseData'
+        $ref: '#/definitions/v1.ListNodeResponseData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.ListNodeResponseData:
+  v1.ListNodeResponseData:
     properties:
       list:
         items:
-          $ref: '#/definitions/pvesphere_api_v1.NodeItem'
+          $ref: '#/definitions/v1.NodeItem'
         type: array
       total:
         type: integer
     type: object
-  pvesphere_api_v1.ListNodeTasksResponse:
+  v1.ListNodeTasksResponse:
     properties:
       code:
         type: integer
       data:
         items:
-          $ref: '#/definitions/pvesphere_api_v1.NodeTaskItem'
+          $ref: '#/definitions/v1.NodeTaskItem'
         type: array
       message:
         type: string
     type: object
-  pvesphere_api_v1.ListStorageResponse:
+  v1.ListStorageResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.ListStorageResponseData'
+        $ref: '#/definitions/v1.ListStorageResponseData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.ListStorageResponseData:
+  v1.ListStorageResponseData:
     properties:
       list:
         items:
-          $ref: '#/definitions/pvesphere_api_v1.StorageItem'
+          $ref: '#/definitions/v1.StorageItem'
         type: array
       total:
         type: integer
     type: object
-  pvesphere_api_v1.ListSyncTasksResponse:
+  v1.ListSyncTasksResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.ListSyncTasksResponseData'
+        $ref: '#/definitions/v1.ListSyncTasksResponseData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.ListSyncTasksResponseData:
+  v1.ListSyncTasksResponseData:
     properties:
       list:
         items:
-          $ref: '#/definitions/pvesphere_api_v1.SyncTaskDetail'
+          $ref: '#/definitions/v1.SyncTaskDetail'
         type: array
       total:
         type: integer
     type: object
-  pvesphere_api_v1.ListTemplateInstancesResponse:
+  v1.ListTemplateInstancesResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.ListTemplateInstancesResponseData'
+        $ref: '#/definitions/v1.ListTemplateInstancesResponseData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.ListTemplateInstancesResponseData:
+  v1.ListTemplateInstancesResponseData:
     properties:
       instances:
         items:
-          $ref: '#/definitions/pvesphere_api_v1.TemplateInstanceInfo'
+          $ref: '#/definitions/v1.TemplateInstanceInfo'
         type: array
       template_id:
         type: integer
@@ -1331,43 +1331,43 @@ definitions:
       total:
         type: integer
     type: object
-  pvesphere_api_v1.ListTemplateResponse:
+  v1.ListTemplateResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.ListTemplateResponseData'
+        $ref: '#/definitions/v1.ListTemplateResponseData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.ListTemplateResponseData:
+  v1.ListTemplateResponseData:
     properties:
       list:
         items:
-          $ref: '#/definitions/pvesphere_api_v1.TemplateItem'
+          $ref: '#/definitions/v1.TemplateItem'
         type: array
       total:
         type: integer
     type: object
-  pvesphere_api_v1.ListVMResponse:
+  v1.ListVMResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.ListVMResponseData'
+        $ref: '#/definitions/v1.ListVMResponseData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.ListVMResponseData:
+  v1.ListVMResponseData:
     properties:
       list:
         items:
-          $ref: '#/definitions/pvesphere_api_v1.VMItem'
+          $ref: '#/definitions/v1.VMItem'
         type: array
       total:
         type: integer
     type: object
-  pvesphere_api_v1.LoginRequest:
+  v1.LoginRequest:
     properties:
       email:
         example: 1234@gmail.com
@@ -1379,21 +1379,21 @@ definitions:
     - email
     - password
     type: object
-  pvesphere_api_v1.LoginResponse:
+  v1.LoginResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.LoginResponseData'
+        $ref: '#/definitions/v1.LoginResponseData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.LoginResponseData:
+  v1.LoginResponseData:
     properties:
       accessToken:
         type: string
     type: object
-  pvesphere_api_v1.MigrateVMRequest:
+  v1.MigrateVMRequest:
     properties:
       bwlimit:
         description: 带宽限制（KiB/s）
@@ -1431,7 +1431,7 @@ definitions:
     - target_node_id
     - vm_id
     type: object
-  pvesphere_api_v1.MigrateVMResponse:
+  v1.MigrateVMResponse:
     properties:
       code:
         type: integer
@@ -1441,7 +1441,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.NodeDetail:
+  v1.NodeDetail:
     properties:
       annotations:
         type: string
@@ -1477,27 +1477,27 @@ definitions:
       vm_limit:
         type: integer
     type: object
-  pvesphere_api_v1.NodeHotspots:
+  v1.NodeHotspots:
     properties:
       cpu:
         description: CPU Top N
         items:
-          $ref: '#/definitions/pvesphere_api_v1.TopResourceConsumer'
+          $ref: '#/definitions/v1.TopResourceConsumer'
         type: array
       memory:
         description: Memory Top N
         items:
-          $ref: '#/definitions/pvesphere_api_v1.TopResourceConsumer'
+          $ref: '#/definitions/v1.TopResourceConsumer'
         type: array
     type: object
-  pvesphere_api_v1.NodeInfo:
+  v1.NodeInfo:
     properties:
       node_id:
         type: integer
       node_name:
         type: string
     type: object
-  pvesphere_api_v1.NodeItem:
+  v1.NodeItem:
     properties:
       cluster_id:
         type: integer
@@ -1519,7 +1519,7 @@ definitions:
       vm_limit:
         type: integer
     type: object
-  pvesphere_api_v1.NodeTaskItem:
+  v1.NodeTaskItem:
     properties:
       endtime:
         type: integer
@@ -1539,7 +1539,7 @@ definitions:
       user:
         type: string
     type: object
-  pvesphere_api_v1.OperationItem:
+  v1.OperationItem:
     properties:
       id:
         description: 操作ID
@@ -1566,7 +1566,7 @@ definitions:
         example: running
         type: string
     type: object
-  pvesphere_api_v1.OperationSummary:
+  v1.OperationSummary:
     properties:
       count:
         description: 数量
@@ -1581,7 +1581,7 @@ definitions:
         example: vm_migration
         type: string
     type: object
-  pvesphere_api_v1.RecentRisk:
+  v1.RecentRisk:
     properties:
       id:
         description: 风险ID
@@ -1616,7 +1616,7 @@ definitions:
         example: node
         type: string
     type: object
-  pvesphere_api_v1.RegisterRequest:
+  v1.RegisterRequest:
     properties:
       email:
         example: 1234@gmail.com
@@ -1628,7 +1628,7 @@ definitions:
     - email
     - password
     type: object
-  pvesphere_api_v1.ReloadNodeNetworkRequest:
+  v1.ReloadNodeNetworkRequest:
     properties:
       node_id:
         description: 节点ID（数据库ID）
@@ -1637,7 +1637,7 @@ definitions:
     required:
     - node_id
     type: object
-  pvesphere_api_v1.ReloadNodeNetworkResponse:
+  v1.ReloadNodeNetworkResponse:
     properties:
       code:
         type: integer
@@ -1645,7 +1645,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.RemoteMigrateVMRequest:
+  v1.RemoteMigrateVMRequest:
     properties:
       bwlimit:
         description: 带宽限制（KiB/s）
@@ -1690,7 +1690,7 @@ definitions:
     - target_storage
     - vm_id
     type: object
-  pvesphere_api_v1.RemoteMigrateVMResponse:
+  v1.RemoteMigrateVMResponse:
     properties:
       code:
         type: integer
@@ -1700,7 +1700,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.ResourceUsage:
+  v1.ResourceUsage:
     properties:
       total_bytes:
         description: 总字节数（内存/存储）
@@ -1723,7 +1723,7 @@ definitions:
         example: 180
         type: number
     type: object
-  pvesphere_api_v1.Response:
+  v1.Response:
     properties:
       code:
         type: integer
@@ -1731,7 +1731,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.RestartNodeServiceRequest:
+  v1.RestartNodeServiceRequest:
     properties:
       node_id:
         description: 节点ID（数据库ID）
@@ -1745,38 +1745,38 @@ definitions:
     - node_id
     - service_name
     type: object
-  pvesphere_api_v1.RestartNodeServiceResponse:
+  v1.RestartNodeServiceResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.RestartNodeServiceResponseData'
+        $ref: '#/definitions/v1.RestartNodeServiceResponseData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.RestartNodeServiceResponseData:
+  v1.RestartNodeServiceResponseData:
     properties:
       upid:
         description: 任务ID
         type: string
     type: object
-  pvesphere_api_v1.RetrySyncTaskResponse:
+  v1.RetrySyncTaskResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.RetrySyncTaskResponseData'
+        $ref: '#/definitions/v1.RetrySyncTaskResponseData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.RetrySyncTaskResponseData:
+  v1.RetrySyncTaskResponseData:
     properties:
       status:
         type: string
       task_id:
         type: integer
     type: object
-  pvesphere_api_v1.RevertNodeNetworkRequest:
+  v1.RevertNodeNetworkRequest:
     properties:
       node_id:
         description: 节点ID（数据库ID）
@@ -1785,7 +1785,7 @@ definitions:
     required:
     - node_id
     type: object
-  pvesphere_api_v1.RevertNodeNetworkResponse:
+  v1.RevertNodeNetworkResponse:
     properties:
       code:
         type: integer
@@ -1793,7 +1793,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.ScopeItem:
+  v1.ScopeItem:
     properties:
       cluster_id:
         example: 1
@@ -1805,7 +1805,7 @@ definitions:
         example: 生产集群一
         type: string
     type: object
-  pvesphere_api_v1.SetNodeStatusRequest:
+  v1.SetNodeStatusRequest:
     properties:
       command:
         description: 操作命令：reboot（重启）或 shutdown（关闭）
@@ -1819,7 +1819,7 @@ definitions:
     - command
     - node_id
     type: object
-  pvesphere_api_v1.SetNodeStatusResponse:
+  v1.SetNodeStatusResponse:
     properties:
       code:
         type: integer
@@ -1829,7 +1829,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.StartNodeServiceRequest:
+  v1.StartNodeServiceRequest:
     properties:
       node_id:
         description: 节点ID（数据库ID）
@@ -1843,22 +1843,22 @@ definitions:
     - node_id
     - service_name
     type: object
-  pvesphere_api_v1.StartNodeServiceResponse:
+  v1.StartNodeServiceResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.StartNodeServiceResponseData'
+        $ref: '#/definitions/v1.StartNodeServiceResponseData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.StartNodeServiceResponseData:
+  v1.StartNodeServiceResponseData:
     properties:
       upid:
         description: 任务ID
         type: string
     type: object
-  pvesphere_api_v1.StopNodeServiceRequest:
+  v1.StopNodeServiceRequest:
     properties:
       node_id:
         description: 节点ID（数据库ID）
@@ -1872,22 +1872,22 @@ definitions:
     - node_id
     - service_name
     type: object
-  pvesphere_api_v1.StopNodeServiceResponse:
+  v1.StopNodeServiceResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.StopNodeServiceResponseData'
+        $ref: '#/definitions/v1.StopNodeServiceResponseData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.StopNodeServiceResponseData:
+  v1.StopNodeServiceResponseData:
     properties:
       upid:
         description: 任务ID
         type: string
     type: object
-  pvesphere_api_v1.StopTaskResponse:
+  v1.StopTaskResponse:
     properties:
       code:
         type: integer
@@ -1895,7 +1895,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.StorageDetail:
+  v1.StorageDetail:
     properties:
       active:
         type: integer
@@ -1939,7 +1939,7 @@ definitions:
       used_fraction:
         type: number
     type: object
-  pvesphere_api_v1.StorageHotspot:
+  v1.StorageHotspot:
     properties:
       id:
         description: 存储ID
@@ -1966,7 +1966,7 @@ definitions:
         example: 85899345920
         type: integer
     type: object
-  pvesphere_api_v1.StorageItem:
+  v1.StorageItem:
     properties:
       active:
         type: integer
@@ -1998,14 +1998,14 @@ definitions:
       used_fraction:
         type: number
     type: object
-  pvesphere_api_v1.SyncTaskDetail:
+  v1.SyncTaskDetail:
     properties:
       error_message:
         type: string
       progress:
         type: integer
       source_node:
-        $ref: '#/definitions/pvesphere_api_v1.NodeInfo'
+        $ref: '#/definitions/v1.NodeInfo'
       status:
         type: string
       storage_name:
@@ -2015,7 +2015,7 @@ definitions:
       sync_start_time:
         type: string
       target_node:
-        $ref: '#/definitions/pvesphere_api_v1.NodeInfo'
+        $ref: '#/definitions/v1.NodeInfo'
       task_id:
         type: integer
       template_id:
@@ -2023,7 +2023,7 @@ definitions:
       template_name:
         type: string
     type: object
-  pvesphere_api_v1.SyncTemplateRequest:
+  v1.SyncTemplateRequest:
     properties:
       target_node_ids:
         example:
@@ -2035,23 +2035,23 @@ definitions:
     required:
     - target_node_ids
     type: object
-  pvesphere_api_v1.SyncTemplateResponse:
+  v1.SyncTemplateResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.SyncTemplateResponseData'
+        $ref: '#/definitions/v1.SyncTemplateResponseData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.SyncTemplateResponseData:
+  v1.SyncTemplateResponseData:
     properties:
       sync_tasks:
         items:
-          $ref: '#/definitions/pvesphere_api_v1.TemplateSyncTaskInfo'
+          $ref: '#/definitions/v1.TemplateSyncTaskInfo'
         type: array
     type: object
-  pvesphere_api_v1.TaskLogItem:
+  v1.TaskLogItem:
     properties:
       "n":
         description: 行号
@@ -2060,7 +2060,7 @@ definitions:
         description: 日志内容
         type: string
     type: object
-  pvesphere_api_v1.TaskStatusItem:
+  v1.TaskStatusItem:
     properties:
       endtime:
         type: integer
@@ -2086,7 +2086,7 @@ definitions:
       user:
         type: string
     type: object
-  pvesphere_api_v1.TemplateDetail:
+  v1.TemplateDetail:
     properties:
       cluster_id:
         type: integer
@@ -2112,7 +2112,7 @@ definitions:
         description: 更新时间
         type: string
     type: object
-  pvesphere_api_v1.TemplateDetailWithInstances:
+  v1.TemplateDetailWithInstances:
     properties:
       cluster_id:
         type: integer
@@ -2124,21 +2124,21 @@ definitions:
         type: integer
       instances:
         items:
-          $ref: '#/definitions/pvesphere_api_v1.TemplateInstanceInfo'
+          $ref: '#/definitions/v1.TemplateInstanceInfo'
         type: array
       template_name:
         type: string
       upload_info:
-        $ref: '#/definitions/pvesphere_api_v1.TemplateUploadInfo'
+        $ref: '#/definitions/v1.TemplateUploadInfo'
     type: object
-  pvesphere_api_v1.TemplateImportNode:
+  v1.TemplateImportNode:
     properties:
       node_id:
         type: integer
       node_name:
         type: string
     type: object
-  pvesphere_api_v1.TemplateInstanceInfo:
+  v1.TemplateInstanceInfo:
     properties:
       instance_id:
         type: integer
@@ -2157,7 +2157,7 @@ definitions:
       vmid:
         type: integer
     type: object
-  pvesphere_api_v1.TemplateItem:
+  v1.TemplateItem:
     properties:
       cluster_id:
         type: integer
@@ -2171,7 +2171,7 @@ definitions:
       template_name:
         type: string
     type: object
-  pvesphere_api_v1.TemplateSyncTaskInfo:
+  v1.TemplateSyncTaskInfo:
     properties:
       status:
         type: string
@@ -2182,7 +2182,7 @@ definitions:
       task_id:
         type: integer
     type: object
-  pvesphere_api_v1.TemplateUploadInfo:
+  v1.TemplateUploadInfo:
     properties:
       file_name:
         type: string
@@ -2197,7 +2197,7 @@ definitions:
       upload_id:
         type: integer
     type: object
-  pvesphere_api_v1.TopResourceConsumer:
+  v1.TopResourceConsumer:
     properties:
       cluster_id:
         description: 集群ID
@@ -2228,7 +2228,7 @@ definitions:
         example: '%'
         type: string
     type: object
-  pvesphere_api_v1.UpdateClusterRequest:
+  v1.UpdateClusterRequest:
     properties:
       api_url:
         type: string
@@ -2253,7 +2253,7 @@ definitions:
       user_token:
         type: string
     type: object
-  pvesphere_api_v1.UpdateNodeRequest:
+  v1.UpdateNodeRequest:
     properties:
       annotations:
         type: string
@@ -2268,7 +2268,7 @@ definitions:
       vm_limit:
         type: integer
     type: object
-  pvesphere_api_v1.UpdateProfileRequest:
+  v1.UpdateProfileRequest:
     properties:
       newPassword:
         example: newpassword
@@ -2280,7 +2280,7 @@ definitions:
         example: oldpassword
         type: string
     type: object
-  pvesphere_api_v1.UpdateStorageRequest:
+  v1.UpdateStorageRequest:
     properties:
       active:
         type: integer
@@ -2301,14 +2301,14 @@ definitions:
       used_fraction:
         type: number
     type: object
-  pvesphere_api_v1.UpdateTemplateRequest:
+  v1.UpdateTemplateRequest:
     properties:
       description:
         type: string
       template_name:
         type: string
     type: object
-  pvesphere_api_v1.UpdateVMCloudInitRequest:
+  v1.UpdateVMCloudInitRequest:
     properties:
       cipassword:
         description: CloudInit 密码
@@ -2356,7 +2356,7 @@ definitions:
     - node_id
     - vm_id
     type: object
-  pvesphere_api_v1.UpdateVMCloudInitResponse:
+  v1.UpdateVMCloudInitResponse:
     properties:
       code:
         type: integer
@@ -2364,7 +2364,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.UpdateVMConfigRequest:
+  v1.UpdateVMConfigRequest:
     properties:
       config:
         additionalProperties: true
@@ -2378,7 +2378,7 @@ definitions:
     - config
     - vm_id
     type: object
-  pvesphere_api_v1.UpdateVMConfigResponse:
+  v1.UpdateVMConfigResponse:
     properties:
       code:
         type: integer
@@ -2386,7 +2386,7 @@ definitions:
       message:
         type: string
     type: object
-  pvesphere_api_v1.UpdateVMRequest:
+  v1.UpdateVMRequest:
     properties:
       app_id:
         type: string
@@ -2413,7 +2413,7 @@ definitions:
       vm_user:
         type: string
     type: object
-  pvesphere_api_v1.VMDetail:
+  v1.VMDetail:
     properties:
       app_id:
         type: string
@@ -2473,20 +2473,20 @@ definitions:
       vmid:
         type: integer
     type: object
-  pvesphere_api_v1.VMHotspots:
+  v1.VMHotspots:
     properties:
       cpu:
         description: CPU Top N
         items:
-          $ref: '#/definitions/pvesphere_api_v1.TopResourceConsumer'
+          $ref: '#/definitions/v1.TopResourceConsumer'
         type: array
       memory:
         description: Memory Top N
         items:
-          $ref: '#/definitions/pvesphere_api_v1.TopResourceConsumer'
+          $ref: '#/definitions/v1.TopResourceConsumer'
         type: array
     type: object
-  pvesphere_api_v1.VMItem:
+  v1.VMItem:
     properties:
       app_id:
         type: string
@@ -2526,7 +2526,7 @@ definitions:
       vmid:
         type: integer
     type: object
-  pvesphere_api_v1.VerifyClusterData:
+  v1.VerifyClusterData:
     properties:
       connected:
         description: 连接状态
@@ -2549,16 +2549,16 @@ definitions:
         example: 8.3.0
         type: string
     type: object
-  pvesphere_api_v1.VerifyClusterResponse:
+  v1.VerifyClusterResponse:
     properties:
       code:
         type: integer
       data:
-        $ref: '#/definitions/pvesphere_api_v1.VerifyClusterData'
+        $ref: '#/definitions/v1.VerifyClusterData'
       message:
         type: string
     type: object
-  pvesphere_api_v1.WipeDiskRequest:
+  v1.WipeDiskRequest:
     properties:
       disk:
         description: 磁盘设备名
@@ -2576,7 +2576,7 @@ definitions:
     - disk
     - node_id
     type: object
-  pvesphere_api_v1.WipeDiskResponse:
+  v1.WipeDiskResponse:
     properties:
       code:
         type: integer
@@ -2630,7 +2630,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.ListClusterResponse'
+            $ref: '#/definitions/v1.ListClusterResponse'
       security:
       - Bearer: []
       summary: 获取集群列表
@@ -2645,14 +2645,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.CreateClusterRequest'
+          $ref: '#/definitions/v1.CreateClusterRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 创建集群
@@ -2674,7 +2674,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 删除集群
@@ -2695,7 +2695,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetClusterResponse'
+            $ref: '#/definitions/v1.GetClusterResponse'
       security:
       - Bearer: []
       summary: 获取集群详情
@@ -2715,14 +2715,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.UpdateClusterRequest'
+          $ref: '#/definitions/v1.UpdateClusterRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 更新集群
@@ -2744,7 +2744,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetClusterResourcesResponse'
+            $ref: '#/definitions/v1.GetClusterResourcesResponse'
       security:
       - Bearer: []
       summary: 获取集群资源
@@ -2766,7 +2766,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetClusterStatusResponse'
+            $ref: '#/definitions/v1.GetClusterStatusResponse'
       security:
       - Bearer: []
       summary: 获取集群状态
@@ -2801,7 +2801,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.VerifyClusterResponse'
+            $ref: '#/definitions/v1.VerifyClusterResponse'
       security:
       - Bearer: []
       summary: 验证集群连接
@@ -2832,7 +2832,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.DashboardHotspotsResponse'
+            $ref: '#/definitions/v1.DashboardHotspotsResponse'
       security:
       - Bearer: []
       summary: 获取压力和风险焦点
@@ -2858,7 +2858,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.DashboardOperationsResponse'
+            $ref: '#/definitions/v1.DashboardOperationsResponse'
       security:
       - Bearer: []
       summary: 获取运行中的操作
@@ -2884,7 +2884,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.DashboardOverviewResponse'
+            $ref: '#/definitions/v1.DashboardOverviewResponse'
       security:
       - Bearer: []
       summary: 获取全局概览
@@ -2910,7 +2910,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.DashboardResourcesResponse'
+            $ref: '#/definitions/v1.DashboardResourcesResponse'
       security:
       - Bearer: []
       summary: 获取资源使用率
@@ -2926,7 +2926,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.DashboardScopesResponse'
+            $ref: '#/definitions/v1.DashboardScopesResponse'
       security:
       - Bearer: []
       summary: 获取可选集群列表
@@ -2942,14 +2942,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.LoginRequest'
+          $ref: '#/definitions/v1.LoginRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.LoginResponse'
+            $ref: '#/definitions/v1.LoginResponse'
       summary: 账号登录
       tags:
       - 用户模块
@@ -2986,7 +2986,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.ListNodeResponse'
+            $ref: '#/definitions/v1.ListNodeResponse'
       security:
       - Bearer: []
       summary: 获取节点列表
@@ -3001,14 +3001,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.CreateNodeRequest'
+          $ref: '#/definitions/v1.CreateNodeRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 创建节点
@@ -3030,7 +3030,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 删除节点
@@ -3051,7 +3051,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetNodeResponse'
+            $ref: '#/definitions/v1.GetNodeResponse'
       security:
       - Bearer: []
       summary: 获取节点详情
@@ -3071,14 +3071,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.UpdateNodeRequest'
+          $ref: '#/definitions/v1.UpdateNodeRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 更新节点
@@ -3095,14 +3095,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.GetNodeConsoleRequest'
+          $ref: '#/definitions/v1.GetNodeConsoleRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetNodeConsoleResponse'
+            $ref: '#/definitions/v1.GetNodeConsoleResponse'
       security:
       - Bearer: []
       summary: 获取节点控制台信息
@@ -3139,7 +3139,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetNodeDisksDirectoryResponse'
+            $ref: '#/definitions/v1.GetNodeDisksDirectoryResponse'
       security:
       - Bearer: []
       summary: 获取节点 Directory 存储
@@ -3155,14 +3155,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.InitGPTDiskRequest'
+          $ref: '#/definitions/v1.InitGPTDiskRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.InitGPTDiskResponse'
+            $ref: '#/definitions/v1.InitGPTDiskResponse'
       security:
       - Bearer: []
       summary: 初始化 GPT 磁盘
@@ -3189,7 +3189,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetNodeDisksListResponse'
+            $ref: '#/definitions/v1.GetNodeDisksListResponse'
       security:
       - Bearer: []
       summary: 获取节点磁盘列表
@@ -3211,7 +3211,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetNodeDisksLVMResponse'
+            $ref: '#/definitions/v1.GetNodeDisksLVMResponse'
       security:
       - Bearer: []
       summary: 获取节点 LVM 存储
@@ -3233,7 +3233,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetNodeDisksLVMThinResponse'
+            $ref: '#/definitions/v1.GetNodeDisksLVMThinResponse'
       security:
       - Bearer: []
       summary: 获取节点 LVM-Thin 存储
@@ -3249,14 +3249,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.WipeDiskRequest'
+          $ref: '#/definitions/v1.WipeDiskRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.WipeDiskResponse'
+            $ref: '#/definitions/v1.WipeDiskResponse'
       security:
       - Bearer: []
       summary: 擦除磁盘或分区
@@ -3278,7 +3278,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetNodeDisksZFSResponse'
+            $ref: '#/definitions/v1.GetNodeDisksZFSResponse'
       security:
       - Bearer: []
       summary: 获取节点 ZFS 存储
@@ -3295,14 +3295,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.RevertNodeNetworkRequest'
+          $ref: '#/definitions/v1.RevertNodeNetworkRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.RevertNodeNetworkResponse'
+            $ref: '#/definitions/v1.RevertNodeNetworkResponse'
       security:
       - Bearer: []
       summary: 恢复网络配置更改
@@ -3324,7 +3324,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetNodeNetworksResponse'
+            $ref: '#/definitions/v1.GetNodeNetworksResponse'
       security:
       - Bearer: []
       summary: 获取节点网络列表
@@ -3340,14 +3340,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.CreateNodeNetworkRequest'
+          $ref: '#/definitions/v1.CreateNodeNetworkRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.CreateNodeNetworkResponse'
+            $ref: '#/definitions/v1.CreateNodeNetworkResponse'
       security:
       - Bearer: []
       summary: 创建网络设备配置
@@ -3363,14 +3363,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.ReloadNodeNetworkRequest'
+          $ref: '#/definitions/v1.ReloadNodeNetworkRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.ReloadNodeNetworkResponse'
+            $ref: '#/definitions/v1.ReloadNodeNetworkResponse'
       security:
       - Bearer: []
       summary: 重新加载网络配置
@@ -3411,7 +3411,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetNodeRRDDataResponse'
+            $ref: '#/definitions/v1.GetNodeRRDDataResponse'
       security:
       - Bearer: []
       summary: 获取节点RRD监控数据
@@ -3433,7 +3433,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetNodeServicesResponse'
+            $ref: '#/definitions/v1.GetNodeServicesResponse'
       security:
       - Bearer: []
       summary: 获取节点服务列表
@@ -3450,14 +3450,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.RestartNodeServiceRequest'
+          $ref: '#/definitions/v1.RestartNodeServiceRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.RestartNodeServiceResponse'
+            $ref: '#/definitions/v1.RestartNodeServiceResponse'
       security:
       - Bearer: []
       summary: 重启节点服务
@@ -3474,14 +3474,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.StartNodeServiceRequest'
+          $ref: '#/definitions/v1.StartNodeServiceRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.StartNodeServiceResponse'
+            $ref: '#/definitions/v1.StartNodeServiceResponse'
       security:
       - Bearer: []
       summary: 启动节点服务
@@ -3498,14 +3498,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.StopNodeServiceRequest'
+          $ref: '#/definitions/v1.StopNodeServiceRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.StopNodeServiceResponse'
+            $ref: '#/definitions/v1.StopNodeServiceResponse'
       security:
       - Bearer: []
       summary: 停止节点服务
@@ -3527,7 +3527,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetNodeStatusResponse'
+            $ref: '#/definitions/v1.GetNodeStatusResponse'
       security:
       - Bearer: []
       summary: 获取节点状态
@@ -3542,14 +3542,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.SetNodeStatusRequest'
+          $ref: '#/definitions/v1.SetNodeStatusRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.SetNodeStatusResponse'
+            $ref: '#/definitions/v1.SetNodeStatusResponse'
       security:
       - Bearer: []
       summary: 设置节点状态（重启/关闭）
@@ -3585,7 +3585,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 删除存储内容（镜像 / ISO / OVA / VM 镜像等）
@@ -3615,7 +3615,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetStorageContentResponse'
+            $ref: '#/definitions/v1.GetStorageContentResponse'
       security:
       - Bearer: []
       summary: 获取节点存储内容列表
@@ -3647,7 +3647,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetStorageVolumeResponse'
+            $ref: '#/definitions/v1.GetStorageVolumeResponse'
       security:
       - Bearer: []
       summary: 获取节点存储卷属性
@@ -3693,7 +3693,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetStorageRRDDataResponse'
+            $ref: '#/definitions/v1.GetStorageRRDDataResponse'
       security:
       - Bearer: []
       summary: 获取节点存储 RRD 监控数据
@@ -3720,7 +3720,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetStorageStatusResponse'
+            $ref: '#/definitions/v1.GetStorageStatusResponse'
       security:
       - Bearer: []
       summary: 获取节点存储状态
@@ -3761,7 +3761,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 上传存储内容（模板 / ISO / OVA / VM 镜像）
@@ -3779,14 +3779,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.GetAccessTicketRequest'
+          $ref: '#/definitions/v1.GetAccessTicketRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetAccessTicketResponse'
+            $ref: '#/definitions/v1.GetAccessTicketResponse'
       security:
       - Bearer: []
       summary: 获取 Proxmox 高权限票据（/access/ticket）
@@ -3803,14 +3803,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.RegisterRequest'
+          $ref: '#/definitions/v1.RegisterRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       summary: 用户注册
       tags:
       - 用户模块
@@ -3851,7 +3851,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.ListStorageResponse'
+            $ref: '#/definitions/v1.ListStorageResponse'
       security:
       - Bearer: []
       summary: 获取存储列表
@@ -3866,14 +3866,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.CreateStorageRequest'
+          $ref: '#/definitions/v1.CreateStorageRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 创建存储
@@ -3895,7 +3895,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 删除存储
@@ -3916,7 +3916,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetStorageResponse'
+            $ref: '#/definitions/v1.GetStorageResponse'
       security:
       - Bearer: []
       summary: 获取存储详情
@@ -3936,14 +3936,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.UpdateStorageRequest'
+          $ref: '#/definitions/v1.UpdateStorageRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 更新存储
@@ -3965,7 +3965,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.ListClusterTasksResponse'
+            $ref: '#/definitions/v1.ListClusterTasksResponse'
       security:
       - Bearer: []
       summary: 获取集群任务列表
@@ -4007,7 +4007,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetTaskLogResponse'
+            $ref: '#/definitions/v1.GetTaskLogResponse'
       security:
       - Bearer: []
       summary: 获取任务日志
@@ -4034,7 +4034,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.ListNodeTasksResponse'
+            $ref: '#/definitions/v1.ListNodeTasksResponse'
       security:
       - Bearer: []
       summary: 获取节点任务列表
@@ -4066,7 +4066,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetTaskStatusResponse'
+            $ref: '#/definitions/v1.GetTaskStatusResponse'
       security:
       - Bearer: []
       summary: 获取任务状态
@@ -4098,7 +4098,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.StopTaskResponse'
+            $ref: '#/definitions/v1.StopTaskResponse'
       security:
       - Bearer: []
       summary: 终止任务
@@ -4129,7 +4129,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.ListTemplateResponse'
+            $ref: '#/definitions/v1.ListTemplateResponse'
       security:
       - Bearer: []
       summary: 获取模板列表
@@ -4144,14 +4144,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.CreateTemplateRequest'
+          $ref: '#/definitions/v1.CreateTemplateRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 创建模板
@@ -4173,7 +4173,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 删除模板
@@ -4194,7 +4194,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetTemplateResponse'
+            $ref: '#/definitions/v1.GetTemplateResponse'
       security:
       - Bearer: []
       summary: 获取模板详情
@@ -4214,14 +4214,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.UpdateTemplateRequest'
+          $ref: '#/definitions/v1.UpdateTemplateRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 更新模板
@@ -4248,7 +4248,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetTemplateDetailResponse'
+            $ref: '#/definitions/v1.GetTemplateDetailResponse'
       summary: 查询模板详情
       tags:
       - 模板管理
@@ -4269,7 +4269,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.ListTemplateInstancesResponse'
+            $ref: '#/definitions/v1.ListTemplateInstancesResponse'
       summary: 列出模板实例
       tags:
       - 模板管理
@@ -4289,14 +4289,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.SyncTemplateRequest'
+          $ref: '#/definitions/v1.SyncTemplateRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.SyncTemplateResponse'
+            $ref: '#/definitions/v1.SyncTemplateResponse'
       summary: 同步模板到其他节点
       tags:
       - 模板管理
@@ -4311,14 +4311,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.ImportTemplateRequest'
+          $ref: '#/definitions/v1.ImportTemplateRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.ImportTemplateResponse'
+            $ref: '#/definitions/v1.ImportTemplateResponse'
       summary: 从备份文件导入模板
       tags:
       - 模板管理
@@ -4350,7 +4350,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.ListSyncTasksResponse'
+            $ref: '#/definitions/v1.ListSyncTasksResponse'
       summary: 列出同步任务
       tags:
       - 模板管理
@@ -4371,7 +4371,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetSyncTaskResponse'
+            $ref: '#/definitions/v1.GetSyncTaskResponse'
       summary: 查询同步任务
       tags:
       - 模板管理
@@ -4392,7 +4392,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.RetrySyncTaskResponse'
+            $ref: '#/definitions/v1.RetrySyncTaskResponse'
       summary: 重试同步任务
       tags:
       - 模板管理
@@ -4406,7 +4406,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetProfileResponse'
+            $ref: '#/definitions/v1.GetProfileResponse'
       security:
       - Bearer: []
       summary: 获取用户信息
@@ -4422,14 +4422,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.UpdateProfileRequest'
+          $ref: '#/definitions/v1.UpdateProfileRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 修改用户信息
@@ -4472,7 +4472,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.ListVMResponse'
+            $ref: '#/definitions/v1.ListVMResponse'
       security:
       - Bearer: []
       summary: 获取虚拟机列表
@@ -4488,14 +4488,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.CreateVMRequest'
+          $ref: '#/definitions/v1.CreateVMRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 创建虚拟机（仅数据库记录）
@@ -4517,7 +4517,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 删除虚拟机
@@ -4538,7 +4538,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetVMResponse'
+            $ref: '#/definitions/v1.GetVMResponse'
       security:
       - Bearer: []
       summary: 获取虚拟机详情
@@ -4558,14 +4558,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.UpdateVMRequest'
+          $ref: '#/definitions/v1.UpdateVMRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 更新虚拟机
@@ -4587,7 +4587,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 启动虚拟机
@@ -4609,7 +4609,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 停止虚拟机
@@ -4626,14 +4626,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.DeleteBackupRequest'
+          $ref: '#/definitions/v1.DeleteBackupRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.DeleteBackupResponse'
+            $ref: '#/definitions/v1.DeleteBackupResponse'
       security:
       - Bearer: []
       summary: 删除虚拟机备份
@@ -4649,14 +4649,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.CreateBackupRequest'
+          $ref: '#/definitions/v1.CreateBackupRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.CreateBackupResponse'
+            $ref: '#/definitions/v1.CreateBackupResponse'
       security:
       - Bearer: []
       summary: 创建虚拟机备份
@@ -4684,7 +4684,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetVMCloudInitResponse'
+            $ref: '#/definitions/v1.GetVMCloudInitResponse'
       security:
       - Bearer: []
       summary: 获取虚拟机 CloudInit 配置
@@ -4700,14 +4700,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.UpdateVMCloudInitRequest'
+          $ref: '#/definitions/v1.UpdateVMCloudInitRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.UpdateVMCloudInitResponse'
+            $ref: '#/definitions/v1.UpdateVMCloudInitResponse'
       security:
       - Bearer: []
       summary: 更新虚拟机 CloudInit 配置
@@ -4729,7 +4729,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetVMCurrentConfigResponse'
+            $ref: '#/definitions/v1.GetVMCurrentConfigResponse'
       security:
       - Bearer: []
       summary: 获取虚拟机当前配置
@@ -4744,14 +4744,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.UpdateVMConfigRequest'
+          $ref: '#/definitions/v1.UpdateVMConfigRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.UpdateVMConfigResponse'
+            $ref: '#/definitions/v1.UpdateVMConfigResponse'
       security:
       - Bearer: []
       summary: 更新虚拟机配置
@@ -4773,7 +4773,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetVMPendingConfigResponse'
+            $ref: '#/definitions/v1.GetVMPendingConfigResponse'
       security:
       - Bearer: []
       summary: 获取虚拟机pending配置
@@ -4790,14 +4790,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.GetVMConsoleRequest'
+          $ref: '#/definitions/v1.GetVMConsoleRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetVMConsoleResponse'
+            $ref: '#/definitions/v1.GetVMConsoleResponse'
       security:
       - Bearer: []
       summary: 获取虚拟机 Console（VNCProxy）
@@ -4829,14 +4829,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.CreateVMRequest'
+          $ref: '#/definitions/v1.CreateVMRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.Response'
+            $ref: '#/definitions/v1.Response'
       security:
       - Bearer: []
       summary: 创建虚拟机（完整流程）
@@ -4852,14 +4852,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.MigrateVMRequest'
+          $ref: '#/definitions/v1.MigrateVMRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.MigrateVMResponse'
+            $ref: '#/definitions/v1.MigrateVMResponse'
       security:
       - Bearer: []
       summary: 迁移虚拟机（同集群）
@@ -4875,14 +4875,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/pvesphere_api_v1.RemoteMigrateVMRequest'
+          $ref: '#/definitions/v1.RemoteMigrateVMRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.RemoteMigrateVMResponse'
+            $ref: '#/definitions/v1.RemoteMigrateVMResponse'
       security:
       - Bearer: []
       summary: 远程迁移虚拟机（跨集群）
@@ -4923,7 +4923,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetVMRRDDataResponse'
+            $ref: '#/definitions/v1.GetVMRRDDataResponse'
       security:
       - Bearer: []
       summary: 获取虚拟机RRD监控数据
@@ -4945,7 +4945,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pvesphere_api_v1.GetVMStatusResponse'
+            $ref: '#/definitions/v1.GetVMStatusResponse'
       security:
       - Bearer: []
       summary: 获取虚拟机状态

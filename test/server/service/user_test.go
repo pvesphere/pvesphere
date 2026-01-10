@@ -182,7 +182,6 @@ func TestUserService_UpdateProfile(t *testing.T) {
 	userId := "123"
 	req := &v1.UpdateProfileRequest{
 		Nickname: "testuser",
-		Email:    "test@example.com",
 	}
 
 	mockUserRepo.EXPECT().GetByID(ctx, userId).Return(&model.User{
@@ -209,7 +208,6 @@ func TestUserService_UpdateProfile_UserNotFound(t *testing.T) {
 	userId := "123"
 	req := &v1.UpdateProfileRequest{
 		Nickname: "testuser",
-		Email:    "test@example.com",
 	}
 
 	mockUserRepo.EXPECT().GetByID(ctx, userId).Return(nil, errors.New("user not found"))
