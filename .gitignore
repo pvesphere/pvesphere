@@ -10,3 +10,7 @@ cmd/server/__debug_bin*
 deploy/docker-compose/conf
 deploy/docker-compose/data
 deploy/build/.frontend-local/
+/coverage.out
+/coverage.html
+*.test
+*.prof
