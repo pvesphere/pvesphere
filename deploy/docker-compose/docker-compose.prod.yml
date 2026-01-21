@@ -1,0 +1,80 @@
+services:
+  # API 服务
+  api:
+    image: pvesphere-api:latest
+    container_name: pvesphere-api
+    ports:
+      - "8000:8000"
+    volumes:
+      # API 使用独立的配置目录，防止与其他服务配置冲突
+      - ./config/api:/data/app/config:ro
+      - ./storage:/data/app/storage
+    environment:
+      - APP_ENV=docker
+      - APP_NAME=server
+    command: >
+      sh -c "echo 'Running migrations...' &&
+             ./migration -conf /data/app/config/docker.yml &&
+             echo 'Starting server...' &&
+             ./server -conf /data/app/config/docker.yml"
+    networks:
+      - pvesphere-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # 控制器服务
+  controller:
+    image: pvesphere-controller:latest
+    container_name: pvesphere-controller
+    volumes:
+      # Controller 使用独立的配置目录，防止与 API 配置冲突
+      - ./config/controller:/data/app/config:ro
+      - ./storage:/data/app/storage
+    environment:
+      - APP_ENV=docker
+      - APP_NAME=controller
+    command: ["sh", "-c", "echo 'Starting controller...' && ./controller -conf /data/app/config/docker.yml"]
+    depends_on:
+      api:
+        condition: service_healthy
+    networks:
+      - pvesphere-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "pgrep", "-f", "controller"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # 前端服务
+  frontend:
+    image: pvesphere-frontend:latest
+    container_name: pvesphere-frontend
+    ports:
+      - "8080:8080"
+    volumes:
+      # 持久化 Nginx 访问日志和错误日志
+      - ./storage/logs:/var/log/nginx
+    depends_on:
+      api:
+        condition: service_healthy
+    networks:
+      - pvesphere-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+networks:
+  pvesphere-network:
+    driver: bridge
+

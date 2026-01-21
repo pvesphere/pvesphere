@@ -35,6 +35,23 @@ build-controller:
 	go build -ldflags="-s -w" -o ./bin/controller ./cmd/controller
 
 # Docker 相关命令
+# 镜像标签（优先使用 VERSION，其次 git 标签，默认 latest）
+IMAGE_TAG ?= $(shell if [ -f VERSION ]; then cat VERSION; else git describe --tags --always 2>/dev/null || echo "latest"; fi)
+IMAGE_TAG := $(strip $(IMAGE_TAG))
+
+# 前端本地构建目录检查
+FRONTEND_LOCAL_DIR := deploy/build/.frontend-local
+FRONTEND_LOCAL_PKG := $(FRONTEND_LOCAL_DIR)/package.json
+
+.PHONY: docker-build-aio
+docker-build-aio:
+	@echo "构建 All-in-One 快速开始镜像..."
+	docker build -f deploy/build/Dockerfile \
+		--target allinone \
+		-t pvesphere-aio:latest \
+		-t pvesphere-aio:$(IMAGE_TAG) \
+		.
+
 .PHONY: docker-build-api
 docker-build-api:
 	@echo "构建 API 服务 Docker 镜像..."
@@ -44,7 +61,7 @@ docker-build-api:
 		--build-arg APP_NAME=server \
 		--build-arg APP_ENV=prod \
 		-t pvesphere-api:latest \
-		-t pvesphere-api:$$(git describe --tags --always 2>/dev/null || echo "latest") \
+		-t pvesphere-api:$(IMAGE_TAG) \
 		.
 
 .PHONY: docker-build-controller
@@ -56,7 +73,7 @@ docker-build-controller:
 		--build-arg APP_NAME=controller \
 		--build-arg APP_ENV=prod \
 		-t pvesphere-controller:latest \
-		-t pvesphere-controller:$$(git describe --tags --always 2>/dev/null || echo "latest") \
+		-t pvesphere-controller:$(IMAGE_TAG) \
 		.
 
 .PHONY: docker-build-frontend
@@ -65,7 +82,7 @@ docker-build-frontend:
 	docker build -f deploy/build/Dockerfile \
 		--target frontend \
 		-t pvesphere-frontend:latest \
-		-t pvesphere-frontend:$$(git describe --tags --always 2>/dev/null || echo "latest") \
+		-t pvesphere-frontend:$(IMAGE_TAG) \
 		.
 
 .PHONY: docker-build
@@ -81,9 +98,11 @@ docker-push-api:
 		echo "错误: 请设置 REGISTRY 环境变量，例如: make docker-push-api REGISTRY=registry.example.com/pvesphere"; \
 		exit 1; \
 	fi
-	@echo "推送 API 服务镜像到仓库: $(REGISTRY)/pvesphere-api:latest"
+	@echo "推送 API 服务镜像到仓库: $(REGISTRY)/pvesphere-api:{latest,$(IMAGE_TAG)}"
 	docker tag pvesphere-api:latest $(REGISTRY)/pvesphere-api:latest
+	docker tag pvesphere-api:$(IMAGE_TAG) $(REGISTRY)/pvesphere-api:$(IMAGE_TAG)
 	docker push $(REGISTRY)/pvesphere-api:latest
+	docker push $(REGISTRY)/pvesphere-api:$(IMAGE_TAG)
 
 .PHONY: docker-push-controller
 docker-push-controller:
@@ -91,12 +110,38 @@ docker-push-controller:
 		echo "错误: 请设置 REGISTRY 环境变量，例如: make docker-push-controller REGISTRY=registry.example.com/pvesphere"; \
 		exit 1; \
 	fi
-	@echo "推送控制器服务镜像到仓库: $(REGISTRY)/pvesphere-controller:latest"
+	@echo "推送控制器服务镜像到仓库: $(REGISTRY)/pvesphere-controller:{latest,$(IMAGE_TAG)}"
 	docker tag pvesphere-controller:latest $(REGISTRY)/pvesphere-controller:latest
+	docker tag pvesphere-controller:$(IMAGE_TAG) $(REGISTRY)/pvesphere-controller:$(IMAGE_TAG)
 	docker push $(REGISTRY)/pvesphere-controller:latest
+	docker push $(REGISTRY)/pvesphere-controller:$(IMAGE_TAG)
+
+.PHONY: docker-push-aio
+docker-push-aio:
+	@if [ -z "$(REGISTRY)" ]; then \
+		echo "错误: 请设置 REGISTRY 环境变量，例如: make docker-push-aio REGISTRY=registry.example.com/pvesphere"; \
+		exit 1; \
+	fi
+	@echo "推送 All-in-One 镜像到仓库: $(REGISTRY)/pvesphere-aio:{latest,$(IMAGE_TAG)}"
+	docker tag pvesphere-aio:latest $(REGISTRY)/pvesphere-aio:latest
+	docker tag pvesphere-aio:$(IMAGE_TAG) $(REGISTRY)/pvesphere-aio:$(IMAGE_TAG)
+	docker push $(REGISTRY)/pvesphere-aio:latest
+	docker push $(REGISTRY)/pvesphere-aio:$(IMAGE_TAG)
+
+.PHONY: docker-push-frontend
+docker-push-frontend:
+	@if [ -z "$(REGISTRY)" ]; then \
+		echo "错误: 请设置 REGISTRY 环境变量，例如: make docker-push-frontend REGISTRY=registry.example.com/pvesphere"; \
+		exit 1; \
+	fi
+	@echo "推送前端服务镜像到仓库: $(REGISTRY)/pvesphere-frontend:{latest,$(IMAGE_TAG)}"
+	docker tag pvesphere-frontend:latest $(REGISTRY)/pvesphere-frontend:latest
+	docker tag pvesphere-frontend:$(IMAGE_TAG) $(REGISTRY)/pvesphere-frontend:$(IMAGE_TAG)
+	docker push $(REGISTRY)/pvesphere-frontend:latest
+	docker push $(REGISTRY)/pvesphere-frontend:$(IMAGE_TAG)
 
 .PHONY: docker-push
-docker-push: docker-push-api docker-push-controller
+docker-push: docker-push-api docker-push-controller docker-push-frontend docker-push-aio
 	@echo "所有服务镜像推送完成"
 
 .PHONY: docker-run-api
@@ -125,6 +170,11 @@ docker-compose-down:
 
 .PHONY: docker-compose-build
 docker-compose-build:
+	@if [ ! -f "$(FRONTEND_LOCAL_PKG)" ]; then \
+		echo "前端构建产物未准备好: 未找到 $(FRONTEND_LOCAL_PKG)"; \
+		echo "请先执行 ./deploy/build.sh -f /path/to/pvesphere-ui 准备前端代码，再运行 make docker-compose-build"; \
+		exit 1; \
+	fi
 	@echo "构建并启动所有服务..."
 	cd deploy/docker-compose && docker compose up -d --build
 
