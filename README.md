@@ -111,6 +111,22 @@ make docker-compose-logs
 make docker-compose-down
 ```
 
+### All-in-One Deployment (Single Container)
+
+If you just want to quickly try PveSphere or run it as a single container, you can use the prebuilt **All-in-One** image (backend + frontend in one container):
+
+```bash
+docker run -d \
+  --name=pvesphere \
+  --restart=always \
+  -p 8080:8080 \
+  pvesphere/pvesphere-aio:latest
+```
+
+Then open:
+
+- `http://localhost:8080`
+
 ### Default Login
 
 After first startup, use these credentials:
