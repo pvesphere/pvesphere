@@ -9,7 +9,8 @@ var (
 	ErrInternalServerError = newError(500, "internal server error")
 
 	// more biz errors
-	ErrEmailAlreadyUse = newError(1001, "The email is already in use.")
+	ErrEmailAlreadyUse   = newError(1001, "The email is already in use.")
+	ErrUsernameAlreadyUse = newError(1002, "The username is already in use.")
 
 	// vm create mode errors
 	ErrInvalidCreateMode = newError(400, "invalid create mode")

@@ -61,10 +61,12 @@ func TestUserService_Register(t *testing.T) {
 
 	ctx := context.Background()
 	req := &v1.RegisterRequest{
-		Password: "password",
+		Username: "testuser",
 		Email:    "test@example.com",
+		Password: "password",
 	}
 
+	mockUserRepo.EXPECT().GetByUsername(ctx, req.Username).Return(nil, nil)
 	mockUserRepo.EXPECT().GetByEmail(ctx, req.Email).Return(nil, nil)
 	mockTm.EXPECT().Transaction(ctx, gomock.Any()).Return(nil)
 
@@ -84,11 +86,12 @@ func TestUserService_Register_UsernameExists(t *testing.T) {
 
 	ctx := context.Background()
 	req := &v1.RegisterRequest{
-		Password: "password",
+		Username: "testuser",
 		Email:    "test@example.com",
+		Password: "password",
 	}
 
-	mockUserRepo.EXPECT().GetByEmail(ctx, req.Email).Return(&model.User{}, nil)
+	mockUserRepo.EXPECT().GetByUsername(ctx, req.Username).Return(&model.User{}, nil)
 
 	err := userService.Register(ctx, req)
 
@@ -106,7 +109,7 @@ func TestUserService_Login(t *testing.T) {
 
 	ctx := context.Background()
 	req := &v1.LoginRequest{
-		Email:    "xxx@gmail.com",
+		Account:  "testuser",
 		Password: "password",
 	}
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
@@ -114,7 +117,7 @@ func TestUserService_Login(t *testing.T) {
 		t.Error("failed to hash password")
 	}
 
-	mockUserRepo.EXPECT().GetByEmail(ctx, req.Email).Return(&model.User{
+	mockUserRepo.EXPECT().GetByUsername(ctx, req.Account).Return(&model.User{
 		Password: string(hashedPassword),
 	}, nil)
 
@@ -135,11 +138,11 @@ func TestUserService_Login_UserNotFound(t *testing.T) {
 
 	ctx := context.Background()
 	req := &v1.LoginRequest{
-		Email:    "xxx@gmail.com",
+		Account:  "testuser",
 		Password: "password",
 	}
 
-	mockUserRepo.EXPECT().GetByEmail(ctx, req.Email).Return(nil, errors.New("user not found"))
+	mockUserRepo.EXPECT().GetByUsername(ctx, req.Account).Return(nil, errors.New("user not found"))
 
 	_, err := userService.Login(ctx, req)
 
@@ -159,8 +162,10 @@ func TestUserService_GetProfile(t *testing.T) {
 	userId := "123"
 
 	mockUserRepo.EXPECT().GetByID(ctx, userId).Return(&model.User{
-		UserId: userId,
-		Email:  "test@example.com",
+		UserId:   userId,
+		Username: "testuser",
+		Email:    "test@example.com",
+		Nickname: "testuser",
 	}, nil)
 
 	user, err := userService.GetProfile(ctx, userId)

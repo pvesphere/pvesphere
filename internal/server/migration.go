@@ -60,11 +60,12 @@ func (m *MigrateServer) Start(ctx context.Context) error {
 
 // createDefaultUser 创建默认管理员用户
 func (m *MigrateServer) createDefaultUser(ctx context.Context) error {
+	defaultUsername := "admin"
 	defaultEmail := "pvesphere@gmail.com"
 	defaultPassword := "Ab123456"
 	defaultNickname := "PveSphere Admin"
 
-	// 检查用户是否已存在
+	// 检查用户是否已存在（通过邮箱或用户名）
 	existingUser, err := m.userRepo.GetByEmail(ctx, defaultEmail)
 	if err != nil {
 		m.log.Error("check default user error", zap.Error(err))
@@ -72,6 +73,17 @@ func (m *MigrateServer) createDefaultUser(ctx context.Context) error {
 	}
 	if existingUser != nil {
 		m.log.Info("default user already exists", zap.String("email", defaultEmail))
+		return nil
+	}
+
+	// 检查用户名是否已存在
+	existingUser, err = m.userRepo.GetByUsername(ctx, defaultUsername)
+	if err != nil {
+		m.log.Error("check default username error", zap.Error(err))
+		return err
+	}
+	if existingUser != nil {
+		m.log.Info("default username already exists", zap.String("username", defaultUsername))
 		return nil
 	}
 
@@ -92,6 +104,7 @@ func (m *MigrateServer) createDefaultUser(ctx context.Context) error {
 	// 创建用户
 	user := &model.User{
 		UserId:   userId,
+		Username: defaultUsername,
 		Email:    defaultEmail,
 		Password: string(hashedPassword),
 		Nickname: defaultNickname,
@@ -103,6 +116,7 @@ func (m *MigrateServer) createDefaultUser(ctx context.Context) error {
 	}
 
 	m.log.Info("default user created successfully", 
+		zap.String("username", defaultUsername),
 		zap.String("email", defaultEmail),
 		zap.String("userId", userId),
 		zap.String("nickname", defaultNickname))

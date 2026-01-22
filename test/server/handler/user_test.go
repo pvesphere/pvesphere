@@ -16,8 +16,9 @@ func TestUserHandler_Register(t *testing.T) {
 	defer ctrl.Finish()
 
 	params := v1.RegisterRequest{
-		Password: "123456",
+		Username: "testuser",
 		Email:    "xxx@gmail.com",
+		Password: "123456",
 	}
 
 	mockUserService := mock_service.NewMockUserService(ctrl)
@@ -43,7 +44,7 @@ func TestUserHandler_Login(t *testing.T) {
 	defer ctrl.Finish()
 
 	params := v1.LoginRequest{
-		Email:    "xxx@gmail.com",
+		Account:  "testuser",
 		Password: "123456",
 	}
 
@@ -74,6 +75,8 @@ func TestUserHandler_GetProfile(t *testing.T) {
 	mockUserService := mock_service.NewMockUserService(ctrl)
 	mockUserService.EXPECT().GetProfile(gomock.Any(), userId).Return(&v1.GetProfileResponseData{
 		UserId:   userId,
+		Username: "testuser",
+		Email:    "test@example.com",
 		Nickname: nickname,
 	}, nil)
 

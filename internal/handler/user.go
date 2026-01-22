@@ -24,7 +24,7 @@ func NewUserHandler(handler *Handler, userService service.UserService) *UserHand
 // Register godoc
 // @Summary 用户注册
 // @Schemes
-// @Description 目前只支持邮箱登录
+// @Description 支持用户名和邮箱注册，用户名和邮箱都必须是唯一的。登录时可以使用用户名或邮箱。
 // @Tags 用户模块
 // @Accept json
 // @Produce json
@@ -50,7 +50,7 @@ func (h *UserHandler) Register(ctx *gin.Context) {
 // Login godoc
 // @Summary 账号登录
 // @Schemes
-// @Description
+// @Description 支持使用用户名或邮箱登录。如果account字段包含@符号，则按邮箱查找；否则按用户名查找。
 // @Tags 用户模块
 // @Accept json
 // @Produce json

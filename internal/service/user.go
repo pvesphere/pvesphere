@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"strings"
 	v1 "pvesphere/api/v1"
 	"pvesphere/internal/model"
 	"pvesphere/internal/repository"
@@ -33,7 +34,16 @@ type userService struct {
 
 func (s *userService) Register(ctx context.Context, req *v1.RegisterRequest) error {
 	// check username
-	user, err := s.userRepo.GetByEmail(ctx, req.Email)
+	user, err := s.userRepo.GetByUsername(ctx, req.Username)
+	if err != nil {
+		return v1.ErrInternalServerError
+	}
+	if err == nil && user != nil {
+		return v1.ErrUsernameAlreadyUse
+	}
+
+	// check email
+	user, err = s.userRepo.GetByEmail(ctx, req.Email)
 	if err != nil {
 		return v1.ErrInternalServerError
 	}
@@ -52,8 +62,10 @@ func (s *userService) Register(ctx context.Context, req *v1.RegisterRequest) err
 	}
 	user = &model.User{
 		UserId:   userId,
+		Username: req.Username,
 		Email:    req.Email,
 		Password: string(hashedPassword),
+		Nickname: req.Username, // 默认使用用户名作为昵称
 	}
 	// Transaction demo
 	err = s.tm.Transaction(ctx, func(ctx context.Context) error {
@@ -68,7 +80,16 @@ func (s *userService) Register(ctx context.Context, req *v1.RegisterRequest) err
 }
 
 func (s *userService) Login(ctx context.Context, req *v1.LoginRequest) (string, error) {
-	user, err := s.userRepo.GetByEmail(ctx, req.Email)
+	var user *model.User
+	var err error
+
+	// 判断是用户名还是邮箱：如果包含@符号，则认为是邮箱，否则是用户名
+	if strings.Contains(req.Account, "@") {
+		user, err = s.userRepo.GetByEmail(ctx, req.Account)
+	} else {
+		user, err = s.userRepo.GetByUsername(ctx, req.Account)
+	}
+
 	if err != nil || user == nil {
 		return "", v1.ErrUnauthorized
 	}
@@ -97,6 +118,7 @@ func (s *userService) GetProfile(ctx context.Context, userId string) (*v1.GetPro
 
 	return &v1.GetProfileResponseData{
 		UserId:   user.UserId,
+		Username: user.Username,
 		Email:    user.Email,
 		Nickname: user.Nickname,
 	}, nil

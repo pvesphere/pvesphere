@@ -558,6 +558,7 @@ const docTemplate = `{
         },
         "/api/v1/login": {
             "post": {
+                "description": "支持使用用户名或邮箱登录。如果account字段包含@符号，则按邮箱查找；否则按用户名查找。",
                 "consumes": [
                     "application/json"
                 ],
@@ -1926,7 +1927,7 @@ const docTemplate = `{
         },
         "/api/v1/register": {
             "post": {
-                "description": "目前只支持邮箱登录",
+                "description": "支持用户名和邮箱注册，用户名和邮箱都必须是唯一的。登录时可以使用用户名或邮箱。",
                 "consumes": [
                     "application/json"
                 ],
@@ -5065,6 +5066,10 @@ const docTemplate = `{
                 },
                 "userId": {
                     "type": "string"
+                },
+                "username": {
+                    "type": "string",
+                    "example": "alice"
                 }
             }
         },
@@ -5728,13 +5733,14 @@ const docTemplate = `{
         "v1.LoginRequest": {
             "type": "object",
             "required": [
-                "email",
+                "account",
                 "password"
             ],
             "properties": {
-                "email": {
+                "account": {
+                    "description": "支持用户名或邮箱登录",
                     "type": "string",
-                    "example": "1234@gmail.com"
+                    "example": "alice"
                 },
                 "password": {
                     "type": "string",
@@ -6077,7 +6083,8 @@ const docTemplate = `{
             "type": "object",
             "required": [
                 "email",
-                "password"
+                "password",
+                "username"
             ],
             "properties": {
                 "email": {
@@ -6086,7 +6093,14 @@ const docTemplate = `{
                 },
                 "password": {
                     "type": "string",
+                    "minLength": 6,
                     "example": "123456"
+                },
+                "username": {
+                    "type": "string",
+                    "maxLength": 20,
+                    "minLength": 3,
+                    "example": "alice"
                 }
             }
         },

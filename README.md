@@ -130,7 +130,7 @@ Then open:
 ### Default Login
 
 After first startup, use these credentials:
-- **Email**: `pvesphere@gmail.com`
+- **Username**: `admin`
 - **Password**: `Ab123456`
 
 > ⚠️ Remember to change the default password after first login.

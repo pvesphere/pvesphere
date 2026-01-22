@@ -927,6 +927,9 @@ definitions:
         type: string
       userId:
         type: string
+      username:
+        example: alice
+        type: string
     type: object
   v1.GetStorageContentResponse:
     properties:
@@ -1369,14 +1372,15 @@ definitions:
     type: object
   v1.LoginRequest:
     properties:
-      email:
-        example: 1234@gmail.com
+      account:
+        description: 支持用户名或邮箱登录
+        example: alice
         type: string
       password:
         example: "123456"
         type: string
     required:
-    - email
+    - account
     - password
     type: object
   v1.LoginResponse:
@@ -1623,10 +1627,17 @@ definitions:
         type: string
       password:
         example: "123456"
+        minLength: 6
+        type: string
+      username:
+        example: alice
+        maxLength: 20
+        minLength: 3
         type: string
     required:
     - email
     - password
+    - username
     type: object
   v1.ReloadNodeNetworkRequest:
     properties:
@@ -2936,6 +2947,7 @@ paths:
     post:
       consumes:
       - application/json
+      description: 支持使用用户名或邮箱登录。如果account字段包含@符号，则按邮箱查找；否则按用户名查找。
       parameters:
       - description: params
         in: body
@@ -3796,7 +3808,7 @@ paths:
     post:
       consumes:
       - application/json
-      description: 目前只支持邮箱登录
+      description: 支持用户名和邮箱注册，用户名和邮箱都必须是唯一的。登录时可以使用用户名或邮箱。
       parameters:
       - description: params
         in: body
