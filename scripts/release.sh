@@ -1,18 +1,18 @@
 #!/bin/bash
 
-# PveSphere v1.0.0-rc01 Release Script
+# PveSphere v1.0.0 Release Script
 # 此脚本帮助自动化发布流程
 
 set -e
 
-VERSION="1.0.0-rc01"
+VERSION="1.0.0"
 BACKEND_DIR="/Users/ztwork/server/git-repos/pvesphere"
 FRONTEND_DIR="/Users/ztwork/server/git-repos/pvesphere-ui"
 DOCS_DIR="/Users/ztwork/server/git-repos/pvesphere-docs"
 
 echo "========================================="
 echo "  PveSphere v${VERSION} Release Script"
-echo "   (Release Candidate 1)"
+echo "   (Official Release)"
 echo "========================================="
 echo ""
 
