@@ -1,7 +1,7 @@
 services:
   # API 服务
   api:
-    image: pvesphere-api:latest
+    image: pvesphere/pvesphere-api:latest
     container_name: pvesphere-api
     ports:
       - "8000:8000"
@@ -29,7 +29,7 @@ services:
 
   # 控制器服务
   controller:
-    image: pvesphere-controller:latest
+    image: pvesphere/pvesphere-controller:latest
     container_name: pvesphere-controller
     volumes:
       # Controller 使用独立的配置目录，防止与 API 配置冲突
@@ -54,7 +54,7 @@ services:
 
   # 前端服务
   frontend:
-    image: pvesphere-frontend:latest
+    image: pvesphere/pvesphere-frontend:latest
     container_name: pvesphere-frontend
     ports:
       - "8080:8080"
