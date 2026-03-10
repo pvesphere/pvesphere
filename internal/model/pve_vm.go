@@ -11,7 +11,7 @@ type PveVM struct {
 	VMID         uint32    `json:"vmid" gorm:"column:vmid"`
 	CPUNum       int       `json:"cpu_num" gorm:"column:cpu_num"`
 	MemorySize   int       `json:"memory_size" gorm:"column:memory_size"`
-	Storage      string    `json:"storage" gorm:"column:storages"`
+	Storage      string    `json:"storages" gorm:"column:storages"`
 	StorageCfg   string    `json:"storage_cfg" gorm:"column:storage_cfg"`
 	AppId        string    `json:"app_id" gorm:"column:appid"`
 	ClusterID    int64     `json:"cluster_id" gorm:"column:cluster_id;index"`   // 集群ID（关联字段）
@@ -23,7 +23,7 @@ type PveVM struct {
 	NodeIP       string    `json:"node_ip" gorm:"column:node_ip"`               // 节点IP（冗余，用于快速访问，IP 很少变化）
 	Creator      string    `json:"creator" gorm:"column:creator"`
 	Modifier     string    `json:"modifier" gorm:"column:modifier"`
-	Description  string    `json:"descriptions" gorm:"column:descriptions"`
+	Description  string    `json:"description" gorm:"column:descriptions"`
 	CreateTime   time.Time `json:"create_time" gorm:"column:gmt_create"`
 	UpdateTime   time.Time `json:"update_time" gorm:"column:gmt_modified"`
 	ResourceHash string    `json:"resource_hash" gorm:"column:resource_hash;index"`
