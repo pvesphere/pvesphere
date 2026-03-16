@@ -603,6 +603,17 @@ func (c *ProxmoxClient) GetNodeServices(ctx context.Context, nodeName string) ([
 	return services, nil
 }
 
+// GetNodeVMs 获取节点上的虚拟机列表
+// GET /api2/json/nodes/{node}/qemu
+func (c *ProxmoxClient) GetNodeVMs(ctx context.Context, nodeName string) ([]map[string]interface{}, error) {
+	path := fmt.Sprintf("/nodes/%s/qemu", nodeName)
+	var vms []map[string]interface{}
+	if err := c.Get(ctx, path, &vms); err != nil {
+		return nil, err
+	}
+	return vms, nil
+}
+
 // StartNodeService 启动节点服务
 // POST /api2/json/nodes/{node}/services/{service}/start
 // 返回: UPID (任务ID)

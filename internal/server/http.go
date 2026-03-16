@@ -61,6 +61,7 @@ func NewHTTPServer(
 	router.InitTemplateManagementRouter(deps, apiV1)
 	router.InitPveTaskRouter(deps, apiV1)
 	router.InitDashboardRouter(deps, apiV1)
+	router.InitNodeMaintenanceRouter(deps, apiV1)
 
 	return s
 }

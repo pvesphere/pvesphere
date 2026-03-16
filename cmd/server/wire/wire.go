@@ -50,6 +50,8 @@ var serviceSet = wire.NewSet(
 	service.NewPveTaskService,
 	service.NewDashboardService,
 	service.NewTemplateManagementService,
+	// 主机维护服务
+	service.NewNodeMaintenanceService,
 )
 
 var handlerSet = wire.NewSet(
@@ -64,6 +66,8 @@ var handlerSet = wire.NewSet(
 	handler.NewTemplateManagementHandler,
 	handler.NewPveTaskHandler,
 	handler.NewDashboardHandler,
+	// 主机维护处理器
+	handler.NewNodeMaintenanceHandler,
 )
 
 var jobSet = wire.NewSet(

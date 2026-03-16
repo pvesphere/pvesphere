@@ -2,6 +2,7 @@ package router
 
 import (
 	"pvesphere/internal/handler"
+	"pvesphere/internal/service"
 	"pvesphere/pkg/jwt"
 	"pvesphere/pkg/log"
 
@@ -20,6 +21,8 @@ type RouterDeps struct {
 	PveStorageHandler          *handler.PveStorageHandler
 	PveTemplateHandler         *handler.PveTemplateHandler
 	TemplateManagementHandler  *handler.TemplateManagementHandler
-	PveTaskHandler             *handler.PveTaskHandler
+	PveTaskHandler            *handler.PveTaskHandler
 	DashboardHandler           *handler.DashboardHandler
+	NodeMaintenanceHandler    *handler.NodeMaintenanceHandler
+	NodeMaintenanceService    *service.NodeMaintenanceService
 }
