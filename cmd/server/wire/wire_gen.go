@@ -7,6 +7,8 @@
 package wire
 
 import (
+	"github.com/google/wire"
+	"github.com/spf13/viper"
 	"pvesphere/internal/handler"
 	"pvesphere/internal/job"
 	"pvesphere/internal/repository"
@@ -18,9 +20,6 @@ import (
 	"pvesphere/pkg/log"
 	"pvesphere/pkg/server/http"
 	"pvesphere/pkg/sid"
-
-	"github.com/google/wire"
-	"github.com/spf13/viper"
 )
 
 // Injectors from wire.go:
@@ -53,8 +52,8 @@ func NewWire(viperViper *viper.Viper, logger *log.Logger) (*app.App, func(), err
 	pveStorageService := service.NewPveStorageService(serviceService, pveStorageRepository, pveNodeRepository, logger)
 	pveStorageHandler := handler.NewPveStorageHandler(handlerHandler, pveStorageService)
 	pveTemplateRepository := repository.NewPveTemplateRepository(repositoryRepository)
-	templateUploadRepository := repository.NewTemplateUploadRepository(repositoryRepository)
 	templateSyncTaskRepository := repository.NewTemplateSyncTaskRepository(repositoryRepository)
+	templateUploadRepository := repository.NewTemplateUploadRepository(repositoryRepository)
 	pveTemplateService := service.NewPveTemplateService(serviceService, pveTemplateRepository, templateInstanceRepository, templateSyncTaskRepository, templateUploadRepository, pveNodeRepository, pveClusterRepository, logger)
 	pveTemplateHandler := handler.NewPveTemplateHandler(handlerHandler, pveTemplateService)
 	templateManagementService := service.NewTemplateManagementService(serviceService, pveTemplateRepository, templateUploadRepository, templateInstanceRepository, templateSyncTaskRepository, pveVMRepository, pveStorageRepository, pveNodeRepository, pveClusterRepository, logger)
@@ -63,6 +62,8 @@ func NewWire(viperViper *viper.Viper, logger *log.Logger) (*app.App, func(), err
 	pveTaskHandler := handler.NewPveTaskHandler(handlerHandler, pveTaskService)
 	dashboardService := service.NewDashboardService(serviceService, pveClusterRepository, pveNodeRepository, pveVMRepository, pveStorageRepository, logger)
 	dashboardHandler := handler.NewDashboardHandler(handlerHandler, dashboardService)
+	nodeMaintenanceService := service.NewNodeMaintenanceService(repositoryRepository)
+	nodeMaintenanceHandler := handler.NewNodeMaintenanceHandler(handlerHandler, nodeMaintenanceService)
 	routerDeps := router.RouterDeps{
 		Logger:                    logger,
 		Config:                    viperViper,
@@ -77,6 +78,8 @@ func NewWire(viperViper *viper.Viper, logger *log.Logger) (*app.App, func(), err
 		TemplateManagementHandler: templateManagementHandler,
 		PveTaskHandler:            pveTaskHandler,
 		DashboardHandler:          dashboardHandler,
+		NodeMaintenanceHandler:    nodeMaintenanceHandler,
+		NodeMaintenanceService:    nodeMaintenanceService,
 	}
 	httpServer := server.NewHTTPServer(routerDeps)
 	jobJob := job.NewJob(transaction, logger, sidSid)
@@ -91,9 +94,9 @@ func NewWire(viperViper *viper.Viper, logger *log.Logger) (*app.App, func(), err
 
 var repositorySet = wire.NewSet(repository.NewDB, repository.NewRepository, repository.NewTransaction, repository.NewUserRepository, repository.NewPveClusterRepository, repository.NewPveNodeRepository, repository.NewPveVMRepository, repository.NewPveStorageRepository, repository.NewVmTemplateRepository, repository.NewVMIPAddressRepository, repository.NewPveTemplateRepository, repository.NewTemplateUploadRepository, repository.NewTemplateInstanceRepository, repository.NewTemplateSyncTaskRepository)
 
-var serviceSet = wire.NewSet(service.NewService, service.NewUserService, service.NewPveClusterService, service.NewPveNodeService, service.NewPveVMService, service.NewPveStorageService, service.NewPveTemplateService, service.NewPveTaskService, service.NewDashboardService, service.NewTemplateManagementService)
+var serviceSet = wire.NewSet(service.NewService, service.NewUserService, service.NewPveClusterService, service.NewPveNodeService, service.NewPveVMService, service.NewPveStorageService, service.NewPveTemplateService, service.NewPveTaskService, service.NewDashboardService, service.NewTemplateManagementService, service.NewNodeMaintenanceService)
 
-var handlerSet = wire.NewSet(handler.NewHandler, handler.NewPveAuthHandler, handler.NewUserHandler, handler.NewPveClusterHandler, handler.NewPveNodeHandler, handler.NewPveVMHandler, handler.NewPveStorageHandler, handler.NewPveTemplateHandler, handler.NewTemplateManagementHandler, handler.NewPveTaskHandler, handler.NewDashboardHandler)
+var handlerSet = wire.NewSet(handler.NewHandler, handler.NewPveAuthHandler, handler.NewUserHandler, handler.NewPveClusterHandler, handler.NewPveNodeHandler, handler.NewPveVMHandler, handler.NewPveStorageHandler, handler.NewPveTemplateHandler, handler.NewTemplateManagementHandler, handler.NewPveTaskHandler, handler.NewDashboardHandler, handler.NewNodeMaintenanceHandler)
 
 var jobSet = wire.NewSet(job.NewJob, job.NewUserJob)
 

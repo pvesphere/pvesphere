@@ -1,4 +1,12 @@
 definitions:
+  v1.CancelMaintenancePlanResponse:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
   v1.ClusterDetail:
     properties:
       api_url:
@@ -221,6 +229,41 @@ definitions:
     - cluster_name
     - user_id
     - user_token
+    type: object
+  v1.CreateMaintenancePlanRequest:
+    properties:
+      concurrency:
+        description: 并发迁移数，默认 3
+        example: 3
+        type: integer
+      mode:
+        description: 迁移模式：auto/manual
+        example: auto
+        type: string
+      node_id:
+        description: 节点 ID
+        example: "1"
+        type: string
+      target_nodes:
+        description: 目标节点 ID 列表 (manual 模式)
+        example:
+        - 1
+        - 2
+        - 3
+        items:
+          type: integer
+        type: array
+    required:
+    - node_id
+    type: object
+  v1.CreateMaintenancePlanResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/v1.MaintenancePlanDetail'
+      message:
+        type: string
     type: object
   v1.CreateNodeNetworkRequest:
     properties:
@@ -689,6 +732,15 @@ definitions:
       message:
         type: string
     type: object
+  v1.EndMaintenanceRequest:
+    properties:
+      node_id:
+        description: 节点 ID
+        example: "1"
+        type: string
+    required:
+    - node_id
+    type: object
   v1.GetAccessTicketRequest:
     properties:
       cluster_id:
@@ -1121,6 +1173,38 @@ definitions:
       message:
         type: string
     type: object
+  v1.HistoryRecord:
+    properties:
+      duration:
+        description: 持续时间
+        type: string
+      end_time:
+        type: string
+      failed_vms:
+        example: 0
+        type: integer
+      migrated_vms:
+        example: 5
+        type: integer
+      node_id:
+        example: 1
+        type: integer
+      node_name:
+        example: pve-node-1
+        type: string
+      plan_id:
+        example: 1
+        type: integer
+      start_time:
+        type: string
+      status:
+        description: completed/failed/cancelled
+        example: completed
+        type: string
+      total_vms:
+        example: 5
+        type: integer
+    type: object
   v1.ImportTemplateRequest:
     properties:
       auto_sync:
@@ -1397,6 +1481,218 @@ definitions:
       accessToken:
         type: string
     type: object
+  v1.MaintenanceHistoryResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        properties:
+          records:
+            items:
+              $ref: '#/definitions/v1.HistoryRecord'
+            type: array
+          total:
+            type: integer
+        type: object
+      message:
+        type: string
+    type: object
+  v1.MaintenancePlanDetail:
+    properties:
+      concurrency:
+        example: 3
+        type: integer
+      create_time:
+        type: string
+      end_time:
+        type: string
+      failed_vms:
+        example: 0
+        type: integer
+      migrated_vms:
+        example: 0
+        type: integer
+      mode:
+        example: auto
+        type: string
+      node_id:
+        example: 1
+        type: integer
+      node_name:
+        example: pve-node-1
+        type: string
+      plan_id:
+        example: 1
+        type: integer
+      start_time:
+        type: string
+      status:
+        description: pending/running/completed/failed/cancelled
+        example: pending
+        type: string
+      total_vms:
+        example: 5
+        type: integer
+    type: object
+  v1.MaintenancePlanProgress:
+    properties:
+      failed_vms:
+        example: 0
+        type: integer
+      migrated_vms:
+        example: 3
+        type: integer
+      node_name:
+        example: pve-node-1
+        type: string
+      plan_id:
+        example: 1
+        type: integer
+      progress:
+        description: 进度百分比
+        example: 60
+        type: number
+      status:
+        example: running
+        type: string
+      tasks:
+        items:
+          $ref: '#/definitions/v1.MaintenanceTaskItem'
+        type: array
+      total_vms:
+        example: 5
+        type: integer
+    type: object
+  v1.MaintenancePlanProgressResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/v1.MaintenancePlanProgress'
+      message:
+        type: string
+    type: object
+  v1.MaintenancePlanResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/v1.MaintenancePlanDetail'
+      message:
+        type: string
+    type: object
+  v1.MaintenanceTask:
+    properties:
+      error:
+        type: string
+      status:
+        description: pending / migrating / completed / failed
+        example: completed
+        type: string
+      target_node:
+        example: pve-node-2
+        type: string
+      vm_id:
+        example: "101"
+        type: string
+      vm_name:
+        example: vm-nginx
+        type: string
+    type: object
+  v1.MaintenanceTaskItem:
+    properties:
+      completed_at:
+        type: string
+      error_message:
+        type: string
+      source_node:
+        example: pve-node-1
+        type: string
+      started_at:
+        type: string
+      status:
+        example: completed
+        type: string
+      target_node:
+        example: pve-node-2
+        type: string
+      task_id:
+        example: 1
+        type: integer
+      vm_id:
+        example: 101
+        type: integer
+      vm_name:
+        example: vm-nginx
+        type: string
+    type: object
+  v1.MaintenanceTaskListResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        properties:
+          tasks:
+            items:
+              $ref: '#/definitions/v1.MaintenanceTaskItem'
+            type: array
+          total:
+            type: integer
+        type: object
+      message:
+        type: string
+    type: object
+  v1.MigrateCandidate:
+    properties:
+      cpu_cores:
+        example: 32
+        type: integer
+      cpu_usage:
+        description: CPU 使用率%
+        example: 45.5
+        type: number
+      mem_free:
+        description: 内存可用 (bytes)
+        example: 64424509440
+        type: integer
+      mem_total:
+        description: 内存总量 (bytes)
+        example: 128849018880
+        type: integer
+      mem_usage:
+        description: 内存使用率%
+        example: 50
+        type: number
+      mem_used:
+        description: 内存使用 (bytes)
+        example: 64424509440
+        type: integer
+      node_id:
+        example: 1
+        type: integer
+      node_name:
+        example: pve-node-1
+        type: string
+      score:
+        description: 调度评分 (越高越好)
+        example: 85
+        type: number
+      vm_count:
+        description: 当前 VM 数量
+        example: 10
+        type: integer
+    type: object
+  v1.MigrateCandidatesResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/v1.MigrateCandidate'
+        type: array
+      message:
+        type: string
+    type: object
   v1.MigrateVMRequest:
     properties:
       bwlimit:
@@ -1523,6 +1819,38 @@ definitions:
       vm_limit:
         type: integer
     type: object
+  v1.NodeMaintenanceResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/v1.NodeMaintenanceResult'
+      message:
+        type: string
+    type: object
+  v1.NodeMaintenanceResult:
+    properties:
+      failed_vms:
+        example: 0
+        type: integer
+      migrated_vms:
+        example: 3
+        type: integer
+      node_id:
+        example: "1"
+        type: string
+      status:
+        description: maintenance / migrating / completed / failed
+        example: maintenance
+        type: string
+      tasks:
+        items:
+          $ref: '#/definitions/v1.MaintenanceTask'
+        type: array
+      total_vms:
+        example: 5
+        type: integer
+    type: object
   v1.NodeTaskItem:
     properties:
       endtime:
@@ -1541,6 +1869,41 @@ definitions:
       upid:
         type: string
       user:
+        type: string
+    type: object
+  v1.NodeVMItem:
+    properties:
+      cpu:
+        example: 2
+        type: integer
+      mem:
+        example: 4294967296
+        type: integer
+      node_id:
+        example: 1
+        type: integer
+      node_name:
+        example: pve-node-1
+        type: string
+      status:
+        example: running
+        type: string
+      vm_id:
+        example: 101
+        type: integer
+      vm_name:
+        example: vm-nginx
+        type: string
+    type: object
+  v1.NodeVMsResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/v1.NodeVMItem'
+        type: array
+      message:
         type: string
     type: object
   v1.OperationItem:
@@ -1839,6 +2202,32 @@ definitions:
         type: object
       message:
         type: string
+    type: object
+  v1.StartMaintenanceRequest:
+    properties:
+      concurrency:
+        description: 并发迁移数，默认 3
+        example: 3
+        type: integer
+      mode:
+        description: 迁移模式：manual(手动指定) / auto(自动选择)
+        example: auto
+        type: string
+      node_id:
+        description: 节点 ID
+        example: "1"
+        type: string
+      target_nodes:
+        description: 目标节点 ID 列表 (manual 模式)
+        example:
+        - 1
+        - 2
+        - 3
+        items:
+          type: integer
+        type: array
+    required:
+    - node_id
     type: object
   v1.StartNodeServiceRequest:
     properties:
@@ -3296,6 +3685,238 @@ paths:
       summary: 获取节点 ZFS 存储
       tags:
       - PVE节点模块
+  /api/v1/nodes/maintenance/candidates:
+    get:
+      consumes:
+      - application/json
+      description: 根据指定节点的资源使用情况，推荐可用于 VM 迁移的目标节点
+      parameters:
+      - description: 源节点 ID
+        in: query
+        name: node_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.MigrateCandidatesResponse'
+      summary: 获取可迁移的目标节点列表
+      tags:
+      - 主机维护模块
+  /api/v1/nodes/maintenance/end:
+    post:
+      consumes:
+      - application/json
+      description: 结束节点维护模式，恢复正常运行状态（有任务运行时禁止结束）
+      parameters:
+      - description: 结束维护请求
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/v1.EndMaintenanceRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.Response'
+      summary: 结束主机维护
+      tags:
+      - 主机维护模块
+  /api/v1/nodes/maintenance/history:
+    get:
+      consumes:
+      - application/json
+      description: 查询已完成的维护计划历史记录
+      parameters:
+      - description: 节点 ID
+        in: query
+        name: node_id
+        type: integer
+      - default: 1
+        description: 页码
+        in: query
+        name: page
+        type: integer
+      - default: 20
+        description: 每页数量
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.MaintenanceHistoryResponse'
+      summary: 获取维护历史
+      tags:
+      - 主机维护计划
+  /api/v1/nodes/maintenance/plans:
+    post:
+      consumes:
+      - application/json
+      description: 创建节点维护计划，异步执行 VM 迁移任务
+      parameters:
+      - description: 创建维护计划请求
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/v1.CreateMaintenancePlanRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.CreateMaintenancePlanResponse'
+      summary: 创建维护计划
+      tags:
+      - 主机维护计划
+  /api/v1/nodes/maintenance/plans/:plan_id:
+    get:
+      consumes:
+      - application/json
+      description: 根据计划 ID 查询维护计划详细信息
+      parameters:
+      - description: 计划 ID
+        in: path
+        name: plan_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.MaintenancePlanResponse'
+      summary: 获取维护计划详情
+      tags:
+      - 主机维护计划
+  /api/v1/nodes/maintenance/plans/:plan_id/cancel:
+    post:
+      consumes:
+      - application/json
+      description: 取消正在执行的维护计划
+      parameters:
+      - description: 计划 ID
+        in: path
+        name: plan_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.CancelMaintenancePlanResponse'
+      summary: 取消维护计划
+      tags:
+      - 主机维护计划
+  /api/v1/nodes/maintenance/plans/:plan_id/progress:
+    get:
+      consumes:
+      - application/json
+      description: 查询维护计划的实时进度
+      parameters:
+      - description: 计划 ID
+        in: path
+        name: plan_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.MaintenancePlanProgressResponse'
+      summary: 获取维护计划进度
+      tags:
+      - 主机维护计划
+  /api/v1/nodes/maintenance/plans/:plan_id/tasks:
+    get:
+      consumes:
+      - application/json
+      description: 查询指定维护计划的所有任务及进度
+      parameters:
+      - description: 计划 ID
+        in: path
+        name: plan_id
+        required: true
+        type: integer
+      - default: 1
+        description: 页码
+        in: query
+        name: page
+        type: integer
+      - default: 20
+        description: 每页数量
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.MaintenanceTaskListResponse'
+      summary: 获取维护计划任务列表
+      tags:
+      - 主机维护计划
+  /api/v1/nodes/maintenance/start:
+    post:
+      consumes:
+      - application/json
+      description: 启动节点维护流程，支持自动和手动两种模式迁移 VM（同步阻塞模式）
+      parameters:
+      - description: 开始维护请求
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/v1.StartMaintenanceRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.NodeMaintenanceResponse'
+      summary: 开始主机维护
+      tags:
+      - 主机维护模块
+  /api/v1/nodes/maintenance/vms:
+    get:
+      consumes:
+      - application/json
+      description: 获取指定节点上的所有虚拟机列表
+      parameters:
+      - description: 节点 ID
+        in: query
+        name: node_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.NodeVMsResponse'
+      summary: 获取节点上的 VM 列表
+      tags:
+      - 主机维护模块
   /api/v1/nodes/network:
     delete:
       consumes:

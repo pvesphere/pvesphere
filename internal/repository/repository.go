@@ -20,7 +20,7 @@ import (
 const ctxTxKey = "TxKey"
 
 type Repository struct {
-	db *gorm.DB
+	GormDB *gorm.DB
 	//rdb    *redis.Client
 	//mongo  *mongo.Client
 	logger *log.Logger
@@ -34,7 +34,7 @@ func NewRepository(
 	//	mongo *mongo.Client,
 ) *Repository {
 	return &Repository{
-		db: db,
+		GormDB: db,
 		//rdb:    rdb,
 		//mongo:  mongo,
 		logger: logger,
@@ -58,11 +58,11 @@ func (r *Repository) DB(ctx context.Context) *gorm.DB {
 			return tx
 		}
 	}
-	return r.db.WithContext(ctx)
+	return r.GormDB.WithContext(ctx)
 }
 
 func (r *Repository) Transaction(ctx context.Context, fn func(ctx context.Context) error) error {
-	return r.db.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
+	return r.GormDB.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
 		ctx = context.WithValue(ctx, ctxTxKey, tx)
 		return fn(ctx)
 	})

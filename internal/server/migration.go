@@ -42,6 +42,9 @@ func (m *MigrateServer) Start(ctx context.Context) error {
 		&model.TemplateUpload{},
 		&model.TemplateInstance{},
 		&model.TemplateSyncTask{},
+		// 主机维护相关表
+		&model.NodeMaintenancePlan{},
+		&model.NodeMaintenanceTask{},
 	); err != nil {
 		m.log.Error("migrate error", zap.Error(err))
 		return err

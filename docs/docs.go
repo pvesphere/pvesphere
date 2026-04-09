@@ -1013,6 +1013,359 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/v1/nodes/maintenance/candidates": {
+            "get": {
+                "description": "根据指定节点的资源使用情况，推荐可用于 VM 迁移的目标节点",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "主机维护模块"
+                ],
+                "summary": "获取可迁移的目标节点列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "源节点 ID",
+                        "name": "node_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/v1.MigrateCandidatesResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/nodes/maintenance/end": {
+            "post": {
+                "description": "结束节点维护模式，恢复正常运行状态（有任务运行时禁止结束）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "主机维护模块"
+                ],
+                "summary": "结束主机维护",
+                "parameters": [
+                    {
+                        "description": "结束维护请求",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/v1.EndMaintenanceRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/v1.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/nodes/maintenance/history": {
+            "get": {
+                "description": "查询已完成的维护计划历史记录",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "主机维护计划"
+                ],
+                "summary": "获取维护历史",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "节点 ID",
+                        "name": "node_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "页码",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 20,
+                        "description": "每页数量",
+                        "name": "page_size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/v1.MaintenanceHistoryResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/nodes/maintenance/plans": {
+            "post": {
+                "description": "创建节点维护计划，异步执行 VM 迁移任务",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "主机维护计划"
+                ],
+                "summary": "创建维护计划",
+                "parameters": [
+                    {
+                        "description": "创建维护计划请求",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/v1.CreateMaintenancePlanRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/v1.CreateMaintenancePlanResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/nodes/maintenance/plans/:plan_id": {
+            "get": {
+                "description": "根据计划 ID 查询维护计划详细信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "主机维护计划"
+                ],
+                "summary": "获取维护计划详情",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "计划 ID",
+                        "name": "plan_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/v1.MaintenancePlanResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/nodes/maintenance/plans/:plan_id/cancel": {
+            "post": {
+                "description": "取消正在执行的维护计划",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "主机维护计划"
+                ],
+                "summary": "取消维护计划",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "计划 ID",
+                        "name": "plan_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/v1.CancelMaintenancePlanResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/nodes/maintenance/plans/:plan_id/progress": {
+            "get": {
+                "description": "查询维护计划的实时进度",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "主机维护计划"
+                ],
+                "summary": "获取维护计划进度",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "计划 ID",
+                        "name": "plan_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/v1.MaintenancePlanProgressResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/nodes/maintenance/plans/:plan_id/tasks": {
+            "get": {
+                "description": "查询指定维护计划的所有任务及进度",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "主机维护计划"
+                ],
+                "summary": "获取维护计划任务列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "计划 ID",
+                        "name": "plan_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "页码",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 20,
+                        "description": "每页数量",
+                        "name": "page_size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/v1.MaintenanceTaskListResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/nodes/maintenance/start": {
+            "post": {
+                "description": "启动节点维护流程，支持自动和手动两种模式迁移 VM（同步阻塞模式）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "主机维护模块"
+                ],
+                "summary": "开始主机维护",
+                "parameters": [
+                    {
+                        "description": "开始维护请求",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/v1.StartMaintenanceRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/v1.NodeMaintenanceResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/nodes/maintenance/vms": {
+            "get": {
+                "description": "获取指定节点上的所有虚拟机列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "主机维护模块"
+                ],
+                "summary": "获取节点上的 VM 列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "节点 ID",
+                        "name": "node_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/v1.NodeVMsResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/nodes/network": {
             "get": {
                 "security": [
@@ -3769,6 +4122,18 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "v1.CancelMaintenancePlanResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {},
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
         "v1.ClusterDetail": {
             "type": "object",
             "properties": {
@@ -4075,6 +4440,55 @@ const docTemplate = `{
                 "user_token": {
                     "type": "string",
                     "example": "your-token"
+                }
+            }
+        },
+        "v1.CreateMaintenancePlanRequest": {
+            "type": "object",
+            "required": [
+                "node_id"
+            ],
+            "properties": {
+                "concurrency": {
+                    "description": "并发迁移数，默认 3",
+                    "type": "integer",
+                    "example": 3
+                },
+                "mode": {
+                    "description": "迁移模式：auto/manual",
+                    "type": "string",
+                    "example": "auto"
+                },
+                "node_id": {
+                    "description": "节点 ID",
+                    "type": "string",
+                    "example": "1"
+                },
+                "target_nodes": {
+                    "description": "目标节点 ID 列表 (manual 模式)",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    },
+                    "example": [
+                        1,
+                        2,
+                        3
+                    ]
+                }
+            }
+        },
+        "v1.CreateMaintenancePlanResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/v1.MaintenancePlanDetail"
+                },
+                "message": {
+                    "type": "string"
                 }
             }
         },
@@ -4719,6 +5133,19 @@ const docTemplate = `{
                 }
             }
         },
+        "v1.EndMaintenanceRequest": {
+            "type": "object",
+            "required": [
+                "node_id"
+            ],
+            "properties": {
+                "node_id": {
+                    "description": "节点 ID",
+                    "type": "string",
+                    "example": "1"
+                }
+            }
+        },
         "v1.GetAccessTicketRequest": {
             "type": "object",
             "required": [
@@ -5359,6 +5786,50 @@ const docTemplate = `{
                 }
             }
         },
+        "v1.HistoryRecord": {
+            "type": "object",
+            "properties": {
+                "duration": {
+                    "description": "持续时间",
+                    "type": "string"
+                },
+                "end_time": {
+                    "type": "string"
+                },
+                "failed_vms": {
+                    "type": "integer",
+                    "example": 0
+                },
+                "migrated_vms": {
+                    "type": "integer",
+                    "example": 5
+                },
+                "node_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "node_name": {
+                    "type": "string",
+                    "example": "pve-node-1"
+                },
+                "plan_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "start_time": {
+                    "type": "string"
+                },
+                "status": {
+                    "description": "completed/failed/cancelled",
+                    "type": "string",
+                    "example": "completed"
+                },
+                "total_vms": {
+                    "type": "integer",
+                    "example": 5
+                }
+            }
+        },
         "v1.ImportTemplateRequest": {
             "type": "object",
             "required": [
@@ -5770,6 +6241,307 @@ const docTemplate = `{
                 }
             }
         },
+        "v1.MaintenanceHistoryResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "records": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/v1.HistoryRecord"
+                            }
+                        },
+                        "total": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "v1.MaintenancePlanDetail": {
+            "type": "object",
+            "properties": {
+                "concurrency": {
+                    "type": "integer",
+                    "example": 3
+                },
+                "create_time": {
+                    "type": "string"
+                },
+                "end_time": {
+                    "type": "string"
+                },
+                "failed_vms": {
+                    "type": "integer",
+                    "example": 0
+                },
+                "migrated_vms": {
+                    "type": "integer",
+                    "example": 0
+                },
+                "mode": {
+                    "type": "string",
+                    "example": "auto"
+                },
+                "node_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "node_name": {
+                    "type": "string",
+                    "example": "pve-node-1"
+                },
+                "plan_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "start_time": {
+                    "type": "string"
+                },
+                "status": {
+                    "description": "pending/running/completed/failed/cancelled",
+                    "type": "string",
+                    "example": "pending"
+                },
+                "total_vms": {
+                    "type": "integer",
+                    "example": 5
+                }
+            }
+        },
+        "v1.MaintenancePlanProgress": {
+            "type": "object",
+            "properties": {
+                "failed_vms": {
+                    "type": "integer",
+                    "example": 0
+                },
+                "migrated_vms": {
+                    "type": "integer",
+                    "example": 3
+                },
+                "node_name": {
+                    "type": "string",
+                    "example": "pve-node-1"
+                },
+                "plan_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "progress": {
+                    "description": "进度百分比",
+                    "type": "number",
+                    "example": 60
+                },
+                "status": {
+                    "type": "string",
+                    "example": "running"
+                },
+                "tasks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v1.MaintenanceTaskItem"
+                    }
+                },
+                "total_vms": {
+                    "type": "integer",
+                    "example": 5
+                }
+            }
+        },
+        "v1.MaintenancePlanProgressResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/v1.MaintenancePlanProgress"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "v1.MaintenancePlanResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/v1.MaintenancePlanDetail"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "v1.MaintenanceTask": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "status": {
+                    "description": "pending / migrating / completed / failed",
+                    "type": "string",
+                    "example": "completed"
+                },
+                "target_node": {
+                    "type": "string",
+                    "example": "pve-node-2"
+                },
+                "vm_id": {
+                    "type": "string",
+                    "example": "101"
+                },
+                "vm_name": {
+                    "type": "string",
+                    "example": "vm-nginx"
+                }
+            }
+        },
+        "v1.MaintenanceTaskItem": {
+            "type": "object",
+            "properties": {
+                "completed_at": {
+                    "type": "string"
+                },
+                "error_message": {
+                    "type": "string"
+                },
+                "source_node": {
+                    "type": "string",
+                    "example": "pve-node-1"
+                },
+                "started_at": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "completed"
+                },
+                "target_node": {
+                    "type": "string",
+                    "example": "pve-node-2"
+                },
+                "task_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "vm_id": {
+                    "type": "integer",
+                    "example": 101
+                },
+                "vm_name": {
+                    "type": "string",
+                    "example": "vm-nginx"
+                }
+            }
+        },
+        "v1.MaintenanceTaskListResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "tasks": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/v1.MaintenanceTaskItem"
+                            }
+                        },
+                        "total": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "v1.MigrateCandidate": {
+            "type": "object",
+            "properties": {
+                "cpu_cores": {
+                    "type": "integer",
+                    "example": 32
+                },
+                "cpu_usage": {
+                    "description": "CPU 使用率%",
+                    "type": "number",
+                    "example": 45.5
+                },
+                "mem_free": {
+                    "description": "内存可用 (bytes)",
+                    "type": "integer",
+                    "example": 64424509440
+                },
+                "mem_total": {
+                    "description": "内存总量 (bytes)",
+                    "type": "integer",
+                    "example": 128849018880
+                },
+                "mem_usage": {
+                    "description": "内存使用率%",
+                    "type": "number",
+                    "example": 50
+                },
+                "mem_used": {
+                    "description": "内存使用 (bytes)",
+                    "type": "integer",
+                    "example": 64424509440
+                },
+                "node_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "node_name": {
+                    "type": "string",
+                    "example": "pve-node-1"
+                },
+                "score": {
+                    "description": "调度评分 (越高越好)",
+                    "type": "number",
+                    "example": 85
+                },
+                "vm_count": {
+                    "description": "当前 VM 数量",
+                    "type": "integer",
+                    "example": 10
+                }
+            }
+        },
+        "v1.MigrateCandidatesResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v1.MigrateCandidate"
+                    }
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
         "v1.MigrateVMRequest": {
             "type": "object",
             "required": [
@@ -5949,6 +6721,52 @@ const docTemplate = `{
                 }
             }
         },
+        "v1.NodeMaintenanceResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/v1.NodeMaintenanceResult"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "v1.NodeMaintenanceResult": {
+            "type": "object",
+            "properties": {
+                "failed_vms": {
+                    "type": "integer",
+                    "example": 0
+                },
+                "migrated_vms": {
+                    "type": "integer",
+                    "example": 3
+                },
+                "node_id": {
+                    "type": "string",
+                    "example": "1"
+                },
+                "status": {
+                    "description": "maintenance / migrating / completed / failed",
+                    "type": "string",
+                    "example": "maintenance"
+                },
+                "tasks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v1.MaintenanceTask"
+                    }
+                },
+                "total_vms": {
+                    "type": "integer",
+                    "example": 5
+                }
+            }
+        },
         "v1.NodeTaskItem": {
             "type": "object",
             "properties": {
@@ -5975,6 +6793,56 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "user": {
+                    "type": "string"
+                }
+            }
+        },
+        "v1.NodeVMItem": {
+            "type": "object",
+            "properties": {
+                "cpu": {
+                    "type": "integer",
+                    "example": 2
+                },
+                "mem": {
+                    "type": "integer",
+                    "example": 4294967296
+                },
+                "node_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "node_name": {
+                    "type": "string",
+                    "example": "pve-node-1"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "running"
+                },
+                "vm_id": {
+                    "type": "integer",
+                    "example": 101
+                },
+                "vm_name": {
+                    "type": "string",
+                    "example": "vm-nginx"
+                }
+            }
+        },
+        "v1.NodeVMsResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/v1.NodeVMItem"
+                    }
+                },
+                "message": {
                     "type": "string"
                 }
             }
@@ -6383,6 +7251,41 @@ const docTemplate = `{
                 },
                 "message": {
                     "type": "string"
+                }
+            }
+        },
+        "v1.StartMaintenanceRequest": {
+            "type": "object",
+            "required": [
+                "node_id"
+            ],
+            "properties": {
+                "concurrency": {
+                    "description": "并发迁移数，默认 3",
+                    "type": "integer",
+                    "example": 3
+                },
+                "mode": {
+                    "description": "迁移模式：manual(手动指定) / auto(自动选择)",
+                    "type": "string",
+                    "example": "auto"
+                },
+                "node_id": {
+                    "description": "节点 ID",
+                    "type": "string",
+                    "example": "1"
+                },
+                "target_nodes": {
+                    "description": "目标节点 ID 列表 (manual 模式)",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    },
+                    "example": [
+                        1,
+                        2,
+                        3
+                    ]
                 }
             }
         },
